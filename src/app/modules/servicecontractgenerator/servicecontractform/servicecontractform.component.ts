@@ -195,14 +195,51 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
   resetStates(servicecontract:NgForm){
     if (servicecontract != undefined){
       servicecontract.reset();
+      this.selectedPropertyManager = "BioMed Realty LLC";
       this.selectedContractorState = null;
       this.selectedExecutionDate = null;
       this.selectedExpirationDate = null;
       this.selectedCommencementDate = null;
       Object.keys(servicecontract.controls).forEach(key =>{
-         servicecontract.controls[key].setErrors(invalid);
+         servicecontract.controls[key].setErrors(null);
       });
     }
+    
+  }
+  invalidateFields(){
+    if(this.selectedOwner === null)
+      return true;
+    if(this.selectedPropertyAddress === null)
+      return true;
+    if(this.selectedPropertyManager === null)
+      return true;
+    if(this.selectedContractor === null)
+      return true;
+    if(this.selectedContractorStateOfFormation === null)
+      return true;
+    if(this.selectedContractorAddress === null)
+      return true;
+    if(this.selectedContractorCity === null)
+      return true;
+    if(this.selectedContractorState === null)
+      return true;
+    if(this.selectedContractorZip === null)
+      return true;
+    if(this.selectedExecutionDate === null)
+      return true;
+    if(this.selectedCommencementDate === null)
+      return true;
+    if(this.selectedExpirationDate === null)
+      return true;
+
+      
+      return false;
+  }
+  resetBtn(){
+    // this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+    // this.router.navigate(['/ServiceContractForm'])
+    // );
+    // this.router.navigate(['/ServiceContractForm']);
   }
   clearPM(){
     this.selectedPropertyManager = null;
@@ -250,7 +287,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
         docxvar['ZipCode'] = this.selectedContractorZip;
       }
       if (docx.Search("ContractorAttn")==true) {
-        if (this.selectedContractorAttn == ""){
+        if (this.selectedContractorAttn == "" || this.selectedContractorAttn == undefined){
           docxvar['ContractorAttn'] = "\n";
         }
         else{
@@ -258,7 +295,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
         }
       }
       if (docx.Search("ContractorEmail")==true) {
-        if (this.selectedContractorEmail == ""){
+        if (this.selectedContractorEmail == "" || this.selectedContractorEmail == undefined){
           docxvar['ContractorEmail'] = "\n";
         }
         else{

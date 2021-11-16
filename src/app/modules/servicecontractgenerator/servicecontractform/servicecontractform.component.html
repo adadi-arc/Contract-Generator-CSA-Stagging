@@ -283,9 +283,9 @@
                         
                 </div>
                 <div class="col-md-4" *ngIf="selectedOwner != undefined" style="margin-top: 18px;text-align: right;">
-                        <button class="btnEnd" mat-raised-button (click)="resetStates(servicecontract);"
+                        <button class="btnEnd" mat-raised-button (click)="resetStates(servicecontract);" type="button"
                                 color="white">Reset</button>
-                        <button class="btnEnd" mat-raised-button (click)="onSave()" [disabled]="servicecontract.invalid"
+                        <button class="btnEnd" mat-raised-button (click)="onSave()" [disabled]="servicecontract.invalid || invalidateFields()" type="button"
                                 color="primary">Generate Contract</button>
                 </div>
                 
