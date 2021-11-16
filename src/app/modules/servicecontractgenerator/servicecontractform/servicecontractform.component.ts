@@ -199,9 +199,9 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
       this.selectedExecutionDate = null;
       this.selectedExpirationDate = null;
       this.selectedCommencementDate = null;
-      // Object.keys(servicecontract.controls).forEach(key =>{
-      //   servicecontract.controls[key].setErrors(invalid);
-      // });
+      Object.keys(servicecontract.controls).forEach(key =>{
+         servicecontract.controls[key].setErrors(invalid);
+      });
     }
   }
   clearPM(){
