@@ -12,7 +12,7 @@ import { NgForm } from '@angular/forms';
 
 declare let DocxReader: any;
 
-//MS Teams Test
+
 @Component({
   selector: 'app-servicecontractform',
   templateUrl: './servicecontractform.component.html',
