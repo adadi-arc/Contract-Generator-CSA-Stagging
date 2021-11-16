@@ -12,7 +12,6 @@ import { NgForm } from '@angular/forms';
 
 declare let DocxReader: any;
 
-//Test
 
 @Component({
   selector: 'app-servicecontractform',
