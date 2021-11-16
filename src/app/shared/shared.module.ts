@@ -1,0 +1,142 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MyInputComponent } from './input//my-input/my-input.component';
+import { MaterialModule } from '../material/material.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MyHeadingComponent } from './my-heading/my-heading.component';
+import { MyInputNumberComponent } from './input/my-input-number/my-input-number.component';
+import { MyInputCurrencyComponent } from './input//my-input-currency/my-input-currency.component';
+import { MatInputCurrencyDirective } from './directives/mat-input-currency.directive';
+import { MyInputDateComponent } from './input//my-input-date/my-input-date.component';
+import { MySelectComponent } from './dropdown/my-select/my-select.component';
+import { MyAutoCompleteComponent } from './dropdown/my-auto-complete/my-auto-complete.component';
+import { RibbonSaveComponent } from './buttons/ribbon-save/ribbon-save.component';
+import { RibbonEditComponent } from './buttons/ribbon-edit/ribbon-edit.component';
+import { RibbonDeleteComponent } from './buttons/ribbon-delete/ribbon-delete.component';
+import { RibbonAddComponent } from './buttons/ribbon-add/ribbon-add.component';
+import { RibbonReloadComponent } from './buttons/ribbon-reload/ribbon-reload.component';
+import { ButtonSaveComponent } from './buttons/button-save/button-save.component';
+import { ModuleCardComponent } from './cards/module-card/module-card.component';
+import { MyTableComponent } from './table/my-table/my-table.component';
+import { MyTableFilterComponent } from './table/my-table-filter/my-table-filter.component';
+import { MyTableSearchComponent } from './table/my-table-search/my-table-search.component';
+import { MyTableReportComponent } from './table/my-table-report/my-table-report.component';
+import { MyInputDateRangeComponent } from './input//my-input-date-range/my-input-date-range.component';
+import { MyInputDateMonthComponent } from './input//my-input-date-month/my-input-date-month.component';
+import { CardComponent } from './cards/card/card.component';
+import { SideNavComponent } from './nav/side-nav/side-nav.component';
+import { MyHeadingDialogeComponent } from './Dialog/my-heading-dialoge/my-heading-dialoge.component';
+import { ButtonSaveDialogComponent } from './Dialog/button-save-dialog/button-save-dialog.component';
+import { ButtonCancelDialogComponent } from './Dialog/button-cancel-dialog/button-cancel-dialog.component';
+import { RibbonSaveDialogComponent } from './Dialog/ribbon-save-dialog/ribbon-save-dialog.component';
+import { RibbonCancelDialogComponent } from './Dialog/ribbon-cancel-dialog/ribbon-cancel-dialog.component';
+import { MyFormDialogComponent } from './Dialog/my-form-dialog/my-form-dialog.component';
+import { ModuleHomeCardComponent } from './cards/module-home-card/module-home-card.component';
+import { SnackbarComponent } from './Dialog/snackbar/snackbar.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { TopnavComponent } from './nav/topnav/topnav.component';
+import { MyInputPasswordComponent } from './input//my-input-password/my-input-password.component';
+import { RibbonBackComponent } from './buttons/ribbon-back/ribbon-back.component';
+import { MyBoxComponent } from './box/my-box/my-box.component';
+import { MyImageBoxComponent } from './box/my-image-box/my-image-box.component';
+import { MyListComponent } from './List/my-list/my-list.component';
+import { MobileBoxComponent } from './box/mobile-box/mobile-box.component';
+import { CheckboxComponent } from './checkbox/checkbox.component';
+
+@NgModule({
+  declarations: [
+    //Directives
+    MatInputCurrencyDirective,
+    //Components
+    MyInputComponent,
+    MyHeadingComponent,
+    MyInputNumberComponent,
+    MyInputCurrencyComponent,
+    MyInputDateComponent,
+    MySelectComponent,
+    MyAutoCompleteComponent,
+    RibbonSaveComponent,
+    RibbonEditComponent,
+    RibbonDeleteComponent,
+    RibbonAddComponent,
+    RibbonReloadComponent,
+    ButtonSaveComponent,
+    ModuleCardComponent,
+    MyTableComponent,
+    MyTableFilterComponent,
+    MyTableSearchComponent,
+    MyTableReportComponent,
+    MyInputDateRangeComponent,
+    MyInputDateMonthComponent,
+    CardComponent,
+    SideNavComponent,
+    MyHeadingDialogeComponent,
+    ButtonSaveDialogComponent,
+    ButtonCancelDialogComponent,
+    RibbonSaveDialogComponent,
+    RibbonCancelDialogComponent,
+    MyFormDialogComponent,
+    ModuleHomeCardComponent,
+    SnackbarComponent,
+    TopnavComponent,
+    MyInputPasswordComponent,
+    RibbonBackComponent, 
+    MyBoxComponent,
+    MyImageBoxComponent,
+    MyListComponent,
+    MobileBoxComponent,
+    CheckboxComponent
+    
+  ],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgxSpinnerModule
+  ],
+  exports:[
+    //Directives
+    MatInputCurrencyDirective,
+    //Components
+    MyInputComponent,
+    MyHeadingComponent,
+    MyInputNumberComponent,
+    MyInputCurrencyComponent,
+    MyInputDateComponent,
+    MySelectComponent,
+    MyAutoCompleteComponent,
+    RibbonSaveComponent,
+    RibbonEditComponent,
+    RibbonDeleteComponent,
+    RibbonAddComponent,
+    RibbonReloadComponent,
+    ButtonSaveComponent,
+    ModuleCardComponent,
+    MyTableComponent,
+    MyTableFilterComponent,
+    MyTableSearchComponent,
+    MyTableReportComponent,
+    MyInputDateRangeComponent,
+    MyInputDateMonthComponent,
+    SideNavComponent,
+    CardComponent,
+    MyHeadingDialogeComponent,
+    ButtonSaveDialogComponent,
+    ButtonCancelDialogComponent,
+    RibbonSaveDialogComponent,
+    RibbonCancelDialogComponent,
+    MyFormDialogComponent,
+    ModuleHomeCardComponent,
+    SnackbarComponent,
+    TopnavComponent,
+    MyInputPasswordComponent,
+    RibbonBackComponent,
+    MyBoxComponent,
+    MyImageBoxComponent,
+    MyListComponent,
+    MobileBoxComponent,
+    CheckboxComponent
+  ]
+})
+export class SharedModule { }

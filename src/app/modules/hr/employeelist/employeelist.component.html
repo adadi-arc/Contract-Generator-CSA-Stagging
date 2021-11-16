@@ -1,0 +1,7 @@
+<div class="shadow-lg p-3 mt-90 rounded">
+    <app-my-heading heading="Employees"></app-my-heading>
+    <div class="row g-2">
+        <app-my-table [columns]="columns" [dataSource]="data" excel="true" (onEmployeeAdd)="onEmployeeAdd()" (onEmployeeEdit)="onEmployeeEdit($event)">
+        </app-my-table>
+    </div>
+</div>

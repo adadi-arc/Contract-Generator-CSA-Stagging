@@ -1,0 +1,40 @@
+
+.spacer {
+    flex: 1 1 auto;
+  }
+
+  a:hover{
+    background-color: transparent;
+    
+  }
+
+  
+.apptitle {
+  font-family: cursive;  
+  font-size: 28px !important;    
+}
+
+.menu{
+  font-size:18px;  
+  // background-color: #4ca704;
+  // margin: 0px 8px;
+}
+
+.menu-width{
+  width: 150px;
+}
+
+.userIcon{
+  display: flex;
+  align-items: center;
+  border: solid 1px #ddd;
+  padding: 0px 20px;
+  border-radius: 12px;
+}
+
+@media only screen and (max-width:768px){
+
+  .userIcon{
+    display: none !important;
+  }
+}

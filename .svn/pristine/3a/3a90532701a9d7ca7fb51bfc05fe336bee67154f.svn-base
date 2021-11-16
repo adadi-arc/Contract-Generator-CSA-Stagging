@@ -1,0 +1,15 @@
+<mat-toolbar [class]="theme.myTopNavColor" class="shadow">
+  <button type="button" mat-icon-button (click)="onMenuClick()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span><button mat-button type="button" class="apptitle" (click)="onAppClick()">{{appName}}</button></span>
+  <span class="spacer"></span>
+  <span class="userIcon">
+    <mat-icon class="ms-1 me-1">person</mat-icon> {{this.user?.UserName}}
+  </span>
+
+  <button mat-button class="favorite-icon" (click)="onlogoutClick()" matTooltip="Log Out">
+    <mat-icon>logout</mat-icon>
+  </button>
+
+</mat-toolbar>

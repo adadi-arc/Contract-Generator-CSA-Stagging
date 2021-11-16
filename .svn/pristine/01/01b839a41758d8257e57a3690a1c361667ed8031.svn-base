@@ -1,0 +1,11 @@
+<div class="card border-primary mb-3 ms-3 me-3 mt-5" style="max-width: 18rem; height: 520px;">
+    <div class="card-header">
+        <h2> {{title}} </h2>
+    </div>
+    <div class="card-body text-primary">            
+        <div *ngFor="let item of routes" class="m-3">            
+            <a mat-stroked-button (click)="openLink(item.route)" class="w-100" >{{item.name}}</a>
+        </div>          
+    </div>
+</div>
+  

@@ -1,0 +1,16 @@
+.heading {
+    //background: rgb(0,142,237) !important; 
+    //background: linear-gradient(90deg, rgba(0,142,237,1) 0%, rgba(108,193,250,0.9) 76%) !important;
+    //color: white;
+    //font-weight: 500;
+    //font-size: 22px;    
+    //z-index: -1;
+    //margin-bottom: 18px;
+    //padding: 12px 16px !important;
+    padding: 30px 0px 0px;
+    font-size: 22px;
+    z-index: -1;
+    color: #909090;
+}
+
+

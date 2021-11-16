@@ -1,0 +1,28 @@
+<div class="row card-margin">
+        <div class="col-md-12">
+            <app-my-table-search (change)="applyFilter($event)" *ngIf="search"></app-my-table-search>
+            <mat-selection-list #forms [multiple]="false">
+                <mat-list-option *ngFor="let d of searchList" [value]="d">
+                    <div class="list-box">                        
+                        <div class="d-flex justify-space-between align-items-center visible-area w-100" (click)="onClick(d)">
+                            <span class="flex-grow-1 bd-highlight">{{getValue(d)}}</span>
+                            <button type="button" mat-icon-button>
+                                <mat-icon>{{icon}}</mat-icon>
+                            </button>
+                        </div>
+                        <div class="d-flex heading"> 
+                            <span *ngIf="val1"> 
+                            {{val1?.title}} : {{ val1?.type == 'currency' ? (getVal1(d) | currency) : val1?.type == 'number' ? (getVal1(d) | number) : val1?.type == 'date' ? (getVal1(d) | date : 'MM/dd/yyyy') : val1?.type == 'text' ? getVal1(d) : ''}} 
+                            </span>
+                            <span *ngIf="val2" class="ps-3"> 
+                            {{val1?.title}} : {{ val2?.type == 'currency' ? (getVal2(d) | currency) : val2?.type == 'number' ? (getVal2(d) | number) : val2?.type == 'date' ? (getVal2(d) | date : 'MM/dd/yyyy') : val2?.type == 'text' ? getVal2(d) : ''}} 
+                            </span>  
+                            <span *ngIf="val3" class="ps-3"> 
+                            {{val3?.title}} : {{ val3?.type == 'currency' ? (getVal3(d) | currency) : val3?.type == 'number' ? (getVal3(d) | number) : val3?.type == 'date' ? (getVal3(d) | date : 'MM/dd/yyyy') : val3?.type == 'text' ? getVal3(d) : ''}} 
+                            </span>  
+                        </div>    
+                    </div>
+                </mat-list-option>
+            </mat-selection-list>
+        </div>
+</div>

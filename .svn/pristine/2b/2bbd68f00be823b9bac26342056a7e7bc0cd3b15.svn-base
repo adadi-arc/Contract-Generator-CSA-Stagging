@@ -1,0 +1,5 @@
+<ngx-spinner type="ball-spin" >
+   
+</ngx-spinner>
+
+<router-outlet></router-outlet>

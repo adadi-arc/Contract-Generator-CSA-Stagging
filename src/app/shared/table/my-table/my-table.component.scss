@@ -1,0 +1,54 @@
+.add-icon{
+    font-size: 22px;margin-right: 2px;
+}
+
+.mat-paginator-container{
+    justify-content: center !important;    
+}
+
+th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
+    padding-left: 5px !important;
+    padding-right: 5px;
+}
+
+// .btn-delete{
+// color: red;
+// }
+
+// .btn-edit{
+//     color: green;
+// }
+
+.table-button{
+   
+    height: 34px;
+    width: 34px;
+    padding-top: 5px;
+  
+}
+
+
+
+@media only screen and (max-width:525px){
+    .columnFilter{
+        display: none;
+    }
+
+    th{
+        display: none;
+    }
+    
+    td{
+        display: none;
+    }
+
+    th:nth-child(2){
+        display: table-cell;
+        padding-left: 10px !important;
+    }
+
+    td:nth-child(2){
+        display: table-cell;
+        padding-left: 10px !important;
+    }
+}

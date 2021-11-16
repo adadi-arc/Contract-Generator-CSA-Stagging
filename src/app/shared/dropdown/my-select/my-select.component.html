@@ -1,0 +1,14 @@
+<mat-form-field appearance="outline" class="w-100 ">
+  <mat-label>{{label}}</mat-label>
+  <mat-select 
+  [required]="required" 
+  #name="ngModel"     
+  [(ngModel)]="model"              
+  (ngModelChange)="onChange(model)"
+    >
+    <mat-option *ngFor="let option of data" [value]="option">
+        {{getValue(option)}}          
+    </mat-option>          
+  </mat-select>  
+  <mat-error *ngIf="name.invalid || name.dirty">This field is required</mat-error>      
+</mat-form-field>

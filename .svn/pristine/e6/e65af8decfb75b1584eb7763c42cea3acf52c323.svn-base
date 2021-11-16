@@ -1,0 +1,51 @@
+
+
+<mat-form-field appearance="outline" class="w-100">
+    <mat-label>{{label}}</mat-label>
+    <input 
+    type="text" 
+    matInput 
+    [matAutocomplete]="auto" 
+    [(ngModel)]="model"  
+    #name="ngModel"
+    [required]="required" 
+    (ngModelChange)="autocomp.searchResult.next($event); onChange(name.value)">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="autocomp.onDisplayValue">
+        <mat-option *ngFor="let option of autocomp.results | async" [value]="option.ID">
+            {{ option.Title }}
+        </mat-option>
+    </mat-autocomplete>
+    <!-- <mat-icon matPrefix class="me-2 icon-color">search</mat-icon> -->
+    <mat-hint>{{hint}}</mat-hint>
+    
+</mat-form-field>
+
+<!-- 
+<mat-form-field class="example-full-width">
+        <mat-label>{{label}}</mat-label>
+
+        <input type="text" matInput 
+          required 
+          [matAutocomplete]="auto" 
+          [(ngModel)]="formData.ClientID" 
+          #ClientID="ngModel"
+          name="ClientID"
+          (ngModelChange)="AutoCompClient.searchResult.next($event)">
+
+        <mat-autocomplete 
+        #auto="matAutocomplete" 
+        [displayWith]="AutoCompClient.onDisplayValue"
+        aria-label="Number" 
+        (optionSelected)="onClientChange()">
+
+          <mat-option *ngFor="let option of AutoCompClient.results | async" [value]="option.ID" style="font-size:13px;line-height:16px;border-bottom: 1px solid #d6d6d8;padding-top: 4px;
+          padding-bottom: 4px;">
+            {{ option.ClientName }}  <br> 
+            <span [hidden]="option.StreetAddress==''">Address: {{option.StreetAddress}} , </span> <span [hidden]="option.City==''">City: {{option.City}}</span>
+          </mat-option>
+          
+        </mat-autocomplete>
+        
+
+        <mat-error *ngIf="ClientID.invalid && ClientID.dirty">This field is required</mat-error>
+</mat-form-field> -->

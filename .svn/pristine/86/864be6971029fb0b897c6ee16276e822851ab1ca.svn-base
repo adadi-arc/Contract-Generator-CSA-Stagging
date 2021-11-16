@@ -1,0 +1,4 @@
+<button mat-button class="ribbon-button-padding" type="button" (click)="onClick()">
+    <mat-icon class="add-icon" [class]="theme.myIconColor">arrow_back_ios</mat-icon> 
+    <span>Back</span> 
+</button>

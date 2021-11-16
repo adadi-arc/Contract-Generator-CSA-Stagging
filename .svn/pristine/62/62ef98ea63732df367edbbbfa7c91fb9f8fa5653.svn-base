@@ -1,0 +1,4 @@
+<button mat-button class="ribbon-button-padding" type="button" [disabled]="valid" (click)="onClick()" >
+        <mat-icon class="save-icon" [class]="theme.myIconColor">save</mat-icon> 
+        <span>Save</span> 
+</button>

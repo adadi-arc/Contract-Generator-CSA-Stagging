@@ -1,0 +1,16 @@
+
+.mat-list-item{
+    color:white;
+   
+}
+
+.custom-list{
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-end;
+    
+}
+
+mat-icon{
+    margin-right: 21px;
+}

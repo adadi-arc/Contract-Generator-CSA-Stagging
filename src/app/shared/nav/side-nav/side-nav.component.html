@@ -1,0 +1,15 @@
+<mat-selection-list #module [multiple]="false">
+        <mat-list-item style="margin-bottom: 50px">
+                <!-- <img src="assets/img/logo.png" alt="" style="height: 105px;width: 500px;margin-top: 50px;"> -->
+                <h1 style="font-family: cursive;
+        margin-top: 30%;
+        margin-left: 20%;">ARC</h1>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-option *ngFor="let m of modules" [value]="shoe">
+                <div class="custom-list" (click)="openLink(m.module,m.routeName);">
+                        <mat-icon>{{m.icon}}</mat-icon> <span>{{m.title}}</span>
+                        <mat-divider></mat-divider>
+                </div>
+        </mat-list-option>
+</mat-selection-list>

@@ -1,0 +1,17 @@
+<mat-form-field appearance="outline" class="w-100">
+        <mat-label>{{label}}</mat-label>
+        <input 
+        matInput 
+        #name="ngModel"
+        autocomplete="off"
+        [required]="required" 
+        [(ngModel)]="model"     
+        (ngModelChange)="onChange(model)"
+        [matDatepicker]="picker">
+        <!-- <mat-icon matPrefix class="me-2 icon-color">event</mat-icon> -->
+        <mat-datepicker-toggle matSuffix [for]="picker">
+                <!-- <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon> -->
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+      

@@ -1,0 +1,58 @@
+<div class="background-card-color"></div>
+<div class="row card-margin">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <mat-card class="shadow">
+            <mat-card-content>
+                <mat-selection-list #forms [multiple]="false" >
+                    <div mat-subheader class="home-heading">                                                 
+                            {{moduleHeading}}                                                                                                    
+                    </div>
+                    <div class="d-flex justify-content-between" style="margin-bottom:8px;">
+                        <div mat-subheader style="padding-bottom: 0px;">                                                 
+                                <mat-icon class="me-2">add</mat-icon> Add                                                                                                    
+                        </div>
+                        <button mat-button class="back-button" type="button" (click)="openHome()">
+                                <mat-icon>navigate_before</mat-icon> Back
+                        </button>
+                    </div>
+                    <mat-list-option *ngFor="let r of routeService.getRouteByType(moduleName, 'form')" [value]="r"
+                        (click)="openLink(moduleName, r.name)">
+                        <div class="d-flex justify-content-between align-items-baseline visible-area">
+                            <span class="flex-grow-1 bd-highlight">{{r.label}}</span>
+                            <button mat-icon-button class="card-buttons">
+                                <mat-icon>navigate_next</mat-icon>
+                            </button>
+                        </div>
+                    </mat-list-option>
+                    <div mat-subheader>
+                        <mat-icon class="me-2">list</mat-icon> View/Edit
+                        
+                    </div>
+                    <mat-list-option *ngFor="let r of routeService.getRouteByType(moduleName, 'list')" [value]="r"
+                        (click)="openLink(moduleName, r.name)">
+                        <div class="d-flex justify-content-between align-items-baseline visible-area">
+                            <span class="flex-grow-1 bd-highlight">{{r.label}}</span>
+                            <button mat-icon-button class="card-buttons">
+                                <mat-icon>navigate_next</mat-icon>
+                            </button>
+                        </div>
+                    </mat-list-option>
+                    <div mat-subheader><mat-icon class="me-2 ">description</mat-icon> Reports</div>
+                    <mat-list-option *ngFor="let r of routeService.getRouteByType(moduleName, 'report')" [value]="r"
+                        (click)="openLink(moduleName, r.name)">
+                        <div class="d-flex justify-content-between align-items-baseline visible-area">
+                            <span class="flex-grow-1 bd-highlight">{{r.label}}</span>
+                            <button mat-icon-button class="card-buttons">
+                                <mat-icon>navigate_next</mat-icon>
+                            </button>
+                        </div>
+                    </mat-list-option>
+                </mat-selection-list>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+
+<br>
+<br>

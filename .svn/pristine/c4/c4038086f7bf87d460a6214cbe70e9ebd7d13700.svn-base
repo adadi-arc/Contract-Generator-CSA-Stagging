@@ -1,0 +1,4 @@
+<button mat-button class="ribbon-button-padding" type="button" (click)="onClick()">
+        <mat-icon class="delete-icon" [class]="theme.myIconColor">delete_outline</mat-icon> 
+        <span> Delete</span>
+</button>

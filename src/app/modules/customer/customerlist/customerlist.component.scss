@@ -1,0 +1,24 @@
+thead {
+    color:rgb(0,142,237);        
+}
+
+table tr td {
+    padding: 12px;
+}
+
+td:nth-child(1) {
+    padding-left: 20px !important;
+}
+
+th:nth-child(1) {
+    padding-left: 20px !important;
+}
+
+th:last-child {
+    padding-left: 20px !important;
+}
+
+td:last-child {
+    padding-left: 20px !important;
+}
+

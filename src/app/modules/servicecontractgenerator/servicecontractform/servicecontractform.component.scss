@@ -1,0 +1,58 @@
+td :first-child{
+    width: 70%;
+}
+
+.ContAdd{
+    display: inline-block;
+}
+
+.selectMenu{
+    //box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: white;
+    border-radius: 5px;
+    padding: 7px 0 7px 0;
+}
+td{
+    vertical-align: middle;
+}
+// .table-striped{
+//     background-color: rgb(220,230,241)
+// }
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color:#ebf5ff !important;
+}
+.my-form-heading-blue{
+    background: #4c7ab5 !important;
+}
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+.mat-checkbox-checked>.mat-checkbox-inner-container{
+    background: #4c7ab5 !important;
+}
+
+
+.mat-form-field.mat-focused .mat-form-field-label {
+    color: #4c7ab5 !important;
+}
+
+.mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary {
+    background-color: #4c7ab5 !important;
+}   
+
+.mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary{
+    background-color: #4c7ab5 !important;
+}
+.mat-raised-button.mat-button-disabled:not([class*=mat-elevation-z]){
+    background-color: rgba(0,0,0,.12) !important;
+}
+.btnEnd{
+    margin-right: 15px;
+}

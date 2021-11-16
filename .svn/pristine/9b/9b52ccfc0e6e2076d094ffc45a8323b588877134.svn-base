@@ -1,0 +1,25 @@
+<div class="top-ribbon row">
+        <div class="btn-group">
+                <app-ribbon-back (myClick)="onBack()"></app-ribbon-back>
+                <app-ribbon-delete (myClick)="onDelete()"></app-ribbon-delete>
+                <app-ribbon-save (myClick)="onSave()" [valid]="customer.invalid"></app-ribbon-save>
+        </div>
+</div>
+
+<form #customer="ngForm" class="shadow-lg p-3 mt-132 rounded needs-validation">
+        <app-my-heading heading="Customer"></app-my-heading>
+        <div class="row g-2">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                        <app-my-input label="Title" class="col-md-6" required="true" name="Title" [(ngModel)]="obj.Title">
+                        </app-my-input>
+                        <app-my-input label="Phone" class="col-md-6" name="Phone" [(ngModel)]="obj.Phone">
+                        </app-my-input>
+                        <app-my-select label="Customer Type" title="Title" required="true" [data]="dataCustomerType" name="CustomerType" [(ngModel)]="selectedCustomerType" class="col-md-6">
+                        </app-my-select>                        
+                        <app-my-input-number label="Amount" class="col-md-6" name="Amount" [(ngModel)]="obj.Amount">
+                        </app-my-input-number>                        
+                        <app-button-save (myClick)="onSave()" [valid]="customer.invalid"></app-button-save>
+                </div>
+        </div>
+</form>

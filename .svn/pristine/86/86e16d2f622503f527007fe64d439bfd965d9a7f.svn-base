@@ -1,0 +1,54 @@
+.back-button{
+    background-color: aliceblue;   
+    color: #0690ed;    
+    border-radius: 4px;
+    margin: 1px;
+    height: 125px;
+}
+.mat-icon{
+    font-size: 70px;
+    color: #0690edad;
+   
+    border-radius: 20%;
+    height: 75px;
+    width: 71px;
+}
+.heading-Box {
+    text-align: center;
+    padding-top: 22%;
+    color: #778c9a;
+    font-size: 25px;
+    font-family:"roboto";
+}
+
+
+.box {
+    margin-top: 80px !important;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-around;
+    margin: 5px;
+} 
+hr {
+    border-top: 3px solid #0690ed59;
+    border-radius: 50%;
+
+}
+
+.icon-box{
+    background-color: #e9f6ff;
+    padding: 15px;
+    border-radius: 20px;
+    
+}
+@media only screen and (min-width:728px) {
+    .mobile{
+        display: none;
+    }
+}
+@media only screen and (max-width:728px) {
+    .desktop{
+        display: none;
+    }
+}

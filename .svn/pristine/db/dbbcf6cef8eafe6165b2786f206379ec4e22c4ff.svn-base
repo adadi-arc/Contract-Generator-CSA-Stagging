@@ -1,0 +1,13 @@
+<mat-form-field appearance="outline" class="w-100">
+        <mat-label>{{label}}</mat-label>
+        <input 
+        type="password"
+        matInput  
+        autocomplete="off"
+        #name="ngModel"
+        [required]="required" 
+        [(ngModel)]="model"     
+        (ngModelChange)="onChange(model)">    
+        <mat-hint>{{hint}}</mat-hint>
+        <mat-error *ngIf="name.invalid || name.dirty">This field is required</mat-error>
+    </mat-form-field>

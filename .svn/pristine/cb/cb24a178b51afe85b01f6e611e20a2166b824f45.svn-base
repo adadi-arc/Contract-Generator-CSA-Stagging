@@ -1,0 +1,12 @@
+<div class="card shadow" >
+    <div class="image-box " MatRippleModule>
+        <img  [src]="imageurl" class="card-img-top" height="220" alt="...">
+    </div>
+    <div class="card-body text-center">
+        <h2 class="card-text"> {{label}} </h2>                     
+        <button type="button" (click)="onOpenClick()" mat-button style="margin-top: 7px; background-color: aliceblue;width: 100%;" class="">
+                <mat-icon class="add-icon" [class]="theme.myIconColor">double_arrow</mat-icon> Open
+        </button>
+
+    </div>    
+</div>

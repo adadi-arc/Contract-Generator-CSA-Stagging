@@ -1,0 +1,6 @@
+.mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary{
+    background-color: #4c7ab5;
+}
+.mat-raised-button.mat-button-disabled:not([class*=mat-elevation-z]){
+    background-color: rgba(0,0,0,.12);
+}

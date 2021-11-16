@@ -1,0 +1,4 @@
+<button mat-button class="ribbon-button-padding">
+        <mat-icon class="reload-icon" [class]="theme.myIconColor">autorenew</mat-icon> 
+        <span> Reload </span>
+</button>

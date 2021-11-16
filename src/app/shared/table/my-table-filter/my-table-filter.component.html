@@ -1,0 +1,13 @@
+<mat-form-field appearance="fill" class="w-100 pe-2">
+        <mat-label>{{label}}</mat-label>
+        <mat-select         
+        #name="ngModel"
+        [(ngModel)]="model"
+        (ngModelChange)="onChange(name.value)">
+          <mat-option> -- Clear -- </mat-option>
+          <mat-option *ngFor="let option of data" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-select>
+        <mat-icon matPrefix [class]="theme.myIconColor">filter_alt</mat-icon>
+</mat-form-field>

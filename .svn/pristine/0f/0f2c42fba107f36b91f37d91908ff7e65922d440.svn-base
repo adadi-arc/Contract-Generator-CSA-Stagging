@@ -1,0 +1,4 @@
+<button mat-button class="ribbon-button-padding">
+    <mat-icon class="save-icon" [class]="theme.myIconColor">save</mat-icon> 
+    <span>Save</span> 
+</button>

@@ -1,0 +1,7 @@
+.add-icon{
+   font-size: 22px;margin-right: 2px;
+}
+
+.mat-paginator-container{
+    justify-content: center !important;    
+}

@@ -1,0 +1,4 @@
+<button mat-button class="ribbon-button-padding" type="button" (click)="onClick()">
+        <mat-icon class="add-icon" [class]="theme.myIconColor">add</mat-icon> 
+        <span>Add</span> 
+</button>
