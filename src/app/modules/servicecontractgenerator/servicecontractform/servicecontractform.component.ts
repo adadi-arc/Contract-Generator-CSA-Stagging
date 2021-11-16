@@ -250,7 +250,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
         docxvar['ZipCode'] = this.selectedContractorZip;
       }
       if (docx.Search("ContractorAttn")==true) {
-        if (this.selectedContractorAttn == undefined || this.selectedContractorAttn == ""){
+        if (this.selectedContractorAttn == ""){
           docxvar['ContractorAttn'] = "\n";
         }
         else{
@@ -258,7 +258,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
         }
       }
       if (docx.Search("ContractorEmail")==true) {
-        if (this.selectedContractorAttn == undefined || this.selectedContractorEmail == ""){
+        if (this.selectedContractorEmail == ""){
           docxvar['ContractorEmail'] = "\n";
         }
         else{
