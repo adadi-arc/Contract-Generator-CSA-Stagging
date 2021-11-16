@@ -192,19 +192,27 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
   onChange(value: any) {
     
   }
+
   resetStates(servicecontract:NgForm){
     if (servicecontract != undefined){
-      servicecontract.reset();
-      this.selectedPropertyManager = "BioMed Realty LLC";
-      this.selectedContractorState = null;
-      this.selectedExecutionDate = null;
-      this.selectedExpirationDate = null;
-      this.selectedCommencementDate = null;
+      this.selectedPropertyAddress = "";
+      this.selectedPropertyManager = "BioMed Realty LLC"
+      this.selectedContractor = "";
+      this.selectedContractorStateOfFormation = "";
+      this.selectedContractorAddress = "";
+      this.selectedContractorCity = "";
+      this.selectedContractorZip = "";
+      this.selectedContractorState = "";
+      this.selectedContractorAttn = "";
+      this.selectedContractorEmail = "";
+      this.selectedExecutionDate = "";
+      this.selectedExpirationDate = "";
+      this.selectedCommencementDate = "";
+      this.selectedIncludeTM = null;
       Object.keys(servicecontract.controls).forEach(key =>{
          servicecontract.controls[key].setErrors(null);
       });
     }
-    
   }
   invalidateFields(){
     if(this.selectedOwner === null)
@@ -232,15 +240,10 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
     if(this.selectedExpirationDate === null)
       return true;
 
-      
+
       return false;
   }
-  resetBtn(){
-    // this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-    // this.router.navigate(['/ServiceContractForm'])
-    // );
-    // this.router.navigate(['/ServiceContractForm']);
-  }
+
   clearPM(){
     this.selectedPropertyManager = null;
   }
@@ -264,7 +267,12 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
         docxvar['OwnerStateOfFormation'] = this.selectedOwner.StateOfFormation;
       }
       if (docx.Search("PropertyManager")==true){
-        docxvar['PropertyManager'] = this.selectedPropertyManager;
+        if (this.selectedPropertyManager == "" || this.selectedPropertyManager == undefined){
+          docxvar['PropertyManager'] = "BioMed Realty LLC"
+        }
+        else{
+          docxvar['PropertyManager'] = this.selectedPropertyManager;
+        }
       }
       if (docx.Search("Contractor")==true) {
         docxvar['Contractor'] = this.selectedContractor;
