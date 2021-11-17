@@ -264,7 +264,12 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
         docxvar['CopyTo'] = this.selectedOwner.Owner;
       }
       if (docx.Search("OwnerStateOfFormation")==true){
-        docxvar['OwnerStateOfFormation'] = this.selectedOwner.StateOfFormation;
+        if (this.selectedOwner.StateOfFormation == undefined){
+          docxvar['OwnerStateOfFormation'] =  "";
+        }
+        else{
+          docxvar['OwnerStateOfFormation'] = this.selectedOwner.StateOfFormation;
+        }
       }
       if (docx.Search("PropertyManager")==true){
         if (this.selectedPropertyManager == "" || this.selectedPropertyManager == undefined){
@@ -309,7 +314,6 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
         else{
           docxvar['ContractorEmail'] = "Email: " + this.selectedContractorEmail;
         }
-        
       }
       if (docx.Search("ContractorStateOfFormation")==true){
         docxvar['ContractorStateOfFormation'] = this.selectedContractorStateOfFormation;
