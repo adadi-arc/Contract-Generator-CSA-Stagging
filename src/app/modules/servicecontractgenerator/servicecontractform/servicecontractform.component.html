@@ -12,6 +12,37 @@
                                 <mat-expansion-panel [expanded]="step === 0" hideToggle>
                                         <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
                                                 <mat-panel-title style="color: white;">
+                                                        Contract Type
+
+                                                </mat-panel-title>
+                                                <mat-panel-description style="display: contents;">
+
+                                                        <mat-icon style="color: white;">account_circle</mat-icon>
+                                                </mat-panel-description>
+                                        </mat-expansion-panel-header>
+                                        <mat-form-field class="example-full-width" style="width: 100%;" id="formselect">
+                                                <mat-label>Select Contract Type:</mat-label>
+                                                <mat-select class="MatInputBoxShadow"
+                                                        type="text" name="FormSelect" required
+                                                        [(ngModel)]="selectedForm"
+                                                        (ngModelChange)="onChange(selectedForm)">
+                                                        <mat-option>-- Clear --</mat-option>
+                                                        <mat-option *ngFor="let option of Forms"
+                                                                [value]="option">
+                                                                {{ option.Title }}
+                                                        </mat-option>
+                                                </mat-select>
+                                                <mat-error>This field is required</mat-error>
+                                        </mat-form-field>
+                                </mat-expansion-panel>
+                        </mat-accordion>
+                </div>
+                
+                <div class="col-md-5">
+                        <mat-accordion class="example-headers-align">
+                                <mat-expansion-panel [expanded]="step === 0" hideToggle>
+                                        <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
+                                                <mat-panel-title style="color: white;">
                                                         Owner Information
 
                                                 </mat-panel-title>
@@ -21,8 +52,7 @@
                                                 </mat-panel-description>
                                         </mat-expansion-panel-header>
                                         <div class="row" style="margin-top: 18px;">
-
-                                                <div class="col-md-12 selectMenu">
+                                                <div class="col-md-12 selectMenu" style="margin-top: 15px;" *ngIf="selectedForm.Title != undefined">>
                                                         <button type="button" mat-menu-item (click)="resetStates(servicecontract);" [matMenuTriggerFor]="markets"
                                                                 *ngFor="let r of Region; let i=index">{{r.Region}} <mat-icon>arrow_right</mat-icon>
                                                                 <mat-menu #markets="matMenu">
@@ -96,7 +126,7 @@
                         </mat-accordion>
                 </div>
                 <div class="col-md-7">
-                        <mat-accordion class="example-headers-align" *ngIf="selectedOwner != undefined">
+                        <mat-accordion class="example-headers-align" *ngIf="selectedForm.Title == 'Service Contract' && selectedOwner != undefined">
                                 <mat-expansion-panel [expanded]="step === 0" hideToggle>
                                         <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
                                                 <mat-panel-title style="color: white;">
@@ -151,14 +181,6 @@
                                                         </mat-form-field>
                                                 </div>
                                                 <div class="col-md-4">
-                                                        <!-- <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                <mat-label>Contractor State:</mat-label>
-                                                                <input matInput class="MatInputBoxShadow" type="text"
-                                                                        required name="ContractorState"
-                                                                        [(ngModel)]="selectedContractorState">
-                                                                <mat-error>This field is required
-                                                                </mat-error>
-                                                        </mat-form-field>  -->
                                                         <mat-form-field class="example-full-width" style="width: 100%;" id="states">
                                                                 <mat-label>Contractor State:</mat-label>
                                                                 <mat-select class="MatInputBoxShadow"
@@ -215,7 +237,7 @@
 
 
                         </mat-accordion>
-                        <mat-accordion class="example-headers-align" *ngIf="selectedOwner != undefined">
+                        <mat-accordion class="example-headers-align" *ngIf="selectedForm.Title == 'Service Contract' && selectedOwner != undefined">
                                 <mat-expansion-panel [expanded]="step === 0" style="margin-top: 20px;" hideToggle>
                                         <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
                                                 <mat-panel-title style="color: white;">

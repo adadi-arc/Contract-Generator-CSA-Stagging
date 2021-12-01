@@ -89,6 +89,11 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
     {ID: 49, Title: "WI"},
     {ID: 50, Title: "WY"}
   ];
+  Forms: any[]=[
+    {ID: 1, Title: "Service Contract"},
+    {ID: 2, Title: "TRS Service Contract"}
+  ];
+  selectedForm: any=null;
   selectedOwner: any = null;
   selectedPropertyManager: any = "BioMed Realty LLC";
   selectedContractor: any = null;
@@ -385,7 +390,6 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
           docxvar['AdditionalInsureds'] = "";
         }
       }
-       //UNCOMMENT ONCE ADDITIONAL INSUREDS IS IN FREDD
        if (docx.Search("AdditionalInsureds")==true){
          if (this.selectedOwner.AdditionalInsureds != undefined){
            docxvar['AdditionalInsureds'] = ", " + this.selectedOwner.AdditionalInsureds;
