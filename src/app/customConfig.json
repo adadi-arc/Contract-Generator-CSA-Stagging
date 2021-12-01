@@ -1,6 +1,6 @@
 {
-    "api": "/sites/fredd",
-    "spSite": "/sites/fredd",
+    "api": "http://localhost:53244/",
+    "spSite": "/sites/DMSDemo2/contract-generator",
     "tokenID": "arctoken",
-    "baseUrl": "http://fredd/"
+    "baseUrl": "http://localhost:8100"
 }
