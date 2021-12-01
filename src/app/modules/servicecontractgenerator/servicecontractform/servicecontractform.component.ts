@@ -137,29 +137,29 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
           this.dataProperty = res['d'].results as any[];
           for (var count = 0; count<this.dataProperty.length; count++){
             var order = this.dataProperty[count];
-            var lines = (order.FREDDPropertyName.results[0].Label).split(':');
-            //var lines = (order.Fredd_x0020_Property_x0020_Name_).split(':');
+            //var lines = (order.FREDDPropertyName.results[0].Label).split(':');
+            var lines = (order.Fredd_x0020_Property_x0020_Name_).split(':');
 
-            this.menuData.push({
-               "Property": lines[3], 
-               "ID": order.ID, 
-               "Region": lines[1], 
-               "Market": lines[2],
-               "Owner": order.EntityName,
-               "StateOfFormation": order.StateofFormation,
-              "AdditionalInsureds": order.AdditionalInsureds,
-               "EntityID": order.EntityID
-              });
-              // this.menuData.push({
-              //   "Property": lines[3], 
-              //   "ID": order.ID, 
-              //   "Region": lines[1], 
-              //   "Market": lines[2],
-              //   "Owner": order.EntityName,
-              //   "StateOfFormation": order.StateofFormation,
-              //  "AdditionalInsureds": order.AdditionalInsureds,
-              //   "EntityID": order.EntityID
-              //  });
+            // this.menuData.push({
+            //    "Property": lines[3], 
+            //    "ID": order.ID, 
+            //    "Region": lines[1], 
+            //    "Market": lines[2],
+            //    "Owner": order.EntityName,
+            //    "StateOfFormation": order.StateofFormation,
+            //   "AdditionalInsureds": order.AdditionalInsureds,
+            //    "EntityID": order.EntityID
+            //   });
+              this.menuData.push({
+                "Property": lines[3], 
+                "ID": order.ID, 
+                "Region": lines[1], 
+                "Market": lines[2],
+                "Owner": order.EntityName,
+                "StateOfFormation": order.StateofFormation,
+               "AdditionalInsureds": order.AdditionalInsureds,
+                "EntityID": order.EntityID
+               });
           }
           this.Region = [...new Map(this.menuData.map(item =>[item['Region'], item])).values()];
           this.Region = this.Region.sort((a, b) => (a.Region > b.Region) ? 1 : -1)
@@ -256,8 +256,8 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
   onSave() {
 
     var docx = new DocxReader();
-    var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/ServiceContractTemplate.docx";
-    //var steUrl = "/assets/template/ServiceContractTemplate.docx"
+    //var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/ServiceContractTemplate.docx";
+    var steUrl = "/assets/template/ServiceContractTemplate.docx"
     docx.Load(steUrl, ()=> {
 
       var docxvar = {};
