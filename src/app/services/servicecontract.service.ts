@@ -26,7 +26,7 @@ export class ServicecontractService {
     var queryProperty = {
       //select: "ID, Title, EntityID, FREDDPropertyName, EntityName, AdditionalInsureds,StateofFormation, Fredd_x0020_Property_x0020_Name_, TaxCatchAll/Term,TaxCatchAll/IdForTerm,TaxCatchAll/Title,TaxCatchAll/IdForTermStore,TaxCatchAll/IdForTermSet",
       select: "ID, Title, EntityID, FREDDPropertyName, EntityName, StateofFormation, Fredd_x0020_Property_x0020_Name_",
-      expand: "TaxCatchAll",
+      //expand: "TaxCatchAll",
       orderby: "EntityID asc",
       top: "5000"
     }
@@ -36,7 +36,7 @@ export class ServicecontractService {
     var queryMaster = {
       //select: "ID, Title, Building_x0020_ID, Building_x0020_Property_x0020_Ma/Title, Building_x0020_Property_x0020_Ma/ID",
       select: "ID, Title, Building_x0020_ID",
-      expand: "Building_x0020_Property_x0020_Ma",
+      //expand: "Building_x0020_Property_x0020_Ma",
       orderby: "Building_x0020_ID asc",
       top: "5000"
     }

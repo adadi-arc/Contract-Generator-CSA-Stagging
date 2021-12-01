@@ -7,7 +7,7 @@
         <app-my-heading heading="Service Contract Generator"></app-my-heading>
 
         <div class="row ">
-                <div class="col-md-5">
+                <div class="col-md-12">
                         <mat-accordion class="example-headers-align">
                                 <mat-expansion-panel [expanded]="step === 0" hideToggle>
                                         <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
@@ -17,10 +17,10 @@
                                                 </mat-panel-title>
                                                 <mat-panel-description style="display: contents;">
 
-                                                        <mat-icon style="color: white;">account_circle</mat-icon>
+                                                        <mat-icon style="color: white;">description</mat-icon>
                                                 </mat-panel-description>
                                         </mat-expansion-panel-header>
-                                        <mat-form-field class="example-full-width" style="width: 100%;" id="formselect">
+                                        <mat-form-field class="example-full-width" style="width: 40%; margin-top: 15px;" id="formselect">
                                                 <mat-label>Select Contract Type:</mat-label>
                                                 <mat-select class="MatInputBoxShadow"
                                                         type="text" name="FormSelect" required
@@ -38,7 +38,7 @@
                         </mat-accordion>
                 </div>
                 
-                <div class="col-md-5">
+                <div class="col-md-5" *ngIf="selectedForm != undefined" style="margin-top: 15px;">
                         <mat-accordion class="example-headers-align">
                                 <mat-expansion-panel [expanded]="step === 0" hideToggle>
                                         <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
@@ -52,7 +52,7 @@
                                                 </mat-panel-description>
                                         </mat-expansion-panel-header>
                                         <div class="row" style="margin-top: 18px;">
-                                                <div class="col-md-12 selectMenu" style="margin-top: 15px;" *ngIf="selectedForm.Title != undefined">>
+                                                <div class="col-md-12 selectMenu" style="margin-top: 15px;">
                                                         <button type="button" mat-menu-item (click)="resetStates(servicecontract);" [matMenuTriggerFor]="markets"
                                                                 *ngFor="let r of Region; let i=index">{{r.Region}} <mat-icon>arrow_right</mat-icon>
                                                                 <mat-menu #markets="matMenu">
@@ -125,8 +125,8 @@
 
                         </mat-accordion>
                 </div>
-                <div class="col-md-7">
-                        <mat-accordion class="example-headers-align" *ngIf="selectedForm.Title == 'Service Contract' && selectedOwner != undefined">
+                <div class="col-md-7" style="margin-top: 15px;">
+                        <mat-accordion class="example-headers-align" *ngIf="selectedForm != undefined && selectedOwner != undefined">
                                 <mat-expansion-panel [expanded]="step === 0" hideToggle>
                                         <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
                                                 <mat-panel-title style="color: white;">
@@ -237,8 +237,8 @@
 
 
                         </mat-accordion>
-                        <mat-accordion class="example-headers-align" *ngIf="selectedForm.Title == 'Service Contract' && selectedOwner != undefined">
-                                <mat-expansion-panel [expanded]="step === 0" style="margin-top: 20px;" hideToggle>
+                        <mat-accordion class="example-headers-align" *ngIf="selectedForm != undefined && selectedOwner != undefined">
+                                <mat-expansion-panel [expanded]="step === 0" style="margin-top: 90px;" hideToggle>
                                         <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
                                                 <mat-panel-title style="color: white;">
                                                         Other Details
