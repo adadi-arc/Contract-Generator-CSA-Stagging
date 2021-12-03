@@ -177,6 +177,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
   
   FormBind(){
     this.FormName=this.selectedForm.Title;
+    this.selectedOwner = undefined;
   }
 
   OwnerSelect(selection){

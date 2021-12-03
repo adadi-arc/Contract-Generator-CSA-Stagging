@@ -22,7 +22,7 @@
                                         </mat-expansion-panel-header>
                                         <mat-form-field class="example-full-width" style="width: 40%; margin-top: 15px;" id="formselect">
                                                 <mat-label>Select Contract Type:</mat-label>
-                                                <mat-select class="MatInputBoxShadow" (click)="resetStates(servicecontract);"
+                                                <mat-select class="MatInputBoxShadow"
                                                         type="text" name="FormSelect" required
                                                         [(ngModel)]="selectedForm"
                                                         (ngModelChange)="onChange(selectedForm)">
@@ -127,7 +127,7 @@
                 </div>
                 <div class="col-md-7" style="margin-top: 15px;">
                         <!--SERVICE CONTRACT FIELDS-->
-                        
+
                         <mat-accordion class="example-headers-align" *ngIf="this.FormName == 'Service Contract' && selectedOwner != undefined">
                                 <mat-expansion-panel [expanded]="step === 0" hideToggle>
                                         <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
@@ -413,7 +413,7 @@
 
                         </mat-accordion>
                         <mat-accordion class="example-headers-align" *ngIf="this.FormName == 'TRS Service Contract' && selectedOwner != undefined">
-                                <mat-expansion-panel [expanded]="step === 0" style="margin-top: 90px;" hideToggle>
+                                <mat-expansion-panel [expanded]="step === 0" style="margin-top: 10px;" hideToggle>
                                         <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
                                                 <mat-panel-title style="color: white;">
                                                         Other Details
