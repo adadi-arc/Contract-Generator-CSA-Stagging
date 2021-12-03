@@ -94,6 +94,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
     {ID: 2, Title: "TRS Service Contract"}
   ];
   selectedForm: any = null;
+  FormName: any = null;
   selectedOwner: any = null;
   selectedPropertyManager: any = "BioMed Realty LLC";
   selectedContractor: any = null;
@@ -169,12 +170,15 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
           this.Property = this.Property.sort((a, b) => (a.Property > b.Property) ? 1 : -1)
           console.log(this.Region);
         
-        
         })  
          
 
   }
   
+  FormBind(){
+    this.FormName=this.selectedForm.Title;
+  }
+
   OwnerSelect(selection){
     this.selectedOwner = selection;
     var eID = this.selectedOwner.EntityID;
@@ -422,7 +426,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
 
     if(this.selectedForm.Title == "TRS Service Contract"){
       var docx = new DocxReader();
-      //var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/ServiceContractTemplate.docx";
+      //var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/TRSContractTemplate.docx";
       var steUrl = "/assets/template/TRSContractTemplate.docx"
       docx.Load(steUrl, ()=> {
 
@@ -510,10 +514,10 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
           }
         }
         if (this.selectedIncludeTM == undefined){
-          if (docx.Search("TM_Y")==true){
+          if (docx.Search("TM_Y") == true){
             docxvar['TM_Y'] = "☐";
           }
-          if (docx.Search("TM_N")==true){
+          if (docx.Search("TM_N") == true){
             docxvar['TM_N'] = "☑";
           }
         }
