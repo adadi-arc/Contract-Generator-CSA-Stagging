@@ -422,7 +422,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
           throw error;
         }
 
-        docx.SetName("SC" + "-" + this.selectedContractor);
+        docx.SetName("SC" + " - " + this.selectedContractor);
 
         docx.Download();
       });
@@ -581,7 +581,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
           throw error;
         }
 
-        docx.SetName("TRS_SC" + "-" + this.selectedContractor);
+        docx.SetName("SC" + " - " + this.selectedContractor);
 
         docx.Download();
       });
