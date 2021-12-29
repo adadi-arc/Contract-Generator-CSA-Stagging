@@ -119,7 +119,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
     super(route);
     this.obj = new ServiceContract();
   }
-
+//test
   
   ngOnInit(): void {
     super.ngOnInit();

@@ -21,7 +21,7 @@ export class ServicecontractService {
 
     return await this.sp.readItems(this.listNameGeneral, queryGen);
   }
-
+//test
   async getAllProperty(){
     var queryProperty = {
       //select: "ID, Title, EntityID, FREDDPropertyName, EntityName, AdditionalInsureds,StateofFormation, Fredd_x0020_Property_x0020_Name_, TaxCatchAll/Term,TaxCatchAll/IdForTerm,TaxCatchAll/Title,TaxCatchAll/IdForTermStore,TaxCatchAll/IdForTermSet", //prod
