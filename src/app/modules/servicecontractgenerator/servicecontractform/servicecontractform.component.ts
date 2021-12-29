@@ -139,8 +139,8 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
           for (var count = 0; count<this.dataProperty.length; count++){
             var order = this.dataProperty[count];
             console.log(order);
-            //var lines = (order.FREDDPropertyName.results[0].Label).split(':'); //Local
-            var lines = (order.Fredd_x0020_Property_x0020_Name_).split(':'); //Prod/Staging
+            var lines = (order.FREDDPropertyName.results[0].Label).split(':'); //Local
+            //var lines = (order.Fredd_x0020_Property_x0020_Name_).split(':'); //Prod/Staging
             //Prod/Staging
             this.menuData.push({
                "Property": lines[3], 
@@ -263,8 +263,8 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
   onSave() {
     if(this.selectedForm.Title == "Service Contract"){
       var docx = new DocxReader();
-      //var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/ServiceContractTemplate.docx"; //prod
-      var steUrl = "/sites/fredd/SourceCode/assets/template/ServiceContractTemplate.docx"; //Staging
+      var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/ServiceContractTemplate.docx"; //prod
+      //var steUrl = "/sites/fredd/SourceCode/assets/template/ServiceContractTemplate.docx"; //Staging
       //var steUrl = "/assets/template/ServiceContractTemplate.docx" //local
       docx.Load(steUrl, ()=> {
 
@@ -430,8 +430,8 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
 
     if(this.selectedForm.Title == "TRS Service Contract"){
       var docx = new DocxReader();
-      //var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/TRSContractTemplate.docx"; //prod
-      var steUrl = "/sites/fredd/SourceCode/assets/template/TRSContractTemplate.docx"; //staging
+      var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/TRSContractTemplate.docx"; //prod
+      //var steUrl = "/sites/fredd/SourceCode/assets/template/TRSContractTemplate.docx"; //staging
       //var steUrl = "/assets/template/TRSContractTemplate.docx" //local
       docx.Load(steUrl, ()=> {
 

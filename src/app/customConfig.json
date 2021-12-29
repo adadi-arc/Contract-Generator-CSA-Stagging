@@ -1,6 +1,6 @@
 {
     "api": "/sites/fredd",
     "spSite": "/sites/fredd",
-    "tokenID": "arctokenstaging",
-    "baseUrl": "http://freddstg"
+    "tokenID": "arctokenprod",
+    "baseUrl": "http://fredd/"
 }
