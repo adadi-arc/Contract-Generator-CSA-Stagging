@@ -91,7 +91,8 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
   ];
   Forms: any[]=[
     {ID: 1, Title: "Service Contract"},
-    {ID: 2, Title: "TRS Service Contract"}
+    {ID: 2, Title: "TRS Service Contract"},
+    {ID: 3, Title: "Change Order Form"}
   ];
   selectedForm: any = null;
   FormName: any = null;
@@ -109,6 +110,26 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
   selectedCommencementDate: any = null;
   selectedExpirationDate: any = null;
   selectedPropertyAddress: any = null;
+  selectedCOnum: any = null;
+  selectedDate: any = null;
+  selectedProjNum: any = null;
+  selectedCAGMP: any = null;
+  selectedOriginalGMP: any = null;
+  selectedNetIncDec: any = null;
+  selectedNetChange: any = null;
+  selectedPreviousGMP: any = null;
+  selectedCOincdec: any = null;
+  selectedCOamount: any = null;
+  selecctedCOdate: any = null;
+  selectedNewGMP: any = null;
+  selectedContractTime: any = null;
+  selectedTimeIncDec: any = null;
+  selectedTimeChange: any = null;
+  selectedSOWrevised: boolean = false;
+  selectedSubstantialCompletion: any = null;
+  selectedSubstantialCompletionDate: any = null;
+  selectedContractDate: any = null;
+  selectedProjectNum: any = null;
   selectedIncludeTM: boolean = false;
   menuData: any[] = [];
   Region: any[] = [];
