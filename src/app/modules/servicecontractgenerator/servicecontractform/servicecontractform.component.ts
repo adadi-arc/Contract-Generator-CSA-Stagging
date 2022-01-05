@@ -112,7 +112,6 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
   selectedPropertyAddress: any = null;
   selectedCOnum: any = null;
   selectedDate: any = null;
-  selectedProjNum: any = null;
   selectedCAGMP: any = null;
   selectedOriginalGMP: any = null;
   selectedNetIncDec: any = null;
@@ -607,7 +606,68 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
         docx.Download();
       });
     }
-    
+    if(this.selectedForm.Title == "Change Order Form"){
+      var docx = new DocxReader();
+      var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/TRSContractTemplate.docx"; //prod
+      //var steUrl = "/sites/fredd/SourceCode/assets/template/TRSContractTemplate.docx"; //staging
+      //var steUrl = "/assets/template/TRSContractTemplate.docx" //local
+      docx.Load(steUrl, ()=> {
+
+        var docxvar = {};
+
+        if (docx.Search("Owner")==true) {
+          docxvar['Owner'] = this.selectedOwner.Owner;
+        }
+        if (docx.Search("PropertyAddress")==true){
+          docxvar['PropertyAddress'] = this.selectedPropertyAddress;
+        }
+        if (docx.Search("CO_Num")==true) {
+          docxvar['CO_Num'] = this.selectedCOnum;
+        }
+        if (docx.Search("Date")==true){
+          docxvar['Date'] = this.selectedDate;
+        }
+        if (docx.Search("ContractorName")==true){
+          docxvar['ContractorName'] = this.selectedContractor;
+        }
+        if (docx.Search("ContractorStreetAddress")==true){
+          docxvar['ContractorStreetAddress'] = this.selectedContractorAddress;
+        }
+        if (docx.Search("City")==true){
+          docxvar['City'] = this.selectedContractorCity;
+        }
+        if (docx.Search("State")==true){
+          docxvar['State'] = this.selectedContractorState;
+        }
+        if (docx.Search("Zipcode")==true){
+          docxvar['Zipcode'] = this.selectedContractorZip;
+        }
+        if (docx.Search("ContractDate")==true){
+          docxvar['ContractDate'] = this.selectedContractDate;
+        }
+        if (docx.Search("ProjectNumber")==true){
+          docxvar['ProjectNumber'] = this.selectedProjectNum;
+        }
+        docx.docxtemplater.setData(docxvar);
+        try{
+          docx.docxtemplater.render();
+        }
+        catch (error) {
+          var e = {
+            message: error.message,
+            name: error.name,
+            stack: error.stack,
+            properties: error.properties,
+          }
+          console.log(JSON.stringify({error: e}));
+          throw error;
+        }
+
+        docx.SetName("SC" + " - " + this.selectedContractor);
+
+        docx.Download();
+      });
+    }
   }
 
 
