@@ -648,6 +648,60 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
         if (docx.Search("ProjectNumber")==true){
           docxvar['ProjectNumber'] = this.selectedProjectNum;
         }
+        if (docx.Search("CA_GMP") == true){
+          docxvar['CA_GMP'] = this.selectedCAGMP;
+        }
+        if (docx.Search("NetIncDec") == true){
+          docxvar['NetIncDec'] = this.selectedNetIncDec;
+        }
+        if (docx.Search("NetChange") == true){
+          docxvar['NetChange'] = this.selectedNetChange;
+        }
+        if (docx.Search("PreviousGMP")==true){
+          if (this.selectedNetIncDec == "Increase"){
+            this.selectedPreviousGMP = parseFloat(this.selectedOriginalGMP) + parseFloat(this.selectedNetChange);
+            docxvar['PreviousGMP'] = this.selectedPreviousGMP;
+          }
+          if (this.selectedNetIncDec == "Decrease"){
+            this.selectedPreviousGMP = parseFloat(this.selectedOriginalGMP) - parseFloat(this.selectedNetChange);
+            docxvar['PreviousGMP'] = this.selectedPreviousGMP;
+          }
+        }
+        if (docx.Search("CO_IncDec")==true){
+          docxvar['CO_IncDec'] = this.selectedCOincdec;
+        }
+        if (docx.Search("CO_Amount") == true){
+          docxvar['CO_Amount'] = this.selectedCOamount;
+        }
+        if (docx.Search("NewGMP") == true){
+          if (this.selectedCOincdec == "Increase"){
+            this.selectedNewGMP = parseFloat(this.selectedPreviousGMP) + parseFloat(this.selectedCOamount);
+            docxvar['NewGMP'] = this.selectedNewGMP;
+          }
+          if (this.selectedCOincdec == "Decrease"){
+            this.selectedNewGMP = parseFloat(this.selectedPreviousGMP) - parseFloat(this.selectedCOamount);
+            docxvar['NewGMP'] = this.selectedNewGMP;
+          }
+        }
+        if (docx.Search("ContractTime") == true){
+          docxvar['ContractTime'] = this.selectedContractTime;
+        }
+        if (docx.Search("TimeIncDec")==true){
+          docxvar['TimeIncDec'] = this.selectedTimeIncDec;
+        }
+        if (docx.Search("TimeChange")==true){
+          docxvar['TimeChange'] = this.selectedTimeChange;
+        }
+        if (docx.Search("SOW_Revised")==true){
+          docxvar['SOW_Revised'] = this.selectedSOWrevised;
+        }
+        if (docx.Search("SubstantialCompletion")==true){
+          docxvar['SubstantialCompletion'] = this.selectedSubstantialCompletion;
+        }
+        if (docx.Search("SubstantialCompletionDate")==true){
+          docxvar['SubstantialCompletionDate'] = this.selectedSubstantialCompletionDate;
+        }
+        
         docx.docxtemplater.setData(docxvar);
         try{
           docx.docxtemplater.render();
