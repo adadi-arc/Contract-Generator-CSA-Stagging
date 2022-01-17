@@ -565,7 +565,7 @@
 
                                         <div class="row" style="margin-top: 18px;">
 
-                                                <div class="col-md-4">
+                                                <div class="col-md-3">
                                                         <mat-form-field class="example-full-width" style="width: 100%;">
                                                                 <mat-label>Change Order Number:</mat-label>
                                                                 <input matInput class="MatInputBoxShadow" type="text" 
@@ -575,7 +575,7 @@
                                                                 </mat-error>
                                                         </mat-form-field>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-3">
                                                         <mat-form-field class="example-full-width" style="width: 100%;">
                                                                 <mat-label>Project Number:</mat-label>
                                                                 <input matInput class="MatInputBoxShadow" type="text" 
@@ -585,7 +585,7 @@
                                                                 </mat-error>
                                                         </mat-form-field>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-3">
 
                                                         <mat-form-field class="example-full-width" style="width: 100%;">
                                                                 <mat-label>Change Order Date:</mat-label>
@@ -597,7 +597,7 @@
                                                         </mat-form-field>
 
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-3">
 
                                                         <mat-form-field class="example-full-width" style="width: 100%;">
                                                                 <mat-label>Contract Date:</mat-label>
@@ -611,12 +611,12 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                         <mat-checkbox class="example-margin" name="CAGMP"
-                                                                [(ngModel)]="selectedChangeCAGMP">Change Contract Amount/GMP?
+                                                                [(ngModel)]="selectedChangeCAGMP" style="padding-bottom: 10px;">Change Contract Amount/GMP?
                                                         </mat-checkbox>
                                                 </div>
                                                 <div class="col-md-12">
                                                         <mat-radio-group aria-label="Use 'Contract Amount or 'GMP'" [(ngModel)]="selectedCAGMP">
-                                                                <mat-radio-button value="Contract Amount">Contract Amount</mat-radio-button>
+                                                                <mat-radio-button value="Contract Amount" style="padding-right: 10px;">Contract Amount</mat-radio-button>
                                                                 <mat-radio-button value="GMP">GMP</mat-radio-button>
                                                         </mat-radio-group>
                                                 </div>
@@ -632,7 +632,7 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                         <mat-radio-group aria-label="Net Change Details" [(ngModel)]="selectedNetIncDec">
-                                                                <mat-radio-button value="Increase">Increase</mat-radio-button>
+                                                                <mat-radio-button value="Increase" style="padding-right: 10px;">Increase</mat-radio-button>
                                                                 <mat-radio-button value="Decrease">Decrease</mat-radio-button>
                                                         </mat-radio-group>
                                                 </div>
@@ -651,7 +651,7 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                         <mat-radio-group aria-label="Change Order Details" [(ngModel)]="selectedCOincdec">
-                                                                <mat-radio-button value="Increase">Increase</mat-radio-button>
+                                                                <mat-radio-button value="Increase" style="padding-right: 10px;">Increase</mat-radio-button>
                                                                 <mat-radio-button value="Decrease">Decrease</mat-radio-button>
                                                         </mat-radio-group>
                                                 </div>
@@ -668,12 +668,12 @@
 
                                                 <div class="col-md-12">
                                                         <mat-checkbox class="example-margin" name="TimeChange"
-                                                                [(ngModel)]="selectedChangeTime">Change Contract Time?
+                                                                [(ngModel)]="selectedChangeTime" style="padding-bottom: 10px;">Change Contract Time?
                                                         </mat-checkbox>
                                                 </div>
                                                 <div class="col-md-12">
                                                         <mat-radio-group aria-label="Contract Time Change Details" [(ngModel)]="selectedTimeIncDec">
-                                                                <mat-radio-button value="Increase">Increase</mat-radio-button>
+                                                                <mat-radio-button value="Increase" style="padding-right: 10px;">Increase</mat-radio-button>
                                                                 <mat-radio-button value="Decrease">Decrease</mat-radio-button>
                                                         </mat-radio-group>
                                                 </div>
