@@ -616,7 +616,7 @@
                                                 </div>
                                                 <div *ngIf="this.selectedChangeCAGMP == true">
                                                         <div class="col-md-12">
-                                                                <mat-radio-group aria-label="Use 'Contract Amount or 'GMP'" [(ngModel)]="selectedCAGMP">
+                                                                <mat-radio-group aria-label="Use 'Contract Amount or 'GMP'" [(ngModel)]="selectedCAGMP" [ngModelOptions]="{standalone: true}">
                                                                         <mat-radio-button value="Contract Amount" style="padding-right: 10px;">Contract Amount</mat-radio-button>
                                                                         <mat-radio-button value="GMP">GMP</mat-radio-button>
                                                                 </mat-radio-group>
@@ -632,7 +632,7 @@
                                                                 </mat-form-field>
                                                         </div>
                                                         <div class="col-md-12">
-                                                                <mat-radio-group aria-label="Net Change Details" [(ngModel)]="selectedNetIncDec">
+                                                                <mat-radio-group aria-label="Net Change Details" [(ngModel)]="selectedNetIncDec" [ngModelOptions]="{standalone: true}">
                                                                         <mat-radio-button value="Increase" style="padding-right: 10px;">Increase</mat-radio-button>
                                                                         <mat-radio-button value="Decrease">Decrease</mat-radio-button>
                                                                 </mat-radio-group>
@@ -651,7 +651,7 @@
                                                                 <p>{{this.selectedPreviousGMP}}</p>
                                                         </div>
                                                         <div class="col-md-12">
-                                                                <mat-radio-group aria-label="Change Order Details" [(ngModel)]="selectedCOincdec">
+                                                                <mat-radio-group aria-label="Change Order Details" [(ngModel)]="selectedCOincdec" [ngModelOptions]="{standalone: true}">
                                                                         <mat-radio-button value="Increase" style="padding-right: 10px;">Increase</mat-radio-button>
                                                                         <mat-radio-button value="Decrease">Decrease</mat-radio-button>
                                                                 </mat-radio-group>
@@ -675,7 +675,7 @@
                                                 </div>
                                                 <div *ngIf="this.selectedChangeTime == true">
                                                         <div class="col-md-12">
-                                                                <mat-radio-group aria-label="Contract Time Change Details" [(ngModel)]="selectedTimeIncDec">
+                                                                <mat-radio-group aria-label="Contract Time Change Details" [(ngModel)]="selectedTimeIncDec" [ngModelOptions]="{standalone: true}">
                                                                         <label>Contract Time </label>
                                                                         <mat-radio-button value="Increase" style="padding-right: 10px;">Increase</mat-radio-button>
                                                                         <mat-radio-button value="Decrease">Decrease</mat-radio-button>

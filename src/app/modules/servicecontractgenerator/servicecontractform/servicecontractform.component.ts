@@ -654,7 +654,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
           docxvar['ProjectNumber'] = this.selectedProjectNum;
         }
         if (docx.Search("CA_GMP") == true){
-          docxvar['CA_GMP'] = this.selectedCAGMP.value;
+          docxvar['CA_GMP'] = this.selectedCAGMP;
         }
         if (docx.Search("OriginalGMP")==true){
           docxvar['OriginalGMP'] = this.selectedOriginalGMP;
@@ -691,11 +691,11 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
             docxvar['NewGMP'] = this.selectedNewGMP;
           }
         }
-        // if (docx.Search("ContractTime") == true){
-        //   docxvar['ContractTime'] = this.selectedContractTime;
-        // }
+        if (docx.Search("ContractTime") == true){
+          docxvar['ContractTime'] = this.selectedContractTime;
+        }
         if (docx.Search("TimeIncDec")==true){
-          docxvar['TimeIncDec'] = this.selectedTimeIncDec.value;
+          docxvar['TimeIncDec'] = this.selectedTimeIncDec;
         }
         if (docx.Search("TimeChange")==true){
           docxvar['TimeChange'] = this.selectedTimeChange;
