@@ -162,27 +162,27 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
             var lines = (order.FREDDPropertyName.results[0].Label).split(':'); //Local
             //var lines = (order.Fredd_x0020_Property_x0020_Name_).split(':'); //Prod/Staging
             //Prod/Staging
-            this.menuData.push({
-               "Property": lines[3], 
-               "ID": order.ID, 
-               "Region": lines[1], 
-               "Market": lines[2],
-               "Owner": order.EntityName,
-               "StateOfFormation": order.StateofFormation,
-              "AdditionalInsureds": order.AdditionalInsureds,
-               "EntityID": order.EntityID
-              });
+            // this.menuData.push({
+            //    "Property": lines[3], 
+            //    "ID": order.ID, 
+            //    "Region": lines[1], 
+            //    "Market": lines[2],
+            //    "Owner": order.EntityName,
+            //    "StateOfFormation": order.StateofFormation,
+            //   "AdditionalInsureds": order.AdditionalInsureds,
+            //    "EntityID": order.EntityID
+            //   });
               //Local
-              // this.menuData.push({
-              //   "Property": lines[3], 
-              //   "ID": order.ID, 
-              //   "Region": lines[1], 
-              //   "Market": lines[2],
-              //   "Owner": order.EntityName,
-              //   "StateOfFormation": order.StateofFormation,
-              //  "AdditionalInsureds": order.AdditionalInsureds,
-              //   "EntityID": order.EntityID
-              //  });
+              this.menuData.push({
+                "Property": lines[3], 
+                "ID": order.ID, 
+                "Region": lines[1], 
+                "Market": lines[2],
+                "Owner": order.EntityName,
+                "StateOfFormation": order.StateofFormation,
+               "AdditionalInsureds": order.AdditionalInsureds,
+                "EntityID": order.EntityID
+               });
           }
           this.Region = [...new Map(this.menuData.map(item =>[item['Region'], item])).values()];
           this.Region = this.Region.sort((a, b) => (a.Region > b.Region) ? 1 : -1)
@@ -283,9 +283,9 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
   onSave() {
     if(this.selectedForm.Title == "Service Contract"){
       var docx = new DocxReader();
-      var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/ServiceContractTemplate.docx"; //prod
+      //var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/ServiceContractTemplate.docx"; //prod
       //var steUrl = "/sites/fredd/SourceCode/assets/template/ServiceContractTemplate.docx"; //Staging
-      //var steUrl = "/assets/template/ServiceContractTemplate.docx" //local
+      var steUrl = "/assets/template/ServiceContractTemplate.docx" //local
       docx.Load(steUrl, ()=> {
 
         var docxvar = {};
@@ -450,9 +450,9 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
 
     if(this.selectedForm.Title == "TRS Service Contract"){
       var docx = new DocxReader();
-      var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/TRSContractTemplate.docx"; //prod
+      //var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/TRSContractTemplate.docx"; //prod
       //var steUrl = "/sites/fredd/SourceCode/assets/template/TRSContractTemplate.docx"; //staging
-      //var steUrl = "/assets/template/TRSContractTemplate.docx" //local
+      var steUrl = "/assets/template/TRSContractTemplate.docx" //local
       docx.Load(steUrl, ()=> {
 
         var docxvar = {};
@@ -608,9 +608,9 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
     }
     if(this.selectedForm.Title == "Change Order Form"){
       var docx = new DocxReader();
-      var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/TRSContractTemplate.docx"; //prod
+      //var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/TRSContractTemplate.docx"; //prod
       //var steUrl = "/sites/fredd/SourceCode/assets/template/TRSContractTemplate.docx"; //staging
-      //var steUrl = "/assets/template/TRSContractTemplate.docx" //local
+      var steUrl = "/assets/template/TRSContractTemplate.docx" //local
       docx.Load(steUrl, ()=> {
 
         var docxvar = {};
