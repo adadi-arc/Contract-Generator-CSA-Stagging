@@ -134,7 +134,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
   selectedChangeTime: boolean = false;
   selectedReviseSOW: boolean = false;
   selectedSubComp: boolean = false;
-  
+
   menuData: any[] = [];
   Region: any[] = [];
   Market: any[] = [];
@@ -615,7 +615,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
       var docx = new DocxReader();
       //var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/TRSContractTemplate.docx"; //prod
       //var steUrl = "/sites/fredd/SourceCode/assets/template/TRSContractTemplate.docx"; //staging
-      var steUrl = "/assets/template/TRSContractTemplate.docx" //local
+      var steUrl = "/assets/template/ChangeOrderTemplate.docx" //local
       docx.Load(steUrl, ()=> {
 
         var docxvar = {};
@@ -722,7 +722,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
           throw error;
         }
 
-        docx.SetName("SC" + " - " + this.selectedContractor);
+        docx.SetName("CO" + " - " + this.selectedContractor);
 
         docx.Download();
       });
