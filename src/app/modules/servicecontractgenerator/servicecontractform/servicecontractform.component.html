@@ -472,7 +472,7 @@
 
 
                         </mat-accordion>
-                        
+
                         <!-- Change Order -->
                         <mat-accordion class="example-headers-align" *ngIf="this.FormName == 'Change Order Form' && selectedOwner != undefined">
                                 <mat-expansion-panel [expanded]="step === 0" hideToggle>
@@ -610,8 +610,8 @@
 
                                                 </div>
                                                 <div class="col-md-12">
-                                                        <mat-checkbox class="example-margin" name="IncludeTM"
-                                                                [(ngModel)]="selectedIncludeTM">Change Contract Amount/GMP?
+                                                        <mat-checkbox class="example-margin" name="CAGMP"
+                                                                [(ngModel)]="selectedChangeCAGMP">Change Contract Amount/GMP?
                                                         </mat-checkbox>
                                                 </div>
                                                 <div class="col-md-12">
@@ -667,8 +667,8 @@
                                                 </div>
 
                                                 <div class="col-md-12">
-                                                        <mat-checkbox class="example-margin" name="IncludeTM"
-                                                                [(ngModel)]="selectedIncludeTM">Change Contract Time?
+                                                        <mat-checkbox class="example-margin" name="TimeChange"
+                                                                [(ngModel)]="selectedChangeTime">Change Contract Time?
                                                         </mat-checkbox>
                                                 </div>
                                                 <div class="col-md-12">
@@ -688,14 +688,14 @@
                                                         </mat-form-field>
                                                 </div>
                                                 <div class="col-md-12">
-                                                        <mat-checkbox class="example-margin" name="IncludeTM"
-                                                                [(ngModel)]="selectedIncludeTM">Scope Of Work Revised?
+                                                        <mat-checkbox class="example-margin" name="SOWrevised"
+                                                                [(ngModel)]="selectedReviseSOW">Scope Of Work Revised?
                                                         </mat-checkbox>
                                                 </div>
 
                                                 <div class="col-md-12">
-                                                        <mat-checkbox class="example-margin" name="IncludeTM"
-                                                                [(ngModel)]="selectedIncludeTM">Substantial Completion?
+                                                        <mat-checkbox class="example-margin" name="SubstantialComp"
+                                                                [(ngModel)]="selectedSubComp">Substantial Completion?
                                                         </mat-checkbox>
                                                 </div>
                                                 <div class="col-md-4">

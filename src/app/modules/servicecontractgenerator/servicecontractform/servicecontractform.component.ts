@@ -130,6 +130,11 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
   selectedContractDate: any = null;
   selectedProjectNum: any = null;
   selectedIncludeTM: boolean = false;
+  selectedChangeCAGMP:  boolean = false;
+  selectedChangeTime: boolean = false;
+  selectedReviseSOW: boolean = false;
+  selectedSubComp: boolean = false;
+  
   menuData: any[] = [];
   Region: any[] = [];
   Market: any[] = [];
@@ -159,8 +164,8 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
           for (var count = 0; count<this.dataProperty.length; count++){
             var order = this.dataProperty[count];
             console.log(order);
-            var lines = (order.FREDDPropertyName.results[0].Label).split(':'); //Local
-            //var lines = (order.Fredd_x0020_Property_x0020_Name_).split(':'); //Prod/Staging
+            //var lines = (order.FREDDPropertyName.results[0].Label).split(':'); //Local
+            var lines = (order.Fredd_x0020_Property_x0020_Name_).split(':'); //Prod/Staging
             //Prod/Staging
             // this.menuData.push({
             //    "Property": lines[3], 
