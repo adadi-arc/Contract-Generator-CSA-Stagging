@@ -591,7 +591,7 @@
                                                                 <mat-label>Change Order Date:</mat-label>
                                                                 <input matInput class="MatInputBoxShadow" type="date"
                                                                         required name="ChangeOrderDate"
-                                                                        [(ngModel)]="selectedCOdate">
+                                                                        [(ngModel)]="selectedDate">
                                                                 <mat-error>This field is required
                                                                 </mat-error>
                                                         </mat-form-field>
@@ -685,8 +685,8 @@
                                                                 <mat-form-field class="example-full-width" style="width: 100%;">
                                                                         <mat-label>Contract Time Change Amount (Days):</mat-label>
                                                                         <input matInput class="MatInputBoxShadow" type="text" 
-                                                                                required name="ChangeOrderAmount"
-                                                                                [(ngModel)]="selectedCOamount" style="padding-left: 10px;">   
+                                                                                required name="TimeChange"
+                                                                                [(ngModel)]="selectedTimeChange" style="padding-left: 10px;">   
                                                                         <mat-error>This field is required
                                                                         </mat-error>
                                                                 </mat-form-field>

@@ -630,7 +630,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
           docxvar['CO_Num'] = this.selectedCOnum;
         }
         if (docx.Search("Date")==true){
-          docxvar['Date'] = this.selectedDate;
+          docxvar['Date'] = moment(this.selectedDate).format("MM/DD/YY");
         }
         if (docx.Search("ContractorName")==true){
           docxvar['ContractorName'] = this.selectedContractor;
@@ -642,19 +642,22 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
           docxvar['City'] = this.selectedContractorCity;
         }
         if (docx.Search("State")==true){
-          docxvar['State'] = this.selectedContractorState;
+          docxvar['State'] = this.selectedContractorState.Title;
         }
         if (docx.Search("Zipcode")==true){
           docxvar['Zipcode'] = this.selectedContractorZip;
         }
         if (docx.Search("ContractDate")==true){
-          docxvar['ContractDate'] = this.selectedContractDate;
+          docxvar['ContractDate'] = moment(this.selectedContractDate).format("MM/DD/YY");
         }
         if (docx.Search("ProjectNumber")==true){
           docxvar['ProjectNumber'] = this.selectedProjectNum;
         }
         if (docx.Search("CA_GMP") == true){
-          docxvar['CA_GMP'] = this.selectedCAGMP;
+          docxvar['CA_GMP'] = this.selectedCAGMP.value;
+        }
+        if (docx.Search("OriginalGMP")==true){
+          docxvar['OriginalGMP'] = this.selectedOriginalGMP;
         }
         if (docx.Search("NetIncDec") == true){
           docxvar['NetIncDec'] = this.selectedNetIncDec;
@@ -688,24 +691,47 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
             docxvar['NewGMP'] = this.selectedNewGMP;
           }
         }
-        if (docx.Search("ContractTime") == true){
-          docxvar['ContractTime'] = this.selectedContractTime;
-        }
+        // if (docx.Search("ContractTime") == true){
+        //   docxvar['ContractTime'] = this.selectedContractTime;
+        // }
         if (docx.Search("TimeIncDec")==true){
-          docxvar['TimeIncDec'] = this.selectedTimeIncDec;
+          docxvar['TimeIncDec'] = this.selectedTimeIncDec.value;
         }
         if (docx.Search("TimeChange")==true){
           docxvar['TimeChange'] = this.selectedTimeChange;
         }
         if (docx.Search("SOW_Revised")==true){
-          docxvar['SOW_Revised'] = this.selectedSOWrevised;
+          if (this.selectedSOWrevised == true){
+            docxvar['SOW_Revised'] = "The Scope of Work is revised to include the Work described in Exhibit B hereto.";
+          }
+          if (this.selectedSOWrevised == false){
+            docxvar['SOW_Revised'] = "";
+          }
+          if (this.selectedSOWrevised == undefined){
+            docxvar['SOW_Revised'] = "";
+          }
         }
         if (docx.Search("SubstantialCompletion")==true){
-          docxvar['SubstantialCompletion'] = this.selectedSubstantialCompletion;
+          if (this.selectedSubstantialCompletion == true){
+            docxvar['SubstantialCompletion'] = "The Scheduled Date of Substantial Completion as of the date of this Change Order, therefore, is ";
+            if (docx.Search("SubstantialCompletionDate")==true){
+              docxvar['SubstantialCompletionDate'] = moment(this.selectedSubstantialCompletionDate).format("MM/DD/YY");
+            }
+          }
+          if (this.selectedSubstantialCompletion == false){
+            docxvar['SubstantialCompletion'] = "";
+            if (docx.Search("SubstantialCompletionDate")==true){
+              docxvar['SubstantialCompletionDate'] = "";
+            }
+          }
+          if (this.selectedSubstantialCompletion == undefined){
+            docxvar['SubstantialCompletion'] = "";
+            if (docx.Search("SubstantialCompletionDate")==true){
+              docxvar['SubstantialCompletionDate'] = "";
+            }
+          }
         }
-        if (docx.Search("SubstantialCompletionDate")==true){
-          docxvar['SubstantialCompletionDate'] = this.selectedSubstantialCompletionDate;
-        }
+        
         
         docx.docxtemplater.setData(docxvar);
         try{
