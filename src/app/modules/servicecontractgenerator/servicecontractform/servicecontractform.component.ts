@@ -112,7 +112,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
   selectedPropertyAddress: any = null;
   selectedCOnum: any = null;
   selectedDate: any = null;
-  selectedCAGMP: any = null;
+  selectedCAGMP: any = "Contact Amount/GMP";
   selectedOriginalGMP: any = 0;
   selectedNetIncDec: any = null;
   selectedNetChange: any = 0;
@@ -674,6 +674,10 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
             this.selectedPreviousGMP = parseFloat(this.selectedOriginalGMP) - parseFloat(this.selectedNetChange);
             docxvar['PreviousGMP'] = this.selectedPreviousGMP;
           }
+          if (this.selectedCOincdec == undefined){
+            this.selectedNewGMP = 0;
+            docxvar['PreviousGMP'] = this.selectedNewGMP;
+          }
         }
         if (docx.Search("CO_IncDec")==true){
           docxvar['CO_IncDec'] = this.selectedCOincdec;
@@ -688,6 +692,10 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
           }
           if (this.selectedCOincdec == "Decrease"){
             this.selectedNewGMP = parseFloat(this.selectedPreviousGMP) - parseFloat(this.selectedCOamount);
+            docxvar['NewGMP'] = this.selectedNewGMP;
+          }
+          if (this.selectedCOincdec == undefined){
+            this.selectedNewGMP = 0;
             docxvar['NewGMP'] = this.selectedNewGMP;
           }
         }
