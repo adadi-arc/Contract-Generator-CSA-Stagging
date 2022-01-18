@@ -723,7 +723,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
           if (this.selectedSubstantialCompletion == true){
             docxvar['SubstantialCompletion'] = "The Scheduled Date of Substantial Completion as of the date of this Change Order, therefore, is ";
             if (docx.Search("SubstantialCompletionDate")==true){
-              docxvar['SubstantialCompletionDate'] = moment(this.selectedSubstantialCompletionDate).format("MM/DD/YY");
+              docxvar['SubstantialCompletionDate'] = moment(this.selectedSubstantialCompletionDate).format("MM/DD/YY") + ".";
             }
           }
           if (this.selectedSubstantialCompletion == false){
