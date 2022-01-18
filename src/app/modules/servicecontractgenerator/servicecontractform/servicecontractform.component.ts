@@ -113,14 +113,14 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
   selectedCOnum: any = null;
   selectedDate: any = null;
   selectedCAGMP: any = null;
-  selectedOriginalGMP: any = null;
+  selectedOriginalGMP: any = 0;
   selectedNetIncDec: any = null;
-  selectedNetChange: any = null;
-  selectedPreviousGMP: any = null;
+  selectedNetChange: any = 0;
+  selectedPreviousGMP: any = 0
   selectedCOincdec: any = null;
-  selectedCOamount: any = null;
+  selectedCOamount: any = 0;
   selecctedCOdate: any = null;
-  selectedNewGMP: any = null;
+  selectedNewGMP: any = 0;
   selectedContractTime: any = null;
   selectedTimeIncDec: any = null;
   selectedTimeChange: any = null;
@@ -691,15 +691,23 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
             docxvar['NewGMP'] = this.selectedNewGMP;
           }
         }
-        if (docx.Search("ContractTime") == true){
-          docxvar['ContractTime'] = this.selectedContractTime;
+        
+        if (this.selectedChangeTime == true){
+          if (docx.Search("ContractTime") == true){
+            docxvar['ContractTime'] = "The Contract Time will be" + this.selectedTimeIncDec + "by" + this.selectedTimeChange + "days."
+          }
         }
-        if (docx.Search("TimeIncDec")==true){
-          docxvar['TimeIncDec'] = this.selectedTimeIncDec;
+        if (this.selectedChangeTime == false){
+          if (docx.Search("ContractTime") == true){
+            docxvar['ContractTime'] = ""
+          }
         }
-        if (docx.Search("TimeChange")==true){
-          docxvar['TimeChange'] = this.selectedTimeChange;
+        if (this.selectedChangeTime == undefined){
+          if (docx.Search("ContractTime") == true){
+            docxvar['ContractTime'] = ""
+          }
         }
+        
         if (docx.Search("SOW_Revised")==true){
           if (this.selectedSOWrevised == true){
             docxvar['SOW_Revised'] = "The Scope of Work is revised to include the Work described in Exhibit B hereto.";
