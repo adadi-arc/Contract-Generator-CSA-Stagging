@@ -655,8 +655,8 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
         }
         if (this.selectedChangeCAGMP == false){
           this.selectedCAGMP = "Contract Amount/GMP"
-          this.selectedNetIncDec = "Increase/Decrease"
-          this.selectedCOincdec = "Increase/Decrease"
+          this.selectedNetIncDec = "increased/decreased"
+          this.selectedCOincdec = "increased/decreased"
           this.selectedOriginalGMP = 0;
           this.selectedNetChange = 0;
           this.selectedPreviousGMP = 0;
@@ -684,7 +684,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
             this.selectedPreviousGMP = parseFloat(this.selectedOriginalGMP) - parseFloat(this.selectedNetChange);
             docxvar['PreviousGMP'] = this.selectedPreviousGMP;
           }
-          if (this.selectedCOincdec == undefined){
+          else{
             this.selectedNewGMP = 0;
             docxvar['PreviousGMP'] = this.selectedNewGMP;
           }
@@ -712,17 +712,17 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
         
         if (this.selectedChangeTime == true){
           if (docx.Search("ContractTime") == true){
-            docxvar['ContractTime'] = "The Contract Time will be" + this.selectedTimeIncDec + "by" + this.selectedTimeChange + "days."
+            docxvar['ContractTime'] = "The Contract Time will be" + this.selectedTimeIncDec + "by" + this.selectedTimeChange + "days.";
           }
         }
         if (this.selectedChangeTime == false){
           if (docx.Search("ContractTime") == true){
-            docxvar['ContractTime'] = ""
+            docxvar['ContractTime'] = "";
           }
         }
-        else{
+        if (this.selectedChangeTime == undefined){
           if (docx.Search("ContractTime") == true){
-            docxvar['ContractTime'] = ""
+            docxvar['ContractTime'] = "";
           }
         }
         
