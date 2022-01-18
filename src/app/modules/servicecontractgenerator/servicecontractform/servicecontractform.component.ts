@@ -112,15 +112,15 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
   selectedPropertyAddress: any = null;
   selectedCOnum: any = null;
   selectedDate: any = null;
-  selectedCAGMP: any = "Contact Amount/GMP";
-  selectedOriginalGMP: any = 0;
+  selectedCAGMP: any = null;
+  selectedOriginalGMP: any = null;
   selectedNetIncDec: any = null;
-  selectedNetChange: any = 0;
-  selectedPreviousGMP: any = 0
+  selectedNetChange: any = null;
+  selectedPreviousGMP: any = null
   selectedCOincdec: any = null;
-  selectedCOamount: any = 0;
+  selectedCOamount: any = null;
   selecctedCOdate: any = null;
-  selectedNewGMP: any = 0;
+  selectedNewGMP: any = null;
   selectedContractTime: any = null;
   selectedTimeIncDec: any = null;
   selectedTimeChange: any = null;
@@ -652,6 +652,16 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
         }
         if (docx.Search("ProjectNumber")==true){
           docxvar['ProjectNumber'] = this.selectedProjectNum;
+        }
+        if (this.selectedChangeCAGMP == false){
+          this.selectedCAGMP = "Contract Amount/GMP"
+          this.selectedNetIncDec = "unchanged"
+          this.selectedCOincdec = "unchanged"
+          this.selectedOriginalGMP = 0;
+          this.selectedNetChange = 0;
+          this.selectedPreviousGMP = 0;
+          this.selectedCOamount = 0;
+          this.selectedNewGMP = 0;
         }
         if (docx.Search("CA_GMP") == true){
           docxvar['CA_GMP'] = this.selectedCAGMP;
