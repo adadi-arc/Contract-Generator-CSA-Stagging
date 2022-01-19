@@ -331,9 +331,9 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
   onSave() {
     if(this.selectedForm.Title == "Service Contract"){
       var docx = new DocxReader();
-      //var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/ServiceContractTemplate.docx"; //prod
+      var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/ServiceContractTemplate.docx"; //prod
       //var steUrl = "/sites/fredd/SourceCode/assets/template/ServiceContractTemplate.docx"; //Staging
-      var steUrl = "/assets/template/ServiceContractTemplate.docx" //local
+      //var steUrl = "/assets/template/ServiceContractTemplate.docx" //local
       docx.Load(steUrl, ()=> {
 
         var docxvar = {};
@@ -498,9 +498,9 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
 
     if(this.selectedForm.Title == "TRS Service Contract"){
       var docx = new DocxReader();
-      //var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/TRSContractTemplate.docx"; //prod
+      var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/TRSContractTemplate.docx"; //prod
       //var steUrl = "/sites/fredd/SourceCode/assets/template/TRSContractTemplate.docx"; //staging
-      var steUrl = "/assets/template/TRSContractTemplate.docx" //local
+      //var steUrl = "/assets/template/TRSContractTemplate.docx" //local
       docx.Load(steUrl, ()=> {
 
         var docxvar = {};
@@ -656,9 +656,9 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
     }
     if(this.selectedForm.Title == "Change Order Form"){
       var docx = new DocxReader();
-      //var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/TRSContractTemplate.docx"; //prod
+      var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/TRSContractTemplate.docx"; //prod
       //var steUrl = "/sites/fredd/SourceCode/assets/template/TRSContractTemplate.docx"; //staging
-      var steUrl = "/assets/template/ChangeOrderTemplate.docx" //local
+      //var steUrl = "/assets/template/ChangeOrderTemplate.docx" //local
       docx.Load(steUrl, ()=> {
 
         var docxvar = {};
