@@ -249,6 +249,27 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
       // Object.keys(servicecontract.controls).forEach(key =>{
       //    servicecontract.controls[key].setErrors(null);
       // });
+
+      if (this.selectedForm.Title == "Change Order Form"){
+        this.selectedCOnum="";
+        this.selectedProjectNum="";
+        this.selectedDate="";
+        this.selectedContractDate="";
+        this.selectedChangeCAGMP=null;
+        this.selectedCAGMP=null;
+        this.selectedOriginalGMP="";
+        this.selectedNetIncDec=null;
+        this.selectedNetChange="";
+        this.selectedPreviousGMP=0;
+        this.selectedCOincdec=null;
+        this.selectedCOamount="";
+        this.selectedNewGMP=0;
+        this.selectedChangeTime=null;
+        this.selectedTimeChange="";
+        this.selectedSOWrevised=null;
+        this.selectedSubComp=null;
+        this.selectedSubstantialCompletionDate="";
+      }
     }
   }
   invalidateFields(){
@@ -279,6 +300,28 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
 
 
       return false;
+  }
+  calc(){
+    console.log("Calculation")
+    if (this.selectedNetIncDec == "Increase"){
+      this.selectedPreviousGMP = parseFloat(this.selectedOriginalGMP) + parseFloat(this.selectedNetChange);
+    }
+    else if (this.selectedNetIncDec == "Decrease"){
+      this.selectedPreviousGMP = parseFloat(this.selectedOriginalGMP) - parseFloat(this.selectedNetChange);
+    }
+    else if (this.selectedNetChange == undefined){
+      this.selectedPreviousGMP = "";
+    }
+
+    if (this.selectedCOincdec == "Increase"){
+      this.selectedNewGMP = parseFloat(this.selectedPreviousGMP) + parseFloat(this.selectedCOamount);
+    }
+    else if (this.selectedCOincdec == "Decrease"){
+      this.selectedNewGMP = parseFloat(this.selectedPreviousGMP) - parseFloat(this.selectedCOamount);
+    }
+    else{
+      this.selectedNewGMP = "";
+    }
   }
 
   clearPM(){
@@ -653,9 +696,9 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
         if (docx.Search("ProjectNumber")==true){
           docxvar['ProjectNumber'] = this.selectedProjectNum;
         }
-        if (this.selectedChangeCAGMP == false){
+        if (this.selectedChangeCAGMP == (false || undefined)){
           this.selectedCAGMP = "Contract Amount/GMP"
-          this.selectedNetIncDec = "increased/decreased"
+          this.selectedNetIncDec = "increase/decrease"
           this.selectedCOincdec = "increased/decreased"
           this.selectedOriginalGMP = 0;
           this.selectedNetChange = 0;
@@ -663,6 +706,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
           this.selectedCOamount = 0;
           this.selectedNewGMP = 0;
         }
+        
         if (docx.Search("CA_GMP") == true){
           docxvar['CA_GMP'] = this.selectedCAGMP;
         }
@@ -670,7 +714,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
           docxvar['OriginalGMP'] = this.selectedOriginalGMP;
         }
         if (docx.Search("NetIncDec") == true){
-          docxvar['NetIncDec'] = this.selectedNetIncDec;
+          docxvar['NetIncDec'] = this.selectedNetIncDec.toLowerCase();
         }
         if (docx.Search("NetChange") == true){
           docxvar['NetChange'] = this.selectedNetChange;
@@ -681,16 +725,22 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
             docxvar['PreviousGMP'] = this.selectedPreviousGMP;
           }
           if (this.selectedNetIncDec == "Decrease"){
-            this.selectedPreviousGMP = parseFloat(this.selectedOriginalGMP) - parseFloat(this.selectedNetChange);
+            this.selectedPreviousGMP = parseFloat(this.selectedOriginalGMP) + parseFloat(this.selectedNetChange);
             docxvar['PreviousGMP'] = this.selectedPreviousGMP;
           }
           else{
             this.selectedNewGMP = 0;
-            docxvar['PreviousGMP'] = this.selectedNewGMP;
+            docxvar['PreviousGMP'] = this.selectedPreviousGMP;
           }
         }
         if (docx.Search("CO_IncDec")==true){
-          docxvar['CO_IncDec'] = this.selectedCOincdec;
+          if (this.selectedCOincdec == "increased/decreased"){
+            docxvar['CO_IncDec'] = this.selectedCOincdec;
+          }
+          else{
+            docxvar['CO_IncDec'] = this.selectedCOincdec.toLowerCase()+"d"
+          }
+         
         }
         if (docx.Search("CO_Amount") == true){
           docxvar['CO_Amount'] = this.selectedCOamount;
@@ -712,7 +762,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
         
         if (this.selectedChangeTime == true){
           if (docx.Search("ContractTime") == true){
-            docxvar['ContractTime'] = "The Contract Time will be" + this.selectedTimeIncDec + "by" + this.selectedTimeChange + "days.";
+            docxvar['ContractTime'] = "The Contract Time will be " + this.selectedTimeIncDec.toLowerCase() + "d by " + this.selectedTimeChange + " days.";
           }
         }
         if (this.selectedChangeTime == false){
@@ -738,19 +788,19 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
           }
         }
         if (docx.Search("SubstantialCompletion")==true){
-          if (this.selectedSubstantialCompletion == true){
+          if (this.selectedSubComp == true){
             docxvar['SubstantialCompletion'] = "The Scheduled Date of Substantial Completion as of the date of this Change Order, therefore, is ";
             if (docx.Search("SubstantialCompletionDate")==true){
               docxvar['SubstantialCompletionDate'] = moment(this.selectedSubstantialCompletionDate).format("MM/DD/YY") + ".";
             }
           }
-          if (this.selectedSubstantialCompletion == false){
+          if (this.selectedSubComp == false){
             docxvar['SubstantialCompletion'] = "";
             if (docx.Search("SubstantialCompletionDate")==true){
               docxvar['SubstantialCompletionDate'] = "";
             }
           }
-          if (this.selectedSubstantialCompletion == undefined){
+          if (this.selectedSubComp == undefined){
             docxvar['SubstantialCompletion'] = "";
             if (docx.Search("SubstantialCompletionDate")==true){
               docxvar['SubstantialCompletionDate'] = "";

@@ -1,748 +1,628 @@
 <!-- <div class="top-ribbon row">
-
 </div> -->
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <form #servicecontract="ngForm" class="shadow-lg p-3 mt-132 rounded needs-validation">
-        <app-my-heading heading="Service Contract Generator"></app-my-heading>
-
-        <div class="row ">
-                <div class="col-md-12">
-                        <mat-accordion class="example-headers-align">
-                                <mat-expansion-panel [expanded]="step === 0" hideToggle>
-                                        <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
-                                                <mat-panel-title style="color: white;">
-                                                        Contract Type
-
-                                                </mat-panel-title>
-                                                <mat-panel-description style="display: contents;">
-
-                                                        <mat-icon style="color: white;">description</mat-icon>
-                                                </mat-panel-description>
-                                        </mat-expansion-panel-header>
-                                        <mat-form-field class="example-full-width" style="width: 40%; margin-top: 15px;" id="formselect">
-                                                <mat-label>Select Contract Type:</mat-label>
-                                                <mat-select class="MatInputBoxShadow"
-                                                        type="text" name="FormSelect" required
-                                                        [(ngModel)]="selectedForm"
-                                                        (ngModelChange)="onChange(selectedForm)">
-                                                        <mat-option>-- Clear --</mat-option>
-                                                        <mat-option *ngFor="let option of Forms"
-                                                                [value]="option" (click)="FormBind();">
-                                                                {{ option.Title }}
-                                                        </mat-option>
-                                                </mat-select>
-                                                <mat-error>This field is required</mat-error>
-                                        </mat-form-field>
-                                </mat-expansion-panel>
-                        </mat-accordion>
-                </div>
-                
-                <div class="col-md-5" *ngIf="selectedForm != undefined" style="margin-top: 15px;">
-                        <mat-accordion class="example-headers-align">
-                                <mat-expansion-panel [expanded]="step === 0" hideToggle>
-                                        <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
-                                                <mat-panel-title style="color: white;">
-                                                        Owner Information
-
-                                                </mat-panel-title>
-                                                <mat-panel-description style="display: contents;">
-
-                                                        <mat-icon style="color: white;">account_circle</mat-icon>
-                                                </mat-panel-description>
-                                        </mat-expansion-panel-header>
-                                        <div class="row" style="margin-top: 18px;">
-                                                <div class="col-md-12 selectMenu" style="margin-top: 15px;">
-                                                        <button type="button" mat-menu-item (click)="resetStates(servicecontract);" [matMenuTriggerFor]="markets"
-                                                                *ngFor="let r of Region; let i=index">{{r.Region}} <mat-icon>arrow_right</mat-icon>
-                                                                <mat-menu #markets="matMenu">
-                                                                        <button type="button" mat-menu-item
-                                                                                [matMenuTriggerFor]="property"
-                                                                                *ngFor="let m of Market"
-                                                                                [hidden]="r.Region != m.Region">{{m.Market}}
-                                                                                <mat-menu #property="matMenu" style="height: 50%; overflow: scroll;">
-                                                                                        <button type="button"
-                                                                                                mat-menu-item
-                                                                                                *ngFor="let p of Property"
-                                                                                                [hidden]="m.Market != p.Market"
-                                                                                                (click)="OwnerSelect(p)">{{p.Property}}</button>
-                                                                                </mat-menu>
-                                                                        </button>
-                                                                </mat-menu>
-                                                        </button>
-
-
-                                                </div>
-                                                <div class="col-md-12" style="margin-top: 15px;">
-
-                                                        <table class="table" *ngIf="selectedOwner != undefined">
-                                                                <tbody>
-                                                                        <tr>
-                                                                                <td>Region</td>
-                                                                                <td style="color:#4c7ab5">
-                                                                                        {{selectedOwner?.Region}}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                                <td>Market</td>
-                                                                                <td style="color:#4c7ab5">
-                                                                                        {{selectedOwner?.Market}}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                                <td>Entity</td>
-                                                                                <td style="color:#4c7ab5">
-                                                                                        {{selectedOwner?.Owner}}</td>
-                                                                        </tr>
-
-                                                                </tbody>
-                                                        </table>
-
-                                                        <mat-form-field *ngIf="selectedOwner != undefined"
-                                                                style="width:100%" class="example-full-width">
-                                                                <mat-label>Property Address</mat-label>
-                                                                <textarea matInput
-                                                                        placeholder="Ex. 100 Main St"
-                                                                        name="PropertyAddress"
-                                                                        [(ngModel)]="selectedPropertyAddress"
-                                                                        required="true"></textarea>
-                                                        </mat-form-field>
-                                                        <mat-form-field *ngIf="this.FormName == 'Service Contract' && selectedOwner != undefined"
-                                                                style="width:100%" class="example-full-width">
-                                                                <mat-label>Property Manager</mat-label>
-                                                                <textarea matInput
-                                                                        name="PropertyManager"
-                                                                        placeholder="BioMed Realty LLC"
-                                                                        [(ngModel)]="selectedPropertyManager"
-                                                                        required="true"></textarea>
-                                                        </mat-form-field>
-                                                        <button mat-raised-button (click)="clearPM()" *ngIf="this.FormName == 'Service Contract' && selectedOwner != undefined"
-                                                        color="primary">Change Default Property Manager</button>
-                                                </div>
-                                        </div>
-
-
-                                </mat-expansion-panel>
-
-
-                        </mat-accordion>
-                </div>
-                <div class="col-md-7" style="margin-top: 15px;">
-                        <!--SERVICE CONTRACT FIELDS-->
-
-                        <mat-accordion class="example-headers-align" *ngIf="this.FormName == 'Service Contract' && selectedOwner != undefined">
-                                <mat-expansion-panel [expanded]="step === 0" hideToggle>
-                                        <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
-                                                <mat-panel-title style="color: white;">
-                                                        Contractor Notice Information
-                                                </mat-panel-title>
-                                                <mat-panel-description style="display: contents;">
-
-                                                        <mat-icon style="color: white;">task</mat-icon>
-                                                </mat-panel-description>
-                                        </mat-expansion-panel-header>
-                                        <div class="row" style="margin-top: 18px;">
-                                                <div class="col-md-12">
-                                                        <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                <mat-label>Contractor:</mat-label>
-                                                                <input matInput class="MatInputBoxShadow" type="text"
-                                                                        required name="Contractor"
-                                                                        [(ngModel)]="selectedContractor">
-                                                                <mat-error>This field is required
-                                                                </mat-error>
-                                                        </mat-form-field>
-                                                </div>
-                                                <div class="col-md-12">
-                                                        <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                <mat-label>Contractor State of Formation:</mat-label>
-                                                                <input matInput 
-                                                                        placeholder="Ex. Delaware limited liability company"
-                                                                        class="MatInputBoxShadow" type="text"
-                                                                        required name="ContractorStateOfFormation"
-                                                                        [(ngModel)]="selectedContractorStateOfFormation">
-                                                                <mat-error>This field is required
-                                                                </mat-error>
-                                                        </mat-form-field>
-                                                </div>
-                                                <div class="col-md-12">
-                                                        <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                <mat-label>Contractor Street Address:</mat-label>
-                                                                <input matInput class="MatInputBoxShadow" type="text"
-                                                                        required name="ContractorAddress"
-                                                                        [(ngModel)]="selectedContractorAddress">
-                                                                <mat-error>This field is required
-                                                                </mat-error>
-                                                        </mat-form-field>
-                                                </div>
-                                                <div class="col-md-4">
-                                                        <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                <mat-label>Contractor City:</mat-label>
-                                                                <input matInput class="MatInputBoxShadow" type="text"
-                                                                        required name="ContractorCity"
-                                                                        [(ngModel)]="selectedContractorCity">
-                                                                <mat-error>This field is required
-                                                                </mat-error>
-                                                        </mat-form-field>
-                                                </div>
-                                                <div class="col-md-4">
-                                                        <mat-form-field class="example-full-width" style="width: 100%;" id="states">
-                                                                <mat-label>Contractor State:</mat-label>
-                                                                <mat-select class="MatInputBoxShadow"
-                                                                        type="text" name="ContractorState" required
-                                                                        [(ngModel)]="selectedContractorState"
-                                                                        (ngModelChange)="onChange(selectedContractorState)">
-                                                                        <mat-option>-- Clear --</mat-option>
-                                                                        <mat-option *ngFor="let option of States"
-                                                                                [value]="option">
-                                                                                {{ option.Title }}
-                                                                        </mat-option>
-                                                                </mat-select>
-                                                                <mat-error>This field is required</mat-error>
-                                                        </mat-form-field>
-                                                </div>
-                                                <div class="col-md-4">
-
-                                                        <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                <mat-label>Contractor Zip Code:</mat-label>
-                                                                <input matInput class="MatInputBoxShadow" type="text"
-                                                                        required name="ContractorZip"
-                                                                        [(ngModel)]="selectedContractorZip">
-                                                                <mat-error>This field is required
-                                                                </mat-error>
-                                                        </mat-form-field>
-
-                                                </div>
-                                                <div class="col-md-12">
-                                                        <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                <mat-label>Contractor Attn:</mat-label>
-                                                                <input matInput class="MatInputBoxShadow" type="text"
-                                                                        name="ContractorAttn"
-                                                                        [(ngModel)]="selectedContractorAttn">
-                                                                <mat-error>This field is required
-                                                                </mat-error>
-                                                        </mat-form-field>
-                                                </div>
-                                                <div class="col-md-12">
-                                                        <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                <mat-label>Contractor Email:</mat-label>
-                                                                <input matInput class="MatInputBoxShadow" type="text"
-                                                                        name="ContractorEmail"
-                                                                        [(ngModel)]="selectedContractorEmail">
-                                                                <mat-error>This field is required
-                                                                </mat-error>
-                                                        </mat-form-field>
-                                                </div>
-                                                
-
-                                        </div>
-
-
-                                </mat-expansion-panel>
-
-
-                        </mat-accordion>
-                        <mat-accordion class="example-headers-align" *ngIf="this.FormName == 'Service Contract' && selectedOwner != undefined">
-                                <mat-expansion-panel [expanded]="step === 0" style="margin-top: 90px;" hideToggle>
-                                        <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
-                                                <mat-panel-title style="color: white;">
-                                                        Other Details
-                                                </mat-panel-title>
-                                                <mat-panel-description style="display: contents;">
-
-                                                        <mat-icon style="color: white;">info</mat-icon>
-                                                </mat-panel-description>
-                                        </mat-expansion-panel-header>
-
-                                        <div class="row" style="margin-top: 18px;">
-
-                                                <div class="col-md-4">
-                                                        <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                <mat-label>Execution Date:</mat-label>
-                                                                <input matInput class="MatInputBoxShadow" type="date" 
-                                                                        required name="ExecutionDate"
-                                                                        [(ngModel)]="selectedExecutionDate">
-                                                                <mat-error>This field is required
-                                                                </mat-error>
-                                                        </mat-form-field>
-                                                </div>
-                                                <div class="col-md-4">
-                                                        <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                <mat-label>Commencement Date:</mat-label>
-                                                                <input matInput class="MatInputBoxShadow" type="date"
-                                                                        required name="CommencementDate"
-                                                                        [(ngModel)]="selectedCommencementDate">
-                                                                <mat-error>This field is required
-                                                                </mat-error>
-                                                        </mat-form-field>
-                                                </div>
-                                                <div class="col-md-4">
-
-                                                        <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                <mat-label>Expiration Date:</mat-label>
-                                                                <input matInput class="MatInputBoxShadow" type="date"
-                                                                        required name="ExpirationDate"
-                                                                        [(ngModel)]="selectedExpirationDate">
-                                                                <mat-error>This field is required
-                                                                </mat-error>
-                                                        </mat-form-field>
-
-                                                </div>
-                                                <div class="col-md-12">
-                                                        <mat-checkbox class="example-margin" name="IncludeTM"
-                                                                [(ngModel)]="selectedIncludeTM">Include T&M Services?
-                                                        </mat-checkbox>
-                                                </div>
-
-
-
-                                        </div>
-
-                                </mat-expansion-panel>
-
-
-                        </mat-accordion>
-                        <!--TRS SERVICE CONTRACT FIELDS-->
-
-                        <mat-accordion class="example-headers-align" *ngIf="this.FormName == 'TRS Service Contract' && selectedOwner != undefined">
-                                <mat-expansion-panel [expanded]="step === 0" hideToggle>
-                                        <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
-                                                <mat-panel-title style="color: white;">
-                                                        Contractor Notice Information
-                                                </mat-panel-title>
-                                                <mat-panel-description style="display: contents;">
-
-                                                        <mat-icon style="color: white;">task</mat-icon>
-                                                </mat-panel-description>
-                                        </mat-expansion-panel-header>
-                                        <div class="row" style="margin-top: 18px;">
-                                                <div class="col-md-12">
-                                                        <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                <mat-label>Contractor:</mat-label>
-                                                                <input matInput class="MatInputBoxShadow" type="text"
-                                                                        required name="Contractor"
-                                                                        [(ngModel)]="selectedContractor">
-                                                                <mat-error>This field is required
-                                                                </mat-error>
-                                                        </mat-form-field>
-                                                </div>
-                                                <div class="col-md-12">
-                                                        <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                <mat-label>Contractor State of Formation:</mat-label>
-                                                                <input matInput 
-                                                                        placeholder="Ex. Delaware limited liability company"
-                                                                        class="MatInputBoxShadow" type="text"
-                                                                        required name="ContractorStateOfFormation"
-                                                                        [(ngModel)]="selectedContractorStateOfFormation">
-                                                                <mat-error>This field is required
-                                                                </mat-error>
-                                                        </mat-form-field>
-                                                </div>
-                                                <div class="col-md-12">
-                                                        <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                <mat-label>Contractor Street Address:</mat-label>
-                                                                <input matInput class="MatInputBoxShadow" type="text"
-                                                                        required name="ContractorAddress"
-                                                                        [(ngModel)]="selectedContractorAddress">
-                                                                <mat-error>This field is required
-                                                                </mat-error>
-                                                        </mat-form-field>
-                                                </div>
-                                                <div class="col-md-4">
-                                                        <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                <mat-label>Contractor City:</mat-label>
-                                                                <input matInput class="MatInputBoxShadow" type="text"
-                                                                        required name="ContractorCity"
-                                                                        [(ngModel)]="selectedContractorCity">
-                                                                <mat-error>This field is required
-                                                                </mat-error>
-                                                        </mat-form-field>
-                                                </div>
-                                                <div class="col-md-4">
-                                                        <mat-form-field class="example-full-width" style="width: 100%;" id="states">
-                                                                <mat-label>Contractor State:</mat-label>
-                                                                <mat-select class="MatInputBoxShadow"
-                                                                        type="text" name="ContractorState" required
-                                                                        [(ngModel)]="selectedContractorState"
-                                                                        (ngModelChange)="onChange(selectedContractorState)">
-                                                                        <mat-option>-- Clear --</mat-option>
-                                                                        <mat-option *ngFor="let option of States"
-                                                                                [value]="option">
-                                                                                {{ option.Title }}
-                                                                        </mat-option>
-                                                                </mat-select>
-                                                                <mat-error>This field is required</mat-error>
-                                                        </mat-form-field>
-                                                </div>
-                                                <div class="col-md-4">
-
-                                                        <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                <mat-label>Contractor Zip Code:</mat-label>
-                                                                <input matInput class="MatInputBoxShadow" type="text"
-                                                                        required name="ContractorZip"
-                                                                        [(ngModel)]="selectedContractorZip">
-                                                                <mat-error>This field is required
-                                                                </mat-error>
-                                                        </mat-form-field>
-
-                                                </div>
-                                                <div class="col-md-12">
-                                                        <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                <mat-label>Contractor Attn:</mat-label>
-                                                                <input matInput class="MatInputBoxShadow" type="text"
-                                                                        name="ContractorAttn"
-                                                                        [(ngModel)]="selectedContractorAttn">
-                                                                <mat-error>This field is required
-                                                                </mat-error>
-                                                        </mat-form-field>
-                                                </div>
-                                                <div class="col-md-12">
-                                                        <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                <mat-label>Contractor Email:</mat-label>
-                                                                <input matInput class="MatInputBoxShadow" type="text"
-                                                                        name="ContractorEmail"
-                                                                        [(ngModel)]="selectedContractorEmail">
-                                                                <mat-error>This field is required
-                                                                </mat-error>
-                                                        </mat-form-field>
-                                                </div>
-                                                
-
-                                        </div>
-
-
-                                </mat-expansion-panel>
-
-
-                        </mat-accordion>
-                        <mat-accordion class="example-headers-align" *ngIf="this.FormName == 'TRS Service Contract' && selectedOwner != undefined">
-                                <mat-expansion-panel [expanded]="step === 0" style="margin-top: 10px;" hideToggle>
-                                        <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
-                                                <mat-panel-title style="color: white;">
-                                                        Other Details
-                                                </mat-panel-title>
-                                                <mat-panel-description style="display: contents;">
-
-                                                        <mat-icon style="color: white;">info</mat-icon>
-                                                </mat-panel-description>
-                                        </mat-expansion-panel-header>
-
-                                        <div class="row" style="margin-top: 18px;">
-
-                                                <div class="col-md-4">
-                                                        <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                <mat-label>Execution Date:</mat-label>
-                                                                <input matInput class="MatInputBoxShadow" type="date" 
-                                                                        required name="ExecutionDate"
-                                                                        [(ngModel)]="selectedExecutionDate">
-                                                                <mat-error>This field is required
-                                                                </mat-error>
-                                                        </mat-form-field>
-                                                </div>
-                                                <div class="col-md-4">
-                                                        <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                <mat-label>Commencement Date:</mat-label>
-                                                                <input matInput class="MatInputBoxShadow" type="date"
-                                                                        required name="CommencementDate"
-                                                                        [(ngModel)]="selectedCommencementDate">
-                                                                <mat-error>This field is required
-                                                                </mat-error>
-                                                        </mat-form-field>
-                                                </div>
-                                                <div class="col-md-4">
-
-                                                        <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                <mat-label>Expiration Date:</mat-label>
-                                                                <input matInput class="MatInputBoxShadow" type="date"
-                                                                        required name="ExpirationDate"
-                                                                        [(ngModel)]="selectedExpirationDate">
-                                                                <mat-error>This field is required
-                                                                </mat-error>
-                                                        </mat-form-field>
-
-                                                </div>
-                                                <div class="col-md-12">
-                                                        <mat-checkbox class="example-margin" name="IncludeTM"
-                                                                [(ngModel)]="selectedIncludeTM">Include T&M Services?
-                                                        </mat-checkbox>
-                                                </div>
-
-
-
-                                        </div>
-
-                                </mat-expansion-panel>
-
-
-                        </mat-accordion>
-
-                        <!-- Change Order -->
-                        <mat-accordion class="example-headers-align" *ngIf="this.FormName == 'Change Order Form' && selectedOwner != undefined">
-                                <mat-expansion-panel [expanded]="step === 0" hideToggle>
-                                        <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
-                                                <mat-panel-title style="color: white;">
-                                                        Contractor Notice Information
-                                                </mat-panel-title>
-                                                <mat-panel-description style="display: contents;">
-
-                                                        <mat-icon style="color: white;">task</mat-icon>
-                                                </mat-panel-description>
-                                        </mat-expansion-panel-header>
-                                        <div class="row" style="margin-top: 18px;">
-                                                <div class="col-md-12">
-                                                        <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                <mat-label>Contractor:</mat-label>
-                                                                <input matInput class="MatInputBoxShadow" type="text"
-                                                                        required name="Contractor"
-                                                                        [(ngModel)]="selectedContractor">
-                                                                <mat-error>This field is required
-                                                                </mat-error>
-                                                        </mat-form-field>
-                                                </div>
-                                                <div class="col-md-12">
-                                                        <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                <mat-label>Contractor Street Address:</mat-label>
-                                                                <input matInput class="MatInputBoxShadow" type="text"
-                                                                        required name="ContractorAddress"
-                                                                        [(ngModel)]="selectedContractorAddress">
-                                                                <mat-error>This field is required
-                                                                </mat-error>
-                                                        </mat-form-field>
-                                                </div>
-                                                <div class="col-md-4">
-                                                        <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                <mat-label>Contractor City:</mat-label>
-                                                                <input matInput class="MatInputBoxShadow" type="text"
-                                                                        required name="ContractorCity"
-                                                                        [(ngModel)]="selectedContractorCity">
-                                                                <mat-error>This field is required
-                                                                </mat-error>
-                                                        </mat-form-field>
-                                                </div>
-                                                <div class="col-md-4">
-                                                        <mat-form-field class="example-full-width" style="width: 100%;" id="states">
-                                                                <mat-label>Contractor State:</mat-label>
-                                                                <mat-select class="MatInputBoxShadow"
-                                                                        type="text" name="ContractorState" required
-                                                                        [(ngModel)]="selectedContractorState"
-                                                                        (ngModelChange)="onChange(selectedContractorState)">
-                                                                        <mat-option>-- Clear --</mat-option>
-                                                                        <mat-option *ngFor="let option of States"
-                                                                                [value]="option">
-                                                                                {{ option.Title }}
-                                                                        </mat-option>
-                                                                </mat-select>
-                                                                <mat-error>This field is required</mat-error>
-                                                        </mat-form-field>
-                                                </div>
-                                                <div class="col-md-4">
-
-                                                        <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                <mat-label>Contractor Zip Code:</mat-label>
-                                                                <input matInput class="MatInputBoxShadow" type="text"
-                                                                        required name="ContractorZip"
-                                                                        [(ngModel)]="selectedContractorZip">
-                                                                <mat-error>This field is required
-                                                                </mat-error>
-                                                        </mat-form-field>
-
-                                                </div>
-                                        </div>
-
-
-                                </mat-expansion-panel>
-
-
-                        </mat-accordion>
-                        <mat-accordion class="example-headers-align" *ngIf="this.FormName == 'Change Order Form' && selectedOwner != undefined">
-                                <mat-expansion-panel [expanded]="step === 0" style="margin-top: 10px;" hideToggle>
-                                        <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
-                                                <mat-panel-title style="color: white;">
-                                                        Change Order information
-                                                </mat-panel-title>
-                                                <mat-panel-description style="display: contents;">
-
-                                                        <mat-icon style="color: white;">info</mat-icon>
-                                                </mat-panel-description>
-                                        </mat-expansion-panel-header>
-
-                                        <div class="row" style="margin-top: 18px;">
-
-                                                <div class="col-md-3">
-                                                        <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                <mat-label>Change Order Number:</mat-label>
-                                                                <input matInput class="MatInputBoxShadow" type="text" 
-                                                                        required name="ChangeOrderNumber"
-                                                                        [(ngModel)]="selectedCOnum">
-                                                                <mat-error>This field is required
-                                                                </mat-error>
-                                                        </mat-form-field>
-                                                </div>
-                                                <div class="col-md-3">
-                                                        <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                <mat-label>Project Number:</mat-label>
-                                                                <input matInput class="MatInputBoxShadow" type="text" 
-                                                                        required name="ProjectNumber"
-                                                                        [(ngModel)]="selectedProjectNum">
-                                                                <mat-error>This field is required
-                                                                </mat-error>
-                                                        </mat-form-field>
-                                                </div>
-                                                <div class="col-md-3">
-
-                                                        <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                <mat-label>Change Order Date:</mat-label>
-                                                                <input matInput class="MatInputBoxShadow" type="date"
-                                                                        required name="ChangeOrderDate"
-                                                                        [(ngModel)]="selectedDate">
-                                                                <mat-error>This field is required
-                                                                </mat-error>
-                                                        </mat-form-field>
-
-                                                </div>
-                                                <div class="col-md-3">
-
-                                                        <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                <mat-label>Contract Date:</mat-label>
-                                                                <input matInput class="MatInputBoxShadow" type="date"
-                                                                        required name="ChangeOrderDate"
-                                                                        [(ngModel)]="selectedContractDate">
-                                                                <mat-error>This field is required
-                                                                </mat-error>
-                                                        </mat-form-field>
-
-                                                </div>
-                                                <div class="col-md-12">
-                                                        <mat-checkbox class="example-margin" name="CAGMP"
-                                                                [(ngModel)]="selectedChangeCAGMP" style="padding-bottom: 10px;">Change Contract Amount/GMP?
-                                                        </mat-checkbox>
-                                                </div>
-                                                <div *ngIf="this.selectedChangeCAGMP == true">
-                                                        <div class="col-md-12">
-                                                                <mat-radio-group aria-label="Use 'Contract Amount or 'GMP'" [(ngModel)]="selectedCAGMP" [ngModelOptions]="{standalone: true}">
-                                                                        <mat-radio-button value="Contract Amount" style="padding-right: 10px;">Contract Amount</mat-radio-button>
-                                                                        <mat-radio-button value="GMP">GMP</mat-radio-button>
-                                                                </mat-radio-group>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                                <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                        <mat-label>Orignal Contract Amount/GMP</mat-label>
-                                                                        <input matInput class="MatInputBoxShadow" type="text" 
-                                                                                required name="OriginalGMP"
-                                                                                [(ngModel)]="selectedOriginalGMP">
-                                                                        <mat-error>This field is required
-                                                                        </mat-error>
-                                                                </mat-form-field>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                                <mat-radio-group aria-label="Net Change Details" [(ngModel)]="selectedNetIncDec" [ngModelOptions]="{standalone: true}">
-                                                                        <mat-radio-button value="Increase" style="padding-right: 10px;">Increase</mat-radio-button>
-                                                                        <mat-radio-button value="Decrease">Decrease</mat-radio-button>
-                                                                </mat-radio-group>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                                <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                        <mat-label>Net Change Amount:</mat-label>
-                                                                        <input matInput class="MatInputBoxShadow" type="text" 
-                                                                                required name="NetChangeAmount"
-                                                                                [(ngModel)]="selectedNetChange">
-                                                                        <mat-error>This field is required
-                                                                        </mat-error>
-                                                                </mat-form-field>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                                <p>{{this.selectedPreviousGMP}}</p>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                                <mat-radio-group aria-label="Change Order Details" [(ngModel)]="selectedCOincdec" [ngModelOptions]="{standalone: true}">
-                                                                        <mat-radio-button value="Increase" style="padding-right: 10px;">Increase</mat-radio-button>
-                                                                        <mat-radio-button value="Decrease">Decrease</mat-radio-button>
-                                                                </mat-radio-group>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                                <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                        <mat-label>Change Order Amount:</mat-label>
-                                                                        <input matInput class="MatInputBoxShadow" type="text" 
-                                                                                required name="ChangeOrderAmount"
-                                                                                [(ngModel)]="selectedCOamount">
-                                                                        <mat-error>This field is required
-                                                                        </mat-error>
-                                                                </mat-form-field>
-                                                        </div>
-                                                </div>
-                                                
-                                                <div class="col-md-12">
-                                                        <mat-checkbox class="example-margin" name="TimeChange"
-                                                                [(ngModel)]="selectedChangeTime" style="padding-bottom: 10px;">Change Contract Time?
-                                                        </mat-checkbox>
-                                                </div>
-                                                <div *ngIf="this.selectedChangeTime == true">
-                                                        <div class="col-md-12">
-                                                                <mat-radio-group aria-label="Contract Time Change Details" [(ngModel)]="selectedTimeIncDec" [ngModelOptions]="{standalone: true}">
-                                                                        <label>Contract Time </label>
-                                                                        <mat-radio-button value="Increase" style="padding-right: 10px;">Increase</mat-radio-button>
-                                                                        <mat-radio-button value="Decrease">Decrease</mat-radio-button>
-                                                                </mat-radio-group>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                                <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                        <mat-label>Contract Time Change Amount (Days):</mat-label>
-                                                                        <input matInput class="MatInputBoxShadow" type="text" 
-                                                                                required name="TimeChange"
-                                                                                [(ngModel)]="selectedTimeChange" style="padding-left: 10px;">   
-                                                                        <mat-error>This field is required
-                                                                        </mat-error>
-                                                                </mat-form-field>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                                <mat-checkbox class="example-margin" name="SOWrevised"
-                                                                        [(ngModel)]="selectedReviseSOW">Scope Of Work Revised?
-                                                                </mat-checkbox>
-                                                        </div>
-
-                                                        <div class="col-md-12">
-                                                                <mat-checkbox class="example-margin" name="SubstantialComp"
-                                                                        [(ngModel)]="selectedSubComp">Substantial Completion?
-                                                                </mat-checkbox>
-                                                        </div>
-                                                        <div class="col-md-4">
-
-                                                                <mat-form-field class="example-full-width" style="width: 100%;">
-                                                                        <mat-label>Substantial Completion Date:</mat-label>
-                                                                        <input matInput class="MatInputBoxShadow" type="date"
-                                                                                required name="SubstantialCompletionDate"
-                                                                                [(ngModel)]="selectedSubstantialCompletionDate">
-                                                                        <mat-error>This field is required
-                                                                        </mat-error>
-                                                                </mat-form-field>
-
-                                                        </div>
-                                                </div>
-                                        </div>
-
-                                        
-                                </mat-expansion-panel>
-
-
-                        </mat-accordion>
-                </div>
-        </div>
-
-        <div class="row " style="display: flex;">
-                <div class="col-md-8" *ngIf="selectedOwner != undefined" style="margin-top: 18px; text-align: right;">
-                        
-                </div>
-                <div class="col-md-4" *ngIf="selectedOwner != undefined" style="margin-top: 18px;text-align: right;">
-                        <button class="btnEnd" mat-raised-button (click)="resetStates(servicecontract);" type="button"
-                                color="white">Reset</button>
-                        <button class="btnEnd" mat-raised-button (click)="onSave()" [disabled]="servicecontract.invalid || invalidateFields()" type="button"
-                                color="primary">Generate Contract</button>
-                </div>
-                
-
-        </div>
-
-
-
-
-        <!-- <div class="row g-2">
+  <app-my-heading heading="Service Contract Generator"></app-my-heading>
+  <div class="row ">
+    <div class="col-md-12">
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel [expanded]="step === 0" hideToggle>
+          <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
+            <mat-panel-title style="color: white;">
+              Contract Type
+            </mat-panel-title>
+            <mat-panel-description style="display: contents;">
+              <mat-icon style="color: white;">description</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <mat-form-field class="example-full-width" style="width: 40%; margin-top: 15px;" id="formselect">
+            <mat-label>Select Contract Type:</mat-label>
+            <mat-select class="MatInputBoxShadow" type="text" name="FormSelect" required [(ngModel)]="selectedForm"
+              (ngModelChange)="onChange(selectedForm)">
+              <mat-option>-- Clear --</mat-option>
+              <mat-option *ngFor="let option of Forms" [value]="option" (click)="FormBind();">
+                {{ option.Title }}
+              </mat-option>
+            </mat-select>
+            <mat-error>This field is required</mat-error>
+          </mat-form-field>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div class="col-md-5" *ngIf="selectedForm != undefined" style="margin-top: 15px;">
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel [expanded]="step === 0" hideToggle>
+          <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
+            <mat-panel-title style="color: white;">
+              Owner Information
+            </mat-panel-title>
+            <mat-panel-description style="display: contents;">
+              <mat-icon style="color: white;">account_circle</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row" style="margin-top: 18px;">
+            <div class="col-md-12 selectMenu" style="margin-top: 15px;">
+              <button type="button" mat-menu-item (click)="resetStates(servicecontract);" [matMenuTriggerFor]="markets"
+                *ngFor="let r of Region; let i=index">{{r.Region}} <mat-icon>arrow_right</mat-icon>
+                <mat-menu #markets="matMenu">
+                  <button type="button" mat-menu-item [matMenuTriggerFor]="property" *ngFor="let m of Market"
+                    [hidden]="r.Region != m.Region">{{m.Market}}
+                    <mat-menu #property="matMenu" style="height: 50%; overflow: scroll;">
+                      <button type="button" mat-menu-item *ngFor="let p of Property" [hidden]="m.Market != p.Market"
+                        (click)="OwnerSelect(p)">{{p.Property}}</button>
+                    </mat-menu>
+                  </button>
+                </mat-menu>
+              </button>
+            </div>
+            <div class="col-md-12" style="margin-top: 15px;">
+              <table class="table" *ngIf="selectedOwner != undefined">
+                <tbody>
+                  <tr>
+                    <td>Region</td>
+                    <td style="color:#4c7ab5">
+                      {{selectedOwner?.Region}}</td>
+                  </tr>
+                  <tr>
+                    <td>Market</td>
+                    <td style="color:#4c7ab5">
+                      {{selectedOwner?.Market}}</td>
+                  </tr>
+                  <tr>
+                    <td>Entity</td>
+                    <td style="color:#4c7ab5">
+                      {{selectedOwner?.Owner}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <mat-form-field *ngIf="selectedOwner != undefined" style="width:100%" class="example-full-width">
+                <mat-label>Property Address</mat-label>
+                <textarea matInput placeholder="Ex. 100 Main St" name="PropertyAddress"
+                  [(ngModel)]="selectedPropertyAddress" required="true"></textarea>
+              </mat-form-field>
+              <mat-form-field *ngIf="this.FormName == 'Service Contract' && selectedOwner != undefined"
+                style="width:100%" class="example-full-width">
+                <mat-label>Property Manager</mat-label>
+                <textarea matInput name="PropertyManager" placeholder="BioMed Realty LLC"
+                  [(ngModel)]="selectedPropertyManager" required="true"></textarea>
+              </mat-form-field>
+              <button mat-raised-button (click)="clearPM()"
+                *ngIf="this.FormName == 'Service Contract' && selectedOwner != undefined" color="primary">Change Default
+                Property Manager</button>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div class="col-md-7" style="margin-top: 15px;">
+      <!--SERVICE CONTRACT FIELDS-->
+      <mat-accordion class="example-headers-align"
+        *ngIf="this.FormName == 'Service Contract' && selectedOwner != undefined">
+        <mat-expansion-panel [expanded]="step === 0" hideToggle>
+          <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
+            <mat-panel-title style="color: white;">
+              Contractor Notice Information
+            </mat-panel-title>
+            <mat-panel-description style="display: contents;">
+              <mat-icon style="color: white;">task</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row" style="margin-top: 18px;">
+            <div class="col-md-12">
+              <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label>Contractor:</mat-label>
+                <input matInput class="MatInputBoxShadow" type="text" required name="Contractor"
+                  [(ngModel)]="selectedContractor">
+                <mat-error>This field is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-12">
+              <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label>Contractor State of Formation:</mat-label>
+                <input matInput placeholder="Ex. Delaware limited liability company" class="MatInputBoxShadow"
+                  type="text" required name="ContractorStateOfFormation"
+                  [(ngModel)]="selectedContractorStateOfFormation">
+                <mat-error>This field is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-12">
+              <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label>Contractor Street Address:</mat-label>
+                <input matInput class="MatInputBoxShadow" type="text" required name="ContractorAddress"
+                  [(ngModel)]="selectedContractorAddress">
+                <mat-error>This field is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label>Contractor City:</mat-label>
+                <input matInput class="MatInputBoxShadow" type="text" required name="ContractorCity"
+                  [(ngModel)]="selectedContractorCity">
+                <mat-error>This field is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width" style="width: 100%;" id="states">
+                <mat-label>Contractor State:</mat-label>
+                <mat-select class="MatInputBoxShadow" type="text" name="ContractorState" required
+                  [(ngModel)]="selectedContractorState" (ngModelChange)="onChange(selectedContractorState)">
+                  <mat-option>-- Clear --</mat-option>
+                  <mat-option *ngFor="let option of States" [value]="option">
+                    {{ option.Title }}
+                  </mat-option>
+                </mat-select>
+                <mat-error>This field is required</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label>Contractor Zip Code:</mat-label>
+                <input matInput class="MatInputBoxShadow" type="text" required name="ContractorZip"
+                  [(ngModel)]="selectedContractorZip">
+                <mat-error>This field is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-12">
+              <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label>Contractor Attn:</mat-label>
+                <input matInput class="MatInputBoxShadow" type="text" name="ContractorAttn"
+                  [(ngModel)]="selectedContractorAttn">
+                <mat-error>This field is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-12">
+              <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label>Contractor Email:</mat-label>
+                <input matInput class="MatInputBoxShadow" type="text" name="ContractorEmail"
+                  [(ngModel)]="selectedContractorEmail">
+                <mat-error>This field is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <mat-accordion class="example-headers-align"
+        *ngIf="this.FormName == 'Service Contract' && selectedOwner != undefined">
+        <mat-expansion-panel [expanded]="step === 0" style="margin-top: 90px;" hideToggle>
+          <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
+            <mat-panel-title style="color: white;">
+              Other Details
+            </mat-panel-title>
+            <mat-panel-description style="display: contents;">
+              <mat-icon style="color: white;">info</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row" style="margin-top: 18px;">
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label>Execution Date:</mat-label>
+                <input matInput class="MatInputBoxShadow" type="date" required name="ExecutionDate"
+                  [(ngModel)]="selectedExecutionDate">
+                <mat-error>This field is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label>Commencement Date:</mat-label>
+                <input matInput class="MatInputBoxShadow" type="date" required name="CommencementDate"
+                  [(ngModel)]="selectedCommencementDate">
+                <mat-error>This field is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label>Expiration Date:</mat-label>
+                <input matInput class="MatInputBoxShadow" type="date" required name="ExpirationDate"
+                  [(ngModel)]="selectedExpirationDate">
+                <mat-error>This field is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-12">
+              <mat-checkbox class="example-margin" name="IncludeTM" [(ngModel)]="selectedIncludeTM">Include T&M
+                Services?
+              </mat-checkbox>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <!--TRS SERVICE CONTRACT FIELDS-->
+      <mat-accordion class="example-headers-align"
+        *ngIf="this.FormName == 'TRS Service Contract' && selectedOwner != undefined">
+        <mat-expansion-panel [expanded]="step === 0" hideToggle>
+          <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
+            <mat-panel-title style="color: white;">
+              Contractor Notice Information
+            </mat-panel-title>
+            <mat-panel-description style="display: contents;">
+              <mat-icon style="color: white;">task</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row" style="margin-top: 18px;">
+            <div class="col-md-12">
+              <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label>Contractor:</mat-label>
+                <input matInput class="MatInputBoxShadow" type="text" required name="Contractor"
+                  [(ngModel)]="selectedContractor">
+                <mat-error>This field is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-12">
+              <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label>Contractor State of Formation:</mat-label>
+                <input matInput placeholder="Ex. Delaware limited liability company" class="MatInputBoxShadow"
+                  type="text" required name="ContractorStateOfFormation"
+                  [(ngModel)]="selectedContractorStateOfFormation">
+                <mat-error>This field is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-12">
+              <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label>Contractor Street Address:</mat-label>
+                <input matInput class="MatInputBoxShadow" type="text" required name="ContractorAddress"
+                  [(ngModel)]="selectedContractorAddress">
+                <mat-error>This field is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label>Contractor City:</mat-label>
+                <input matInput class="MatInputBoxShadow" type="text" required name="ContractorCity"
+                  [(ngModel)]="selectedContractorCity">
+                <mat-error>This field is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width" style="width: 100%;" id="states">
+                <mat-label>Contractor State:</mat-label>
+                <mat-select class="MatInputBoxShadow" type="text" name="ContractorState" required
+                  [(ngModel)]="selectedContractorState" (ngModelChange)="onChange(selectedContractorState)">
+                  <mat-option>-- Clear --</mat-option>
+                  <mat-option *ngFor="let option of States" [value]="option">
+                    {{ option.Title }}
+                  </mat-option>
+                </mat-select>
+                <mat-error>This field is required</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label>Contractor Zip Code:</mat-label>
+                <input matInput class="MatInputBoxShadow" type="text" required name="ContractorZip"
+                  [(ngModel)]="selectedContractorZip">
+                <mat-error>This field is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-12">
+              <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label>Contractor Attn:</mat-label>
+                <input matInput class="MatInputBoxShadow" type="text" name="ContractorAttn"
+                  [(ngModel)]="selectedContractorAttn">
+                <mat-error>This field is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-12">
+              <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label>Contractor Email:</mat-label>
+                <input matInput class="MatInputBoxShadow" type="text" name="ContractorEmail"
+                  [(ngModel)]="selectedContractorEmail">
+                <mat-error>This field is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <mat-accordion class="example-headers-align"
+        *ngIf="this.FormName == 'TRS Service Contract' && selectedOwner != undefined">
+        <mat-expansion-panel [expanded]="step === 0" style="margin-top: 10px;" hideToggle>
+          <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
+            <mat-panel-title style="color: white;">
+              Other Details
+            </mat-panel-title>
+            <mat-panel-description style="display: contents;">
+              <mat-icon style="color: white;">info</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row" style="margin-top: 18px;">
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label>Execution Date:</mat-label>
+                <input matInput class="MatInputBoxShadow" type="date" required name="ExecutionDate"
+                  [(ngModel)]="selectedExecutionDate">
+                <mat-error>This field is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label>Commencement Date:</mat-label>
+                <input matInput class="MatInputBoxShadow" type="date" required name="CommencementDate"
+                  [(ngModel)]="selectedCommencementDate">
+                <mat-error>This field is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label>Expiration Date:</mat-label>
+                <input matInput class="MatInputBoxShadow" type="date" required name="ExpirationDate"
+                  [(ngModel)]="selectedExpirationDate">
+                <mat-error>This field is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-12">
+              <mat-checkbox class="example-margin" name="IncludeTM" [(ngModel)]="selectedIncludeTM">Include T&M
+                Services?
+              </mat-checkbox>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <!-- Change Order -->
+      <mat-accordion class="example-headers-align"
+        *ngIf="this.FormName == 'Change Order Form' && selectedOwner != undefined">
+        <mat-expansion-panel [expanded]="step === 0" hideToggle>
+          <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
+            <mat-panel-title style="color: white;">
+              Contractor Notice Information
+            </mat-panel-title>
+            <mat-panel-description style="display: contents;">
+              <mat-icon style="color: white;">task</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row" style="margin-top: 18px;">
+            <div class="col-md-12">
+              <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label>Contractor:</mat-label>
+                <input matInput class="MatInputBoxShadow" type="text" required name="Contractor"
+                  [(ngModel)]="selectedContractor">
+                <mat-error>This field is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-12">
+              <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label>Contractor Street Address:</mat-label>
+                <input matInput class="MatInputBoxShadow" type="text" required name="ContractorAddress"
+                  [(ngModel)]="selectedContractorAddress">
+                <mat-error>This field is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label>Contractor City:</mat-label>
+                <input matInput class="MatInputBoxShadow" type="text" required name="ContractorCity"
+                  [(ngModel)]="selectedContractorCity">
+                <mat-error>This field is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width" style="width: 100%;" id="states">
+                <mat-label>Contractor State:</mat-label>
+                <mat-select class="MatInputBoxShadow" type="text" name="ContractorState" required
+                  [(ngModel)]="selectedContractorState" (ngModelChange)="onChange(selectedContractorState)">
+                  <mat-option>-- Clear --</mat-option>
+                  <mat-option *ngFor="let option of States" [value]="option">
+                    {{ option.Title }}
+                  </mat-option>
+                </mat-select>
+                <mat-error>This field is required</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label>Contractor Zip Code:</mat-label>
+                <input matInput class="MatInputBoxShadow" type="text" required name="ContractorZip"
+                  [(ngModel)]="selectedContractorZip">
+                <mat-error>This field is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <mat-accordion class="example-headers-align"
+        *ngIf="this.FormName == 'Change Order Form' && selectedOwner != undefined">
+        <mat-expansion-panel [expanded]="step === 0" style="margin-top: 10px;" hideToggle>
+          <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
+            <mat-panel-title style="color: white;">
+              Change Order information
+            </mat-panel-title>
+            <mat-panel-description style="display: contents;">
+              <mat-icon style="color: white;">info</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row" style="margin-top: 18px;">
+            <div class="col-md-3">
+              <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label>Change Order Number:</mat-label>
+                <input matInput class="MatInputBoxShadow" type="text" required name="ChangeOrderNumber"
+                  [(ngModel)]="selectedCOnum">
+                <mat-error>This field is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-3">
+              <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label>Project Number:</mat-label>
+                <input matInput class="MatInputBoxShadow" type="text" required name="ProjectNumber"
+                  [(ngModel)]="selectedProjectNum">
+                <mat-error>This field is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-3">
+              <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label>Change Order Date:</mat-label>
+                <input matInput class="MatInputBoxShadow" type="date" required name="ChangeOrderDate"
+                  [(ngModel)]="selectedDate">
+                <mat-error>This field is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-3">
+              <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label>Contract Date:</mat-label>
+                <input matInput class="MatInputBoxShadow" type="date" required name="ContractDate"
+                  [(ngModel)]="selectedContractDate">
+                <mat-error>This field is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <hr class="solid">
+            <div class="col-md-12">
+              <mat-checkbox class="example-margin" name="CAGMP" [(ngModel)]="selectedChangeCAGMP"
+                style="padding-bottom: 10px;">Change Contract Amount/GMP?
+              </mat-checkbox>
+            </div>
+            <div *ngIf="this.selectedChangeCAGMP == true">
+              <div class="col-md-12">
+                <br>
+                <p>Use "Contract Amount" or "GMP"?</p>
+                <mat-radio-group aria-label="Use 'Contract Amount or 'GMP'" [(ngModel)]="selectedCAGMP"
+                  [ngModelOptions]="{standalone: true}">
+                  <mat-radio-button value="Contract Amount" style="padding-right: 10px;">Contract Amount
+                  </mat-radio-button>
+                  <mat-radio-button value="GMP">GMP</mat-radio-button>
+                </mat-radio-group>
+                <br>
+              </div>
+              <div class="col-md-12">
+                <mat-form-field class="example-full-width" style="width: 100%; padding-top: 10px;">
+                  <mat-label>Orignal Contract Amount/GMP</mat-label>
+                  <input matInput class="MatInputBoxShadow" type="text" required name="OriginalGMP"
+                    [(ngModel)]="selectedOriginalGMP" (change)="calc()">
+                  <mat-error>This field is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-md-12">
+                <br>
+                <p>Net Change Increase or Decrease?</p>
+                <mat-radio-group aria-label="Net Change Details" [(ngModel)]="selectedNetIncDec"
+                  [ngModelOptions]="{standalone: true}" (click)="calc()" (change)="calc()">
+                  <mat-radio-button value="Increase" style="padding-right: 10px;">Increase</mat-radio-button>
+                  <mat-radio-button value="Decrease">Decrease</mat-radio-button>
+                </mat-radio-group>
+                <br>
+              </div>
+              <div class="col-md-12">
+                <mat-form-field class="example-full-width" style="width: 100%; padding-top: 10px;">
+                  <mat-label>Net Change Amount:</mat-label>
+                  <input matInput class="MatInputBoxShadow" type="text" required name="NetChangeAmount"
+                    [(ngModel)]="selectedNetChange" (change)="calc()">
+                  <mat-error>This field is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-md-12 prevGMP">
+                <p style="color: #4c7ab5; font-weight: bold;">Previous {{selectedCAGMP}}: {{this.selectedPreviousGMP}}</p>
+              </div>
+              <div class="col-md-12">
+                <br>
+                <p>Change Order Amount Increase or Decrease?</p>
+                <mat-radio-group aria-label="Change Order Details" [(ngModel)]="selectedCOincdec"
+                  [ngModelOptions]="{standalone: true}" (click)="calc()" (change)="calc()">
+                  <mat-radio-button value="Increase" style="padding-right: 10px;">Increase</mat-radio-button>
+                  <mat-radio-button value="Decrease">Decrease</mat-radio-button>
+                </mat-radio-group>
+                <br>
+              </div>
+              <div class="col-md-12">
+                <mat-form-field class="example-full-width" style="width: 100%; padding-top: 10px;">
+                  <mat-label>Change Order Amount:</mat-label>
+                  <input matInput class="MatInputBoxShadow" type="text" required name="ChangeOrderAmount"
+                    [(ngModel)]="selectedCOamount" (change)="calc()">
+                  <mat-error>This field is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-md-12 prevGMP">
+                <p style="color: #4c7ab5; font-weight: bold;">New {{selectedCAGMP}}: {{this.selectedNewGMP}}</p>
+              </div>
+            </div>
+            <hr class="solid">
+            <div class="col-md-12">
+              <mat-checkbox class="example-margin" name="changeTime" [(ngModel)]="selectedChangeTime"
+                style="padding-bottom: 10px;">Change Contract Time?
+              </mat-checkbox>
+            </div>
+            <div *ngIf="this.selectedChangeTime == true">
+              <div class="col-md-12">
+                <br>
+                <p>Contract Time Increase or Decrease?</p>
+                <mat-radio-group aria-label="Contract Time Change Details" [(ngModel)]="selectedTimeIncDec"
+                  [ngModelOptions]="{standalone: true}">
+                  <mat-radio-button value="Increase" style="padding-right: 10px;">Increase</mat-radio-button>
+                  <mat-radio-button value="Decrease">Decrease</mat-radio-button>
+                </mat-radio-group>
+                <br>
+              </div>
+              <div class="col-md-12">
+                <mat-form-field class="example-full-width" style="width: 100%;">
+                  <mat-label>Contract Time Change Amount (Days):</mat-label>
+                  <input matInput class="MatInputBoxShadow" type="text" required name="TimeChange"
+                    [(ngModel)]="selectedTimeChange">
+                  <mat-error>This field is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-md-12">
+                <mat-checkbox class="example-margin" name="SOWrevised" [(ngModel)]="selectedSOWrevised" style="width: 100%; padding-top: 10px;">Scope Of Work
+                  Revised?
+                </mat-checkbox>
+              </div>
+              <div class="col-md-12">
+                <mat-checkbox class="example-margin" name="SubstantialComp" [(ngModel)]="selectedSubComp" style="width: 100%; padding-top: 10px;">Substantial
+                  Completion?
+                </mat-checkbox>
+              </div>
+              <div class="col-md-4" *ngIf="this.selectedSubComp == true">
+                <mat-form-field class="example-full-width" style="width: 100%; padding-top: 10px;">
+                  <mat-label>Substantial Completion Date:</mat-label>
+                  <input matInput class="MatInputBoxShadow" type="date" name="SubstantialCompletionDate"
+                    [(ngModel)]="selectedSubstantialCompletionDate" required>
+                </mat-form-field>
+              </div>   
+            </div>
+            <hr class="solid">
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+  <div class="row " style="display: flex;">
+    <div class="col-md-8" *ngIf="selectedOwner != undefined" style="margin-top: 18px; text-align: right;">
+    </div>
+    <div class="col-md-4" *ngIf="selectedOwner != undefined" style="margin-top: 18px;text-align: right;">
+      <button class="btnEnd" mat-raised-button (click)="resetStates(servicecontract);" type="button"
+        color="white">Reset</button>
+      <button class="btnEnd" mat-raised-button (click)="onSave()"
+        [disabled]="servicecontract.invalid || invalidateFields()" type="button" color="primary">Generate
+        Contract</button>
+    </div>
+  </div>
+
+  <!-- <div class="row g-2">
                 <div class="col-md-3"></div>
                 <div class="col-md-12">
                         <table class="table table-striped table-bordered">
@@ -753,8 +633,6 @@
                                                         <p>Owner:&emsp;</p>
                                                 </td>
                                                 <td>
-
-
                                                 </td>
                                         </tr>
                                         <tr>
@@ -771,10 +649,8 @@
                                                         <p>Property Address:&emsp;</p>
                                                 </td>
                                                 <td>
-
                                                 </td>
                                         </tr>
-
                                         <tr>
                                                 <td>
                                                         <p>Contractor Information:&emsp;</p>
@@ -850,22 +726,17 @@
                                                         </app-my-input-date>
                                                 </td>
                                         </tr>
-
                                         <tr>
                                                 <td>
                                                         <p>Include T&M Services?&emsp;</p>
                                                 </td>
                                                 <td>
-
                                                         <mat-checkbox class="example-margin" name="IncludeTM"
                                                                 [(ngModel)]="selectedIncludeTM">Include</mat-checkbox>
                                                 </td>
                                         </tr>
                                 </tbody>
                         </table>
-
-
-
 
                 </div>
         </div> -->

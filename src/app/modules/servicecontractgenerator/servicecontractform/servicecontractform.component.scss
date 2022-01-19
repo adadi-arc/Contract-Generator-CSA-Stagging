@@ -53,6 +53,12 @@ td{
 .mat-raised-button.mat-button-disabled:not([class*=mat-elevation-z]){
     background-color: rgba(0,0,0,.12) !important;
 }
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: #4c7ab5 !important;
+}
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-inner-circle {
+    background-color: #4c7ab5 !important;
+}
 .btnEnd{
     margin-right: 15px;
 }
