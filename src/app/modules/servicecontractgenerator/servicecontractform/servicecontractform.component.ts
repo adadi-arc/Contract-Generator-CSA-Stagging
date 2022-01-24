@@ -744,7 +744,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
             docxvar['PreviousGMP'] = this.selectedPreviousGMP;
           }
           if (this.selectedNetIncDec == "Decrease") {
-            this.selectedPreviousGMP = parseFloat(this.selectedOriginalGMP) + parseFloat(this.selectedNetChange);
+            this.selectedPreviousGMP = parseFloat(this.selectedOriginalGMP) - parseFloat(this.selectedNetChange);
             docxvar['PreviousGMP'] = this.selectedPreviousGMP;
           }
           if (this.selectedNetIncDec == "increase/decrease") {
