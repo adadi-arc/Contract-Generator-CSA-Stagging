@@ -730,26 +730,26 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
           docxvar['CA_GMP'] = this.selectedCAGMP;
         }
         if (docx.Search("OriginalGMP") == true) {
-          docxvar['OriginalGMP'] = this.selectedOriginalGMP;
+          docxvar['OriginalGMP'] = Number(this.selectedOriginalGMP).toFixed(2);
         }
         if (docx.Search("NetIncDec") == true) {
           docxvar['NetIncDec'] = this.selectedNetIncDec.toLowerCase();
         }
         if (docx.Search("NetChange") == true) {
-          docxvar['NetChange'] = this.selectedNetChange;
+          docxvar['NetChange'] = Number(this.selectedNetChange).toFixed(2);
         }
         if (docx.Search("PreviousGMP") == true) {
           if (this.selectedNetIncDec == "Increase") {
             this.selectedPreviousGMP = parseFloat(this.selectedOriginalGMP) + parseFloat(this.selectedNetChange);
-            docxvar['PreviousGMP'] = this.selectedPreviousGMP;
+            docxvar['PreviousGMP'] = Number(this.selectedPreviousGMP).toFixed(2);
           }
           if (this.selectedNetIncDec == "Decrease") {
             this.selectedPreviousGMP = parseFloat(this.selectedOriginalGMP) - parseFloat(this.selectedNetChange);
-            docxvar['PreviousGMP'] = this.selectedPreviousGMP;
+            docxvar['PreviousGMP'] = Number(this.selectedPreviousGMP).toFixed(2);
           }
           if (this.selectedNetIncDec == "increase/decrease") {
             this.selectedPreviousGMP = 0
-            docxvar['PreviousGMP'] = this.selectedPreviousGMP;
+            docxvar['PreviousGMP'] = Number(this.selectedPreviousGMP).toFixed(2);
           }
         }
         if (docx.Search("CO_IncDec") == true) {
@@ -762,20 +762,20 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
 
         }
         if (docx.Search("CO_Amount") == true) {
-          docxvar['CO_Amount'] = this.selectedCOamount;
+          docxvar['CO_Amount'] = Number(this.selectedCOamount).toFixed(2);
         }
         if (docx.Search("NewGMP") == true) {
           if (this.selectedCOincdec == "Increase") {
             this.selectedNewGMP = parseFloat(this.selectedPreviousGMP) + parseFloat(this.selectedCOamount);
-            docxvar['NewGMP'] = this.selectedNewGMP;
+            docxvar['NewGMP'] = Number(this.selectedNewGMP).toFixed(2);
           }
           if (this.selectedCOincdec == "Decrease") {
             this.selectedNewGMP = parseFloat(this.selectedPreviousGMP) - parseFloat(this.selectedCOamount);
-            docxvar['NewGMP'] = this.selectedNewGMP;
+            docxvar['NewGMP'] = Number(this.selectedNewGMP).toFixed(2);
           }
           if (this.selectedCOincdec == "increased/decreased") {
             this.selectedNewGMP = 0
-            docxvar['NewGMP'] = this.selectedNewGMP;
+            docxvar['NewGMP'] = Number(this.selectedNewGMP).toFixed(2);
           }
         }
 

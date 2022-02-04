@@ -15,7 +15,7 @@ export class SpService {
   apiUrl: string;
   //baseUrl: string = "http://";
   //baseUrl: string = "http://localhost:8100";
-  baseUrl: string = customConfig.baseUrl;
+  baseUrl: string = (location.href.indexOf('biomedrealty.com:8090') >= 0) ? customConfig.extBaseUrl : customConfig.baseUrl;
   context = { FormDigestValue: "", WebFullUrl: "" };
 
   constructor(private http: HttpClient) {

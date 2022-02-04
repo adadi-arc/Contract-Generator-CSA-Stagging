@@ -2,5 +2,6 @@
     "api": "/sites/fredd",
     "spSite": "/sites/fredd",
     "tokenID": "arctokenprod",
-    "baseUrl": "http://fredd/"
+    "baseUrl": "http://fredd/",
+    "extBaseUrl": "http://fredd.biomedrealty.com:8090/"
 }
