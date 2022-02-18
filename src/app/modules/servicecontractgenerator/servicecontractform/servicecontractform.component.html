@@ -18,7 +18,7 @@
           <mat-form-field class="example-full-width" style="width: 40%; margin-top: 15px;" id="formselect">
             <mat-label>Select Contract Type:</mat-label>
             <mat-select class="MatInputBoxShadow" type="text" name="FormSelect" required [(ngModel)]="selectedForm"
-              (ngModelChange)="onChange(selectedForm)">
+              (ngModelChange)="onChange(selectedForm)" (click)="resetStates(servicecontract);">
               <mat-option>-- Clear --</mat-option>
               <mat-option *ngFor="let option of Forms" [value]="option" (click)="FormBind();">
                 {{ option.Title }}
@@ -42,7 +42,7 @@
           </mat-expansion-panel-header>
           <div class="row" style="margin-top: 18px;">
             <div class="col-md-12 selectMenu" style="margin-top: 15px;">
-              <button type="button" mat-menu-item (click)="resetStates(servicecontract);" [matMenuTriggerFor]="markets"
+              <button type="button" mat-menu-item [matMenuTriggerFor]="markets"
                 *ngFor="let r of Region; let i=index">{{r.Region}} <mat-icon>arrow_right</mat-icon>
                 <mat-menu #markets="matMenu">
                   <button type="button" mat-menu-item [matMenuTriggerFor]="property" *ngFor="let m of Market"
