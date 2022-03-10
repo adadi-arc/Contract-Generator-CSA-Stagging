@@ -80,14 +80,14 @@
                 <textarea matInput placeholder="Ex. 100 Main St" name="PropertyAddress"
                   [(ngModel)]="selectedPropertyAddress" required="true"></textarea>
               </mat-form-field>
-              <mat-form-field *ngIf="this.FormName == 'Service Contract' && selectedOwner != undefined"
+              <mat-form-field *ngIf="(this.FormName == 'Service Contract' || this.FormName == 'TRS Service Contract') && selectedOwner != undefined"
                 style="width:100%" class="example-full-width">
                 <mat-label>Property Manager</mat-label>
                 <textarea matInput name="PropertyManager" placeholder="BioMed Realty LLC"
                   [(ngModel)]="selectedPropertyManager" required="true"></textarea>
               </mat-form-field>
               <button mat-raised-button (click)="clearPM()"
-                *ngIf="this.FormName == 'Service Contract' && selectedOwner != undefined" color="primary">Change Default
+                *ngIf="(this.FormName == 'Service Contract' || this.FormName == 'TRS Service Contract') && selectedOwner != undefined" color="primary">Change Default
                 Property Manager</button>
             </div>
           </div>

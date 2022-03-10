@@ -527,15 +527,23 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
         if (docx.Search("Owner") == true) {
           docxvar['Owner'] = this.selectedOwner.Owner;
         }
-        if (docx.Search("Owner") == true) {
-          docxvar['CopyTo'] = this.selectedOwner.Owner;
-        }
-        if (docx.Search("OwnerStateOfFormation") == true) {
-          if (this.selectedOwner.StateOfFormation == undefined) {
-            docxvar['OwnerStateOfFormation'] = "";
+        // if (docx.Search("Owner") == true) {
+        //   docxvar['CopyTo'] = this.selectedOwner.Owner;
+        // }
+        // if (docx.Search("OwnerStateOfFormation") == true) {
+        //   if (this.selectedOwner.StateOfFormation == undefined) {
+        //     docxvar['OwnerStateOfFormation'] = "";
+        //   }
+        //   else {
+        //     docxvar['OwnerStateOfFormation'] = this.selectedOwner.StateOfFormation;
+        //   }
+        // }
+        if (docx.Search("PropertyManager") == true) {
+          if (this.selectedPropertyManager == "" || this.selectedPropertyManager == undefined) {
+            docxvar['PropertyManager'] = "BioMed Realty LLC"
           }
           else {
-            docxvar['OwnerStateOfFormation'] = this.selectedOwner.StateOfFormation;
+            docxvar['PropertyManager'] = this.selectedPropertyManager;
           }
         }
         if (docx.Search("Contractor") == true) {
