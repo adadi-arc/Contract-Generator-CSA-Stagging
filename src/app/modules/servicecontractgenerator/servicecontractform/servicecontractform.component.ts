@@ -858,7 +858,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
       });
     }
     //FLATIRON SERVICE CONTRACT
-    if (this.selectedForm.Title == "Service Contract") {
+    if (this.selectedForm.Title == "Flatiron Service Contract") {
       var docx = new DocxReader();
       //var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/FlatironServiceContractTemplate.docx"; //prod
       //var steUrl = "/sites/fredd/SourceCode/assets/template/FlatironServiceContractTemplate.docx"; //Staging
