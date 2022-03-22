@@ -92,7 +92,8 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
   Forms: any[] = [
     { ID: 1, Title: "Service Contract" },
     { ID: 2, Title: "TRS Service Contract" },
-    { ID: 3, Title: "Change Order Form" }
+    { ID: 3, Title: "Change Order Form" },
+    { ID: 4, Title: "Flatiron Service Contract"}
   ];
   selectedForm: any = null;
   FormName: any = null;
@@ -164,8 +165,8 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
       for (var count = 0; count < this.dataProperty.length; count++) {
         var order = this.dataProperty[count];
         console.log(order);
-        var lines = (order.FREDDPropertyName.results[0].Label).split(':'); //Local
-        //var lines = (order.Fredd_x0020_Property_x0020_Name_).split(':'); //Prod/Staging
+        //var lines = (order.FREDDPropertyName.results[0].Label).split(':'); //Local
+        var lines = (order.Fredd_x0020_Property_x0020_Name_).split(':'); //Prod/Staging
         //Prod/Staging
         // this.menuData.push({
         //    "Property": lines[3], 
@@ -348,11 +349,12 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
   }
 
   onSave() {
+    //SERVICE CONTRACT
     if (this.selectedForm.Title == "Service Contract") {
       var docx = new DocxReader();
-      var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/ServiceContractTemplate.docx"; //prod
+      //var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/ServiceContractTemplate.docx"; //prod
       //var steUrl = "/sites/fredd/SourceCode/assets/template/ServiceContractTemplate.docx"; //Staging
-      //var steUrl = "/assets/template/ServiceContractTemplate.docx" //local
+      var steUrl = "/assets/template/ServiceContractTemplate.docx" //local
       docx.Load(steUrl, () => {
 
         var docxvar = {};
@@ -514,12 +516,12 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
         docx.Download();
       });
     }
-
+    //TRS SERVICE CONTRACT
     if (this.selectedForm.Title == "TRS Service Contract") {
       var docx = new DocxReader();
-      var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/TRSContractTemplate.docx"; //prod
+      //var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/TRSContractTemplate.docx"; //prod
       //var steUrl = "/sites/fredd/SourceCode/assets/template/TRSContractTemplate.docx"; //staging
-      //var steUrl = "/assets/template/TRSContractTemplate.docx" //local
+      var steUrl = "/assets/template/TRSContractTemplate.docx" //local
       docx.Load(steUrl, () => {
 
         var docxvar = {};
@@ -681,11 +683,12 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
         docx.Download();
       });
     }
+    //CHANGE ORDER FORM
     if (this.selectedForm.Title == "Change Order Form") {
       var docx = new DocxReader();
-      var steUrl = "/sites/fredd/SourceCode1/ChangeOrder/assets/template/ChangeOrderTemplate.docx"; //prod
+      //var steUrl = "/sites/fredd/SourceCode1/ChangeOrder/assets/template/ChangeOrderTemplate.docx"; //prod
       //var steUrl = "/sites/fredd/SourceCode/assets/template/TRSContractTemplate.docx"; //staging
-      //var steUrl = "/assets/template/ChangeOrderTemplate.docx" //local
+      var steUrl = "/assets/template/ChangeOrderTemplate.docx" //local
       docx.Load(steUrl, () => {
 
         var docxvar = {};
@@ -834,8 +837,6 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
             }
           }
         }
-
-
         docx.docxtemplater.setData(docxvar);
         try {
           docx.docxtemplater.render();
@@ -856,9 +857,115 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
         docx.Download();
       });
     }
+    //FLATIRON SERVICE CONTRACT
+    if (this.selectedForm.Title == "Service Contract") {
+      var docx = new DocxReader();
+      //var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/FlatironServiceContractTemplate.docx"; //prod
+      //var steUrl = "/sites/fredd/SourceCode/assets/template/FlatironServiceContractTemplate.docx"; //Staging
+      var steUrl = "/assets/template/FlatironServiceContractTemplate.docx" //local
+      docx.Load(steUrl, () => {
+
+        var docxvar = {};
+
+        if (docx.Search("Owner") == true) {
+          docxvar['Owner'] = this.selectedOwner.Owner;
+        }
+        if (docx.Search("Contractor") == true) {
+          docxvar['Contractor'] = this.selectedContractor;
+        }
+
+        if (docx.Search("ContractorName") == true) {
+          docxvar['ContractorName'] = this.selectedContractor;
+        }
+
+        if (docx.Search("ContractorStreetAddress") == true) {
+          docxvar['ContractorStreetAddress'] = this.selectedContractorAddress;
+        }
+        if (docx.Search("City") == true) {
+          docxvar['City'] = this.selectedContractorCity;
+        }
+        if (docx.Search("State") == true) {
+          docxvar['State'] = this.selectedContractorState.Title;
+        }
+        if (docx.Search("ZipCode") == true) {
+          docxvar['ZipCode'] = this.selectedContractorZip;
+        }
+        if (docx.Search("ContractorAttn") == true) {
+          if (this.selectedContractorAttn == "" || this.selectedContractorAttn == undefined) {
+            docxvar['ContractorAttn'] = "\n";
+          }
+          else {
+            docxvar['ContractorAttn'] = "Attn: " + this.selectedContractorAttn;
+          }
+        }
+        if (docx.Search("ContractorEmail") == true) {
+          if (this.selectedContractorEmail == "" || this.selectedContractorEmail == undefined) {
+            docxvar['ContractorEmail'] = "\n";
+          }
+          else {
+            docxvar['ContractorEmail'] = "Email: " + this.selectedContractorEmail;
+          }
+        }
+        if (docx.Search("ContractorStateOfFormation") == true) {
+          docxvar['ContractorStateOfFormation'] = this.selectedContractorStateOfFormation;
+        }
+        if (docx.Search("ExecutionDate") == true) {
+          docxvar['ExecutionDate'] = moment(this.selectedExecutionDate).format("MM/DD/YY");
+        }
+        if (docx.Search("CommencementDate") == true) {
+          docxvar['CommencementDate'] = moment(this.selectedCommencementDate).format("MM/DD/YY");
+        }
+        if (docx.Search("ExpirationDate") == true) {
+          docxvar['ExpirationDate'] = moment(this.selectedExpirationDate).format("MM/DD/YY");
+        }
+        if (docx.Search("PropertyAddress") == true) {
+          docxvar['PropertyAddress'] = this.selectedPropertyAddress;
+        }
+        if (this.selectedIncludeTM == true) {
+          if (docx.Search("TM_Y") == true) {
+            docxvar['TM_Y'] = "☑";
+          }
+          if (docx.Search("TM_N") == true) {
+            docxvar['TM_N'] = "☐";
+          }
+        }
+        if (this.selectedIncludeTM == false) {
+          if (docx.Search("TM_Y") == true) {
+            docxvar['TM_Y'] = "☐";
+          }
+          if (docx.Search("TM_N") == true) {
+            docxvar['TM_N'] = "☑";
+          }
+        }
+        if (this.selectedIncludeTM == undefined) {
+          if (docx.Search("TM_Y") == true) {
+            docxvar['TM_Y'] = "☐";
+          }
+          if (docx.Search("TM_N") == true) {
+            docxvar['TM_N'] = "☑";
+          }
+        }
+        docx.docxtemplater.setData(docxvar);
+
+        try {
+          docx.docxtemplater.render();
+        }
+        catch (error) {
+          var e = {
+            message: error.message,
+            name: error.name,
+            stack: error.stack,
+            properties: error.properties,
+          }
+          console.log(JSON.stringify({ error: e }));
+          throw error;
+        }
+
+        docx.SetName("SC" + " - " + this.selectedContractor);
+
+        docx.Download();
+      });
+    } 
   }
-
-
-
 
 }
