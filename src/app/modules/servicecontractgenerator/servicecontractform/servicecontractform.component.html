@@ -29,7 +29,8 @@
         </mat-expansion-panel>
       </mat-accordion>
     </div>
-    <div class="col-md-5" *ngIf="selectedForm != undefined" style="margin-top: 15px;">
+    <!-- Non-Flatiron -->
+    <div class="col-md-5" *ngIf="(this.FormName != undefined && this.FormName != 'Flatiron Service Contract')" style="margin-top: 15px;">
       <mat-accordion class="example-headers-align">
         <mat-expansion-panel [expanded]="step === 0" hideToggle>
           <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
@@ -75,6 +76,81 @@
                   </tr>
                 </tbody>
               </table>
+              <mat-form-field *ngIf="selectedOwner != undefined" style="width:100%" class="example-full-width">
+                <mat-label>Property Address</mat-label>
+                <textarea matInput placeholder="Ex. 100 Main St" name="PropertyAddress"
+                  [(ngModel)]="selectedPropertyAddress" required="true"></textarea>
+              </mat-form-field>
+              <mat-form-field *ngIf="(this.FormName == 'Service Contract' || this.FormName == 'TRS Service Contract') && selectedOwner != undefined"
+                style="width:100%" class="example-full-width">
+                <mat-label>Property Manager</mat-label>
+                <textarea matInput name="PropertyManager" placeholder="BioMed Realty LLC"
+                  [(ngModel)]="selectedPropertyManager" required="true"></textarea>
+              </mat-form-field>
+              <button mat-raised-button (click)="clearPM()"
+                *ngIf="(this.FormName == 'Service Contract' || this.FormName == 'TRS Service Contract') && selectedOwner != undefined" color="primary">Change Default
+                Property Manager</button>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <!-- Non-Flatiron Owner -->
+    <div class="col-md-5" *ngIf="(this.FormName != undefined && this.FormName == 'Flatiron Service Contract')" style="margin-top: 15px;">
+      <mat-accordion class="example-headers-align">
+        <mat-expansion-panel [expanded]="step === 0" hideToggle>
+          <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
+            <mat-panel-title style="color: white;">
+              Owner Information
+            </mat-panel-title>
+            <mat-panel-description style="display: contents;">
+              <mat-icon style="color: white;">account_circle</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row" style="margin-top: 18px;">
+            <!-- <div class="col-md-12 selectMenu" style="margin-top: 15px;">
+              <button type="button" mat-menu-item [matMenuTriggerFor]="markets"
+                *ngFor="let r of Region; let i=index">{{r.Region}} <mat-icon>arrow_right</mat-icon>
+                <mat-menu #markets="matMenu">
+                  <button type="button" mat-menu-item [matMenuTriggerFor]="property" *ngFor="let m of Market"
+                    [hidden]="r.Region != m.Region">{{m.Market}}
+                    <mat-menu #property="matMenu" style="height: 50%; overflow: scroll;">
+                      <button type="button" mat-menu-item *ngFor="let p of Property" [hidden]="m.Market != p.Market"
+                        (click)="OwnerSelect(p)">{{p.Property}}</button>
+                    </mat-menu>
+                  </button>
+                </mat-menu>
+              </button>
+            </div> -->
+            <div class="col-md-12" style="margin-top: 15px;">
+              <!-- <table class="table" *ngIf="selectedOwner != undefined">
+                <tbody>
+                  <tr>
+                    <td>Region</td>
+                    <td style="color:#4c7ab5">
+                      {{selectedOwner?.Region}}</td>
+                  </tr>
+                  <tr>
+                    <td>Market</td>
+                    <td style="color:#4c7ab5">
+                      {{selectedOwner?.Market}}</td>
+                  </tr>
+                  <tr>
+                    <td>Entity</td>
+                    <td style="color:#4c7ab5">
+                      {{selectedOwner?.Owner}}</td>
+                  </tr>
+                </tbody>
+              </table> -->
+              <mat-form-field appearance="fill">
+                <mat-label>Select an option</mat-label>
+                <mat-select [formControl]="selected" multiple>
+                  <mat-option>None</mat-option>
+                  <mat-option value="option1">Option 1</mat-option>
+                  <mat-option value="option2">Option 2</mat-option>
+                  <mat-option value="option3">Option 3</mat-option>
+                </mat-select>
+              </mat-form-field>
               <mat-form-field *ngIf="selectedOwner != undefined" style="width:100%" class="example-full-width">
                 <mat-label>Property Address</mat-label>
                 <textarea matInput placeholder="Ex. 100 Main St" name="PropertyAddress"
