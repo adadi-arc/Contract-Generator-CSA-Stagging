@@ -94,7 +94,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
     { ID: 1, Title: "Service Contract" },
     { ID: 2, Title: "TRS Service Contract" },
     { ID: 3, Title: "Change Order Form" },
-    { ID: 4, Title: "Flatiron Service Contract"}
+    { ID: 4, Title: "Flatiron Service Contract (Draft)"}
   ];
   selectedForm: any = null;
   FormName: any = null;
@@ -209,7 +209,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
   FormBind() {
     this.FormName = this.selectedForm.Title;
     this.selectedOwner = undefined;
-    if (this.FormName == "Flatiron Service Contract"){
+    if (this.FormName == "Flatiron Service Contract (Draft)"){
       
       this.flatironOwners = this.Property.filter(a => {
         return a.Market === "Colorado";
@@ -888,7 +888,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
       });
     }
     //FLATIRON SERVICE CONTRACT
-    if (this.selectedForm.Title == "Flatiron Service Contract") {
+    if (this.selectedForm.Title == "Flatiron Service Contract (Draft)") {
       var docx = new DocxReader();
       //var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/FlatironServiceContractTemplate.docx"; //prod
       //var steUrl = "/sites/fredd/SourceCode/assets/template/FlatironServiceContractTemplate.docx"; //Staging
@@ -1031,7 +1031,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
                 docxvar['ContractorBy' + i] = "";
               }
               else{
-                docxvar['ContractorBy' + i] = "By:	__________________________________________";
+                docxvar['ContractorBy' + i] = "By:	______________________________________________";
               }
             }
             if (docx.Search("ContractorNameLine" + i)==true){
@@ -1092,7 +1092,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
         }
         if (docx.Search("ContractorAttn") == true) {
           if (this.selectedContractorAttn == "" || this.selectedContractorAttn == undefined) {
-            docxvar['ContractorAttn'] = "";
+            docxvar['ContractorAttn'] = "\n";
           }
           else {
             docxvar['ContractorAttn'] = "Attn: " + this.selectedContractorAttn;
@@ -1100,7 +1100,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
         }
         if (docx.Search("ContractorEmail") == true) {
           if (this.selectedContractorEmail == "" || this.selectedContractorEmail == undefined) {
-            docxvar['ContractorEmail'] = "";
+            docxvar['ContractorEmail'] = "\n";
           }
           else {
             docxvar['ContractorEmail'] = "Email: " + this.selectedContractorEmail;

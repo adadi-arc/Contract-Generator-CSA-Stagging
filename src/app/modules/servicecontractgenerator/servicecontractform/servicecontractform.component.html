@@ -30,7 +30,7 @@
       </mat-accordion>
     </div>
     <!-- Non-Flatiron -->
-    <div class="col-md-5" *ngIf="(this.FormName != undefined && this.FormName != 'Flatiron Service Contract')" style="margin-top: 15px;">
+    <div class="col-md-5" *ngIf="(this.FormName != undefined && this.FormName != 'Flatiron Service Contract (Draft)')" style="margin-top: 15px;">
       <mat-accordion class="example-headers-align">
         <mat-expansion-panel [expanded]="step === 0" hideToggle>
           <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
@@ -96,7 +96,7 @@
       </mat-accordion>
     </div>
     <!-- Non-Flatiron Owner -->
-    <div class="col-md-5" *ngIf="(this.FormName != undefined && this.FormName == 'Flatiron Service Contract')" style="margin-top: 15px;">
+    <div class="col-md-5" *ngIf="(this.FormName != undefined && this.FormName == 'Flatiron Service Contract (Draft)')" style="margin-top: 15px;">
       <mat-accordion class="example-headers-align">
         <mat-expansion-panel [expanded]="step === 0" hideToggle>
           <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
@@ -108,43 +108,10 @@
             </mat-panel-description>
           </mat-expansion-panel-header>
           <div class="row" style="margin-top: 18px;">
-            <!-- <div class="col-md-12 selectMenu" style="margin-top: 15px;">
-              <button type="button" mat-menu-item [matMenuTriggerFor]="markets"
-                *ngFor="let r of Region; let i=index">{{r.Region}} <mat-icon>arrow_right</mat-icon>
-                <mat-menu #markets="matMenu">
-                  <button type="button" mat-menu-item [matMenuTriggerFor]="property" *ngFor="let m of Market"
-                    [hidden]="r.Region != m.Region">{{m.Market}}
-                    <mat-menu #property="matMenu" style="height: 50%; overflow: scroll;">
-                      <button type="button" mat-menu-item *ngFor="let p of Property" [hidden]="m.Market != p.Market"
-                        (click)="OwnerSelect(p)">{{p.Property}}</button>
-                    </mat-menu>
-                  </button>
-                </mat-menu>
-              </button>
-            </div> -->
             <div class="col-md-12" style="margin-top: 15px;">
-              <!-- <table class="table" *ngIf="selectedOwner != undefined">
-                <tbody>
-                  <tr>
-                    <td>Region</td>
-                    <td style="color:#4c7ab5">
-                      {{selectedOwner?.Region}}</td>
-                  </tr>
-                  <tr>
-                    <td>Market</td>
-                    <td style="color:#4c7ab5">
-                      {{selectedOwner?.Market}}</td>
-                  </tr>
-                  <tr>
-                    <td>Entity</td>
-                    <td style="color:#4c7ab5">
-                      {{selectedOwner?.Owner}}</td>
-                  </tr>
-                </tbody>
-              </table> -->
-              <mat-form-field appearance="fill" style="width: 40%;">
+              <mat-form-field class="example-full-width" style="width: 40%; margin-top: 15px;" id="fiSelect">
                 <mat-label>Select Flatiron Owner(s)</mat-label>
-                <mat-select [(ngModel)]="fiOwners" (selectionChange)="flatironOwnerSelection($event)" name="fiOwners" [formControl]="selected" multiple>
+                <mat-select class="MatInputBoxShadow" type="text" name="fiOwnerSelect" [(ngModel)]="fiOwners" (selectionChange)="flatironOwnerSelection($event)" [formControl]="selected" multiple>
                   <mat-option *ngFor="let item of flatironOwners" [value]="item">
                     {{ item.Property }}
                   </mat-option>
@@ -676,7 +643,7 @@
       </mat-accordion>
       <!--FLATIRON SERVICE CONTRACT FIELDS-->
       <mat-accordion class="example-headers-align"
-        *ngIf="this.FormName == 'Flatiron Service Contract' && addressRepeating.length > 0">
+        *ngIf="this.FormName == 'Flatiron Service Contract (Draft)' && addressRepeating.length > 0">
         <mat-expansion-panel [expanded]="step === 0" hideToggle>
           <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
             <mat-panel-title style="color: white;">
@@ -768,7 +735,7 @@
         </mat-expansion-panel>
       </mat-accordion>
       <mat-accordion class="example-headers-align"
-        *ngIf="this.FormName == 'Flatiron Service Contract' && addressRepeating.length > 0">
+        *ngIf="this.FormName == 'Flatiron Service Contract (Draft)' && addressRepeating.length > 0">
         <mat-expansion-panel [expanded]="step === 0" style="margin-top: 90px;" hideToggle>
           <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
             <mat-panel-title style="color: white;">
