@@ -9,6 +9,7 @@ import { saveAs } from "file-saver";
 import { DocumentCreator } from './servicecontracttemplate';
 import moment, { invalid } from 'moment';
 import { NgForm } from '@angular/forms';
+import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
 declare let DocxReader: any;
 
@@ -97,6 +98,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
   ];
   selectedForm: any = null;
   FormName: any = null;
+  flatironOwners: any[] = [];
   selectedOwner: any = null;
   selectedPropertyManager: any = "BioMed Realty LLC";
   selectedContractor: any = null;
@@ -135,7 +137,8 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
   selectedChangeTime: boolean = false;
   selectedReviseSOW: boolean = false;
   selectedSubComp: boolean = false;
-
+  addressRepeating: any[] = [];
+  fiOwners: any = null;
   menuData: any[] = [];
   Region: any[] = [];
   Market: any[] = [];
@@ -206,8 +209,26 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
   FormBind() {
     this.FormName = this.selectedForm.Title;
     this.selectedOwner = undefined;
+    if (this.FormName == "Flatiron Service Contract"){
+      
+      this.flatironOwners = this.Property.filter(a => {
+        return a.Market === "Colorado";
+      });
+    } 
   }
+  flatironOwnerSelection(value){
+    console.log(value);
+    console.log(this.fiOwners);
+    this.addressRepeating =  [];
+   for(var i=0;i<value.value.length;i++){
+      this.addressRepeating.push({
+        Address: "",
+        Name: value.value[i].Owner,
+        ID: value.value[i].EntityID
+      });
+   }
 
+  }
   OwnerSelect(selection) {
     this.selectedOwner = selection;
     var eID = this.selectedOwner.EntityID;
@@ -867,9 +888,179 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
 
         var docxvar = {};
 
-        if (docx.Search("Owner") == true) {
-          docxvar['Owner'] = this.selectedOwner.Owner;
-        }
+        // if (docx.Search("Owner") == true) {
+        //   docxvar['Owner'] = this.addressRepeating[0].Name;
+        // }
+          //let signatureSection = "";
+          for(var j=0; j < 8; j++){
+            docxvar['Witness' + j] = "";
+            docxvar['OwnerSection' + j] = "";
+            docxvar['OwnersSelected' + j] = "";
+            docxvar['By' + j] = "";
+            docxvar['Crescent' + j] = "";
+            docxvar['OwnerStateOfFormation' + j] = "";
+            docxvar['Agent' + j] = "";
+            docxvar['Agent' + j] = "";
+            docxvar['ByLine' + j] = "";
+            docxvar['NameLine' + j] = "";
+            docxvar['Title' + j] = "";
+            docxvar['ContractorSection' + j] = "";
+            docxvar['Contractor' + j] = "";
+            docxvar['ContractorStateOfFormation' + j] = "";
+            docxvar['ContractorBy' + j] = "";
+            docxvar['ContractorNameLine' + j] = "";
+            docxvar['ContractorTitle' + j] = "";
+            docxvar['PropertyAddress' + j] = "";
+          }
+          for(var i=0; i < this.addressRepeating.length; i++){
+            if (docx.Search("Witness" + i)==true){
+              if (this.addressRepeating[i].Name == undefined){
+                docxvar['Witness' + i] = "";
+              }
+              else{
+                docxvar['Witness' + i] = "IN WITNESS WHEREOF, the parties hereto have executed this Contract as of the date and year first above written.";
+              }
+            }
+            if (docx.Search("OwnerSection" + i)==true){
+              if (this.addressRepeating[i].Name == undefined){
+                docxvar['OwnerSection' + i] = "";
+              }
+              else{
+                docxvar['OwnerSection' + i] = "OWNER";
+              }
+            }
+            if (docx.Search("OwnersSelected" + i)==true){
+              if (this.addressRepeating[i].Name == undefined){
+                docxvar['OwnersSelected' + i] = "";
+              }
+              else{
+                docxvar['OwnersSelected' + i] = this.addressRepeating[i].Name;
+              } 
+            }
+            if (docx.Search("By" + i)==true){
+              if (this.addressRepeating[i].Name == undefined){
+                docxvar['By' + i] = "";
+              }
+              else{
+                docxvar['By' + i] = "By:";
+              }
+            }
+            if (docx.Search("Crescent" + i)==true){
+              if (this.addressRepeating[i].Name == undefined){
+                docxvar['Crescent' + i] = "";
+              }
+              else{
+                docxvar['Crescent' + i] = "CRESCENT PROPERTY SERVICES LLC,";
+              }
+            }
+            if (docx.Search("OwnerStateOfFormation" + i)==true){
+              if (this.addressRepeating[i].Name == undefined){
+                docxvar['OwnerStateOfFormation' + i] = "";
+              }
+              else{
+                docxvar['OwnerStateOfFormation' + i] = "a Delaware limited liability company,";
+              }
+            }
+            if (docx.Search("Agent" + i)==true){
+              if (this.addressRepeating[i].Name == undefined){
+                docxvar['Agent' + i] = "";
+              }
+              else{
+                docxvar['Agent' + i] = "its managing agent";
+              } 
+            }
+            if (docx.Search("ByLine" + i)==true){
+              if (this.addressRepeating[i].Name == undefined){
+                docxvar['ByLine' + i] = "";
+              }
+              else{
+                docxvar['ByLine' + i] = "By:	__________________________________________";
+              }
+            }
+            if (docx.Search("NameLine" + i)==true){
+              if (this.addressRepeating[i].Name == undefined){
+                docxvar['NameLine' + i] = "";
+              }
+              else{
+                docxvar['NameLine' + i] = "Name:	Brandi Herdzina";
+              }
+            }
+            if (docx.Search("Title" + i)==true){
+              if (this.addressRepeating[i].Name == undefined){
+                docxvar['Title' + i] = "";
+              }
+              else{
+                docxvar['Title' + i] = "Title:	Authorized Signatory";
+              }
+            }
+            if (docx.Search("ContractorSection" + i)==true){
+              if (this.addressRepeating[i].Name == undefined){
+                docxvar['ContractorSection' + i] = "";
+              }
+              else{
+                docxvar['ContractorSection' + i] = "CONTRACTOR";
+              }
+            }
+            if (docx.Search("Contractor" + i)==true){
+              if (this.addressRepeating[i].Name == undefined){
+                docxvar['Contractor' + i] = "";
+              }
+              else{
+                docxvar['Contractor' + i] = this.selectedContractor;
+              }
+            }
+            if (docx.Search("ContractorStateOfFormation" + i)==true){
+              if (this.addressRepeating[i].Name == undefined){
+                docxvar['ContractorStateOfFormation' + i] = "";
+              }
+              else{
+                docxvar['ContractorStateOfFormation' + i] = "a " + this.selectedContractorStateOfFormation;
+              }
+            }
+            if (docx.Search("ContractorBy" + i)==true){
+              if (this.addressRepeating[i].Name == undefined){
+                docxvar['ContractorBy' + i] = "";
+              }
+              else{
+                docxvar['ContractorBy' + i] = "By:	__________________________________________";
+              }
+            }
+            if (docx.Search("ContractorNameLine" + i)==true){
+              if (this.addressRepeating[i].Name == undefined){
+                docxvar['ContractorNameLine' + i] = "";
+              }
+              else{
+                docxvar['ContractorNameLine' + i] = "Name:	______________________________________________";
+              }
+            }
+            if (docx.Search("ContractorTitle" + i)==true){
+              if (this.addressRepeating[i].Name == undefined){
+                docxvar['ContractorTitle' + i] = "";
+              }
+              else{
+                docxvar['ContractorTitle' + i] = "Title:	______________________________________________";
+              }
+            }
+            if (docx.Search("PropertyAddress" + i)==true){
+              if (this.addressRepeating[i].Name == undefined){
+                docxvar['PropertyAddress' + i] = "";
+              }
+              else{
+                docxvar['PropertyAddress' + i] = this.addressRepeating[i].Address;
+              }
+            }
+            // signatureSection = signatureSection + 
+            // "\tIN WITNESS WHEREOF, the parties hereto have executed this Contract as of the date and year first above written." + 
+            // "\r\nOWNER" +
+            // "\r\n" + this.addressRepeating[i].Name +
+            // "\r\n\nBy:\tCRESCENT PROPERTY SERVICES LLC,\n\ta Delaware limited liability company,\n\tits managing agent" + 
+            // "\r\n\tBy:\t__________________________________________\nName:\tBrandi Herdzina\nTitle:\tAuthorized Signatory" +
+            // "\r\nCONTRACTOR" +
+            // "\r\n" + this.selectedContractor +
+            // "\r\na " + this.selectedContractorStateOfFormation +
+            // "\r\n\nBy:\t__________________________________________\nName:\t__________________________________________\nTitle:\t__________________________________________" +
+            // "\r\n\n\n\n\n\n\n\n\n\n\n";
+          }
         if (docx.Search("Contractor") == true) {
           docxvar['Contractor'] = this.selectedContractor;
         }
@@ -892,7 +1083,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
         }
         if (docx.Search("ContractorAttn") == true) {
           if (this.selectedContractorAttn == "" || this.selectedContractorAttn == undefined) {
-            docxvar['ContractorAttn'] = "\n";
+            docxvar['ContractorAttn'] = "";
           }
           else {
             docxvar['ContractorAttn'] = "Attn: " + this.selectedContractorAttn;
@@ -900,15 +1091,15 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
         }
         if (docx.Search("ContractorEmail") == true) {
           if (this.selectedContractorEmail == "" || this.selectedContractorEmail == undefined) {
-            docxvar['ContractorEmail'] = "\n";
+            docxvar['ContractorEmail'] = "";
           }
           else {
             docxvar['ContractorEmail'] = "Email: " + this.selectedContractorEmail;
           }
         }
-        if (docx.Search("ContractorStateOfFormation") == true) {
-          docxvar['ContractorStateOfFormation'] = this.selectedContractorStateOfFormation;
-        }
+        // if (docx.Search("ContractorStateOfFormation") == true) {
+        //   docxvar['ContractorStateOfFormation'] = this.selectedContractorStateOfFormation;
+        // }
         if (docx.Search("ExecutionDate") == true) {
           docxvar['ExecutionDate'] = moment(this.selectedExecutionDate).format("MM/DD/YY");
         }
@@ -918,9 +1109,9 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
         if (docx.Search("ExpirationDate") == true) {
           docxvar['ExpirationDate'] = moment(this.selectedExpirationDate).format("MM/DD/YY");
         }
-        if (docx.Search("PropertyAddress") == true) {
-          docxvar['PropertyAddress'] = this.selectedPropertyAddress;
-        }
+        // if (docx.Search("PropertyAddress") == true) {
+        //   docxvar['PropertyAddress'] = this.selectedPropertyAddress;
+        // }
         if (this.selectedIncludeTM == true) {
           if (docx.Search("TM_Y") == true) {
             docxvar['TM_Y'] = "☑";
