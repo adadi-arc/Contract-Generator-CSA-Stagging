@@ -268,6 +268,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
       this.selectedExpirationDate = "";
       this.selectedCommencementDate = "";
       this.selectedIncludeTM = null;
+      this.addressRepeating = [];
       // Object.keys(servicecontract.controls).forEach(key =>{
       //    servicecontract.controls[key].setErrors(null);
       // });
@@ -338,7 +339,15 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
       return true;
     if (this.selectedExpirationDate === null)
       return true;
-
+    if (this.addressRepeating === [] || this.addressRepeating === null)
+      return true;
+    for (var k = 0; k<this.addressRepeating.length; k++){
+      if (this.addressRepeating[k].Address === "" || this.addressRepeating[k].Address === null){
+        {
+          return true;
+        }
+      }
+    }
 
     return false;
   }

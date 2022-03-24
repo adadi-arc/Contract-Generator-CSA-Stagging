@@ -142,8 +142,8 @@
                   </tr>
                 </tbody>
               </table> -->
-              <mat-form-field appearance="fill">
-                <mat-label>Select an option</mat-label>
+              <mat-form-field appearance="fill" style="width: 40%;">
+                <mat-label>Select Flatiron Owner(s)</mat-label>
                 <mat-select [(ngModel)]="fiOwners" (selectionChange)="flatironOwnerSelection($event)" name="fiOwners" [formControl]="selected" multiple>
                   <mat-option *ngFor="let item of flatironOwners" [value]="item">
                     {{ item.Property }}
