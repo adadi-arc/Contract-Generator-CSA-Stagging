@@ -168,8 +168,8 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
       for (var count = 0; count < this.dataProperty.length; count++) {
         var order = this.dataProperty[count];
         console.log(order);
-        //var lines = (order.FREDDPropertyName.results[0].Label).split(':'); //Local
-        var lines = (order.Fredd_x0020_Property_x0020_Name_).split(':'); //Prod/Staging
+        var lines = (order.FREDDPropertyName.results[0].Label).split(':'); //{rod/Staging
+        //var lines = (order.Fredd_x0020_Property_x0020_Name_).split(':'); //Local
         //Prod/Staging
         // this.menuData.push({
         //    "Property": lines[3], 
@@ -224,7 +224,8 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
       this.addressRepeating.push({
         Address: "",
         Name: value.value[i].Owner,
-        ID: value.value[i].EntityID
+        ID: value.value[i].EntityID,
+        ownerSOF: value.value[i].StateOfFormation
       });
    }
 
@@ -382,9 +383,9 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
     //SERVICE CONTRACT
     if (this.selectedForm.Title == "Service Contract") {
       var docx = new DocxReader();
-      //var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/ServiceContractTemplate.docx"; //prod
+      var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/ServiceContractTemplate.docx"; //prod
       //var steUrl = "/sites/fredd/SourceCode/assets/template/ServiceContractTemplate.docx"; //Staging
-      var steUrl = "/assets/template/ServiceContractTemplate.docx" //local
+      //var steUrl = "/assets/template/ServiceContractTemplate.docx" //local
       docx.Load(steUrl, () => {
 
         var docxvar = {};
@@ -549,9 +550,9 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
     //TRS SERVICE CONTRACT
     if (this.selectedForm.Title == "TRS Service Contract") {
       var docx = new DocxReader();
-      //var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/TRSContractTemplate.docx"; //prod
+      var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/TRSContractTemplate.docx"; //prod
       //var steUrl = "/sites/fredd/SourceCode/assets/template/TRSContractTemplate.docx"; //staging
-      var steUrl = "/assets/template/TRSContractTemplate.docx" //local
+      //var steUrl = "/assets/template/TRSContractTemplate.docx" //local
       docx.Load(steUrl, () => {
 
         var docxvar = {};
@@ -716,9 +717,9 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
     //CHANGE ORDER FORM
     if (this.selectedForm.Title == "Change Order Form") {
       var docx = new DocxReader();
-      //var steUrl = "/sites/fredd/SourceCode1/ChangeOrder/assets/template/ChangeOrderTemplate.docx"; //prod
+      var steUrl = "/sites/fredd/SourceCode1/ChangeOrder/assets/template/ChangeOrderTemplate.docx"; //prod
       //var steUrl = "/sites/fredd/SourceCode/assets/template/TRSContractTemplate.docx"; //staging
-      var steUrl = "/assets/template/ChangeOrderTemplate.docx" //local
+      //var steUrl = "/assets/template/ChangeOrderTemplate.docx" //local
       docx.Load(steUrl, () => {
 
         var docxvar = {};
@@ -890,9 +891,9 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
     //FLATIRON SERVICE CONTRACT
     if (this.selectedForm.Title == "Flatiron Service Contract (Draft)") {
       var docx = new DocxReader();
-      //var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/FlatironServiceContractTemplate.docx"; //prod
+      var steUrl = "/sites/fredd/SourceCode1/ChangeOrder/assets/template/FlatironServiceContractTemplate.docx"; //prod
       //var steUrl = "/sites/fredd/SourceCode/assets/template/FlatironServiceContractTemplate.docx"; //Staging
-      var steUrl = "/assets/template/FlatironServiceContractTemplate.docx" //local
+      //var steUrl = "/assets/template/FlatironServiceContractTemplate.docx" //local
       docx.Load(steUrl, () => {
 
         var docxvar = {};
@@ -902,7 +903,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
         // }
           //let signatureSection = "";
           for(var j=0; j < 8; j++){
-            docxvar['Witness' + j] = "";
+            docxvar['Witness' + j] = "\tREMAINDER OF PAGE INTENTIONALLY LEFT BLANK ";
             docxvar['OwnerSection' + j] = "";
             docxvar['OwnersSelected' + j] = "";
             docxvar['By' + j] = "";
@@ -924,7 +925,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
           for(var i=0; i < this.addressRepeating.length; i++){
             if (docx.Search("Witness" + i)==true){
               if (this.addressRepeating[i].Name == undefined){
-                docxvar['Witness' + i] = "";
+                docxvar['Witness' + i] = "\tREMAINDER OF PAGE INTENTIONALLY LEFT BLANK";
               }
               else{
                 docxvar['Witness' + i] = "IN WITNESS WHEREOF, the parties hereto have executed this Contract as of the date and year first above written.";
