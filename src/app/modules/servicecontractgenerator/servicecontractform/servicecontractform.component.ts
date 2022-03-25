@@ -903,154 +903,176 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
         // }
           //let signatureSection = "";
           for(var j=0; j < 8; j++){
-            docxvar['Witness' + j] = "\tREMAINDER OF PAGE INTENTIONALLY LEFT BLANK ";
-            docxvar['OwnerSection' + j] = "";
+            // docxvar['Witness' + j] = "\tREMAINDER OF PAGE INTENTIONALLY LEFT BLANK ";
+            // docxvar['OwnerSection' + j] = "";
             docxvar['OwnersSelected' + j] = "";
-            docxvar['By' + j] = "";
-            docxvar['Crescent' + j] = "";
-            docxvar['OwnerStateOfFormation' + j] = "";
-            docxvar['Agent' + j] = "";
-            docxvar['Agent' + j] = "";
-            docxvar['ByLine' + j] = "";
-            docxvar['NameLine' + j] = "";
-            docxvar['Title' + j] = "";
-            docxvar['ContractorSection' + j] = "";
-            docxvar['Contractor' + j] = "";
-            docxvar['ContractorStateOfFormation' + j] = "";
-            docxvar['ContractorBy' + j] = "";
-            docxvar['ContractorNameLine' + j] = "";
-            docxvar['ContractorTitle' + j] = "";
+            docxvar['OwnersSelected' + this.addressRepeating.length] = "";
+            docxvar['OwnersSelected8'] = ""; //for state of formation when all owners selected
+            // docxvar['By' + j] = "";
+            // docxvar['Crescent' + j] = "";
+            // docxvar['OwnerStateOfFormation' + j] = "";
+            // docxvar['Agent' + j] = "";
+            // docxvar['Agent' + j] = "";
+            // docxvar['ByLine' + j] = "";
+            // docxvar['NameLine' + j] = "";
+            // docxvar['Title' + j] = "";
+            // docxvar['ContractorSection' + j] = "";
+            // docxvar['Contractor' + j] = "";
+            // docxvar['ContractorStateOfFormation' + j] = "";
+            // docxvar['ContractorBy' + j] = "";
+            // docxvar['ContractorNameLine' + j] = "";
+            // docxvar['ContractorTitle' + j] = "";
+            docxvar['OwnersSelectedT' + j] = "";
             docxvar['PropertyAddress' + j] = "";
           }
           for(var i=0; i < this.addressRepeating.length; i++){
-            if (docx.Search("Witness" + i)==true){
-              if (this.addressRepeating[i].Name == undefined){
-                docxvar['Witness' + i] = "\tREMAINDER OF PAGE INTENTIONALLY LEFT BLANK";
-              }
-              else{
-                docxvar['Witness' + i] = "IN WITNESS WHEREOF, the parties hereto have executed this Contract as of the date and year first above written.";
-              }
-            }
-            if (docx.Search("OwnerSection" + i)==true){
-              if (this.addressRepeating[i].Name == undefined){
-                docxvar['OwnerSection' + i] = "";
-              }
-              else{
-                docxvar['OwnerSection' + i] = "OWNER";
-              }
-            }
+            // if (docx.Search("Witness" + i)==true){
+            //   if (this.addressRepeating[i].Name == undefined){
+            //     docxvar['Witness' + i] = "\tREMAINDER OF PAGE INTENTIONALLY LEFT BLANK";
+            //   }
+            //   else{
+            //     docxvar['Witness' + i] = "IN WITNESS WHEREOF, the parties hereto have executed this Contract as of the date and year first above written.";
+            //   }
+            // }
+            // if (docx.Search("OwnerSection" + i)==true){
+            //   if (this.addressRepeating[i].Name == undefined){
+            //     docxvar['OwnerSection' + i] = "";
+            //   }
+            //   else{
+            //     docxvar['OwnerSection' + i] = "OWNER";
+            //   }
+            // }
             if (docx.Search("OwnersSelected" + i)==true){
               if (this.addressRepeating[i].Name == undefined){
                 docxvar['OwnersSelected' + i] = "";
               }
               else{
-                docxvar['OwnersSelected' + i] = this.addressRepeating[i].Name;
+                if (i != (this.addressRepeating.length - 1)){
+                  docxvar['OwnersSelected' + i] = this.addressRepeating[i].Name + ", ";
+                }
+                else{
+                  docxvar['OwnersSelected' + i] = this.addressRepeating[i].Name;
+                  if (this.addressRepeating.length > 1){ //Owner State of Formation
+                    docxvar['OwnersSelected' + this.addressRepeating.length] = "each, a " + this.addressRepeating[0].ownerSOF;
+                  }
+                  else{
+                    docxvar['OwnersSelected' + this.addressRepeating.length] = "a " + this.addressRepeating[0].ownerSOF;
+                  } 
+                }
               } 
             }
-            if (docx.Search("By" + i)==true){
+            if (docx.Search("OwnersSelectedT" + i)==true){
               if (this.addressRepeating[i].Name == undefined){
-                docxvar['By' + i] = "";
+                docxvar['OwnersSelectedT' + i] = "";
               }
               else{
-                docxvar['By' + i] = "By:";
-              }
-            }
-            if (docx.Search("Crescent" + i)==true){
-              if (this.addressRepeating[i].Name == undefined){
-                docxvar['Crescent' + i] = "";
-              }
-              else{
-                docxvar['Crescent' + i] = "CRESCENT PROPERTY SERVICES LLC,";
-              }
-            }
-            if (docx.Search("OwnerStateOfFormation" + i)==true){
-              if (this.addressRepeating[i].Name == undefined){
-                docxvar['OwnerStateOfFormation' + i] = "";
-              }
-              else{
-                docxvar['OwnerStateOfFormation' + i] = "a Delaware limited liability company,";
-              }
-            }
-            if (docx.Search("Agent" + i)==true){
-              if (this.addressRepeating[i].Name == undefined){
-                docxvar['Agent' + i] = "";
-              }
-              else{
-                docxvar['Agent' + i] = "its managing agent";
+                docxvar['OwnersSelectedT' + i] = this.addressRepeating[i].Name;
               } 
             }
-            if (docx.Search("ByLine" + i)==true){
-              if (this.addressRepeating[i].Name == undefined){
-                docxvar['ByLine' + i] = "";
-              }
-              else{
-                docxvar['ByLine' + i] = "By:	__________________________________________";
-              }
-            }
-            if (docx.Search("NameLine" + i)==true){
-              if (this.addressRepeating[i].Name == undefined){
-                docxvar['NameLine' + i] = "";
-              }
-              else{
-                docxvar['NameLine' + i] = "Name:	Brandi Herdzina";
-              }
-            }
-            if (docx.Search("Title" + i)==true){
-              if (this.addressRepeating[i].Name == undefined){
-                docxvar['Title' + i] = "";
-              }
-              else{
-                docxvar['Title' + i] = "Title:	Authorized Signatory";
-              }
-            }
-            if (docx.Search("ContractorSection" + i)==true){
-              if (this.addressRepeating[i].Name == undefined){
-                docxvar['ContractorSection' + i] = "";
-              }
-              else{
-                docxvar['ContractorSection' + i] = "CONTRACTOR";
-              }
-            }
-            if (docx.Search("Contractor" + i)==true){
-              if (this.addressRepeating[i].Name == undefined){
-                docxvar['Contractor' + i] = "";
-              }
-              else{
-                docxvar['Contractor' + i] = this.selectedContractor;
-              }
-            }
-            if (docx.Search("ContractorStateOfFormation" + i)==true){
-              if (this.addressRepeating[i].Name == undefined){
-                docxvar['ContractorStateOfFormation' + i] = "";
-              }
-              else{
-                docxvar['ContractorStateOfFormation' + i] = "a " + this.selectedContractorStateOfFormation;
-              }
-            }
-            if (docx.Search("ContractorBy" + i)==true){
-              if (this.addressRepeating[i].Name == undefined){
-                docxvar['ContractorBy' + i] = "";
-              }
-              else{
-                docxvar['ContractorBy' + i] = "By:	______________________________________________";
-              }
-            }
-            if (docx.Search("ContractorNameLine" + i)==true){
-              if (this.addressRepeating[i].Name == undefined){
-                docxvar['ContractorNameLine' + i] = "";
-              }
-              else{
-                docxvar['ContractorNameLine' + i] = "Name:	______________________________________________";
-              }
-            }
-            if (docx.Search("ContractorTitle" + i)==true){
-              if (this.addressRepeating[i].Name == undefined){
-                docxvar['ContractorTitle' + i] = "";
-              }
-              else{
-                docxvar['ContractorTitle' + i] = "Title:	______________________________________________";
-              }
-            }
+            // if (docx.Search("By" + i)==true){
+            //   if (this.addressRepeating[i].Name == undefined){
+            //     docxvar['By' + i] = "";
+            //   }
+            //   else{
+            //     docxvar['By' + i] = "By:";
+            //   }
+            // }
+            // if (docx.Search("Crescent" + i)==true){
+            //   if (this.addressRepeating[i].Name == undefined){
+            //     docxvar['Crescent' + i] = "";
+            //   }
+            //   else{
+            //     docxvar['Crescent' + i] = "CRESCENT PROPERTY SERVICES LLC,";
+            //   }
+            // }
+            // if (docx.Search("OwnerStateOfFormation" + i)==true){
+            //   if (this.addressRepeating[i].Name == undefined){
+            //     docxvar['OwnerStateOfFormation' + i] = "";
+            //   }
+            //   else{
+            //     docxvar['OwnerStateOfFormation' + i] = "a Delaware limited liability company,";
+            //   }
+            // }
+            // if (docx.Search("Agent" + i)==true){
+            //   if (this.addressRepeating[i].Name == undefined){
+            //     docxvar['Agent' + i] = "";
+            //   }
+            //   else{
+            //     docxvar['Agent' + i] = "its managing agent";
+            //   } 
+            // }
+            // if (docx.Search("ByLine" + i)==true){
+            //   if (this.addressRepeating[i].Name == undefined){
+            //     docxvar['ByLine' + i] = "";
+            //   }
+            //   else{
+            //     docxvar['ByLine' + i] = "By:	__________________________________________";
+            //   }
+            // }
+            // if (docx.Search("NameLine" + i)==true){
+            //   if (this.addressRepeating[i].Name == undefined){
+            //     docxvar['NameLine' + i] = "";
+            //   }
+            //   else{
+            //     docxvar['NameLine' + i] = "Name:	Brandi Herdzina";
+            //   }
+            // }
+            // if (docx.Search("Title" + i)==true){
+            //   if (this.addressRepeating[i].Name == undefined){
+            //     docxvar['Title' + i] = "";
+            //   }
+            //   else{
+            //     docxvar['Title' + i] = "Title:	Authorized Signatory";
+            //   }
+            // }
+            // if (docx.Search("ContractorSection" + i)==true){
+            //   if (this.addressRepeating[i].Name == undefined){
+            //     docxvar['ContractorSection' + i] = "";
+            //   }
+            //   else{
+            //     docxvar['ContractorSection' + i] = "CONTRACTOR";
+            //   }
+            // }
+            // if (docx.Search("Contractor" + i)==true){
+            //   if (this.addressRepeating[i].Name == undefined){
+            //     docxvar['Contractor' + i] = "";
+            //   }
+            //   else{
+            //     docxvar['Contractor' + i] = this.selectedContractor;
+            //   }
+            // }
+            // if (docx.Search("ContractorStateOfFormation" + i)==true){
+            //   if (this.addressRepeating[i].Name == undefined){
+            //     docxvar['ContractorStateOfFormation' + i] = "";
+            //   }
+            //   else{
+            //     docxvar['ContractorStateOfFormation' + i] = "a " + this.selectedContractorStateOfFormation;
+            //   }
+            // }
+            // if (docx.Search("ContractorBy" + i)==true){
+            //   if (this.addressRepeating[i].Name == undefined){
+            //     docxvar['ContractorBy' + i] = "";
+            //   }
+            //   else{
+            //     docxvar['ContractorBy' + i] = "By:	______________________________________________";
+            //   }
+            // }
+            // if (docx.Search("ContractorNameLine" + i)==true){
+            //   if (this.addressRepeating[i].Name == undefined){
+            //     docxvar['ContractorNameLine' + i] = "";
+            //   }
+            //   else{
+            //     docxvar['ContractorNameLine' + i] = "Name:	______________________________________________";
+            //   }
+            // }
+            // if (docx.Search("ContractorTitle" + i)==true){
+            //   if (this.addressRepeating[i].Name == undefined){
+            //     docxvar['ContractorTitle' + i] = "";
+            //   }
+            //   else{
+            //     docxvar['ContractorTitle' + i] = "Title:	______________________________________________";
+            //   }
+            // }
             if (docx.Search("PropertyAddress" + i)==true){
               if (this.addressRepeating[i].Name == undefined){
                 docxvar['PropertyAddress' + i] = "";
@@ -1071,10 +1093,13 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
             // "\r\n\nBy:\t__________________________________________\nName:\t__________________________________________\nTitle:\t__________________________________________" +
             // "\r\n\n\n\n\n\n\n\n\n\n\n";
           }
+          
         if (docx.Search("Contractor") == true) {
           docxvar['Contractor'] = this.selectedContractor;
         }
-
+        if (docx.Search("ContractorStateOfFormation") == true) {
+          docxvar['ContractorStateOfFormation'] = this.selectedContractorStateOfFormation;
+        }
         if (docx.Search("ContractorName") == true) {
           docxvar['ContractorName'] = this.selectedContractor;
         }
