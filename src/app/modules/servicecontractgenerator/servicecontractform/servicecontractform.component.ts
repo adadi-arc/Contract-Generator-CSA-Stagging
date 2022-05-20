@@ -94,9 +94,24 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
     { ID: 1, Title: "Service Contract" },
     { ID: 2, Title: "TRS Service Contract" },
     { ID: 3, Title: "Change Order Form" },
-    { ID: 4, Title: "Flatiron Service Contract (Draft)"}
+    { ID: 4, Title: "Flatiron Service Contract"},
+    { ID: 5, Title: "Service Contract BMR LP (Draft)"},
+    { ID: 6, Title: "Consulting Services"}    
   ];
   selectedForm: any = null;
+  // Consulting Service
+  // ConsultingService: any = null;
+  selectedStreetAddress: any = null;
+  selectedEmergencyCompensation: any = null;
+  ConsultingServiceTemp: any = null;
+  selectedContractAmount: any = null;
+  selectedMonthlyCompensation: any = null;
+  selectedYearlyCompensation: any = null;
+  selectedReimbursableExpenses: any = null;
+  selectedPayment: any = null;
+  selectedCovid: any = null;
+  selectedPollutionLiability: any = null;
+  // X----
   FormName: any = null;
   flatironOwners: any[] = [];
   selectedOwner: any = null;
@@ -168,30 +183,30 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
       for (var count = 0; count < this.dataProperty.length; count++) {
         var order = this.dataProperty[count];
         console.log(order);
-        var lines = (order.FREDDPropertyName.results[0].Label).split(':'); //{rod/Staging
-        //var lines = (order.Fredd_x0020_Property_x0020_Name_).split(':'); //Local
+        //  var lines = (order.FREDDPropertyName.results[0].Label).split(':'); //{rod/Staging
+         var lines = (order.Fredd_x0020_Property_x0020_Name_).split(':'); //Local
         //Prod/Staging
-        // this.menuData.push({
-        //    "Property": lines[3], 
-        //    "ID": order.ID, 
-        //    "Region": lines[1], 
-        //    "Market": lines[2],
-        //    "Owner": order.EntityName,
-        //    "StateOfFormation": order.StateofFormation,
-        //   "AdditionalInsureds": order.AdditionalInsureds,
-        //    "EntityID": order.EntityID
-        //   });
+          // this.menuData.push({
+          //    "Property": lines[3], 
+          //    "ID": order.ID, 
+          //    "Region": lines[1], 
+          //    "Market": lines[2],
+          //    "Owner": order.EntityName,
+          //    "StateOfFormation": order.StateofFormation,
+          //   "AdditionalInsureds": order.AdditionalInsureds,
+          //    "EntityID": order.EntityID
+          //   });
         //Local
-        this.menuData.push({
-          "Property": lines[3],
-          "ID": order.ID,
-          "Region": lines[1],
-          "Market": lines[2],
-          "Owner": order.EntityName,
-          "StateOfFormation": order.StateofFormation,
-          "AdditionalInsureds": order.AdditionalInsureds,
-          "EntityID": order.EntityID
-        });
+         this.menuData.push({
+           "Property": lines[3],
+           "ID": order.ID,
+           "Region": lines[1],
+           "Market": lines[2],
+           "Owner": order.EntityName,
+           "StateOfFormation": order.StateofFormation,
+           "AdditionalInsureds": order.AdditionalInsureds,
+           "EntityID": order.EntityID
+         });
       }
       this.Region = [...new Map(this.menuData.map(item => [item['Region'], item])).values()];
       this.Region = this.Region.sort((a, b) => (a.Region > b.Region) ? 1 : -1)
@@ -208,8 +223,11 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
 
   FormBind() {
     this.FormName = this.selectedForm.Title;
+    // if (this.selectedForm.Title == 'Consulting Services'){
+    //   this.ConsultingService = this.ConsultingServiceTemp.Title
+    // }
     this.selectedOwner = undefined;
-    if (this.FormName == "Flatiron Service Contract (Draft)"){
+    if (this.FormName == "Flatiron Service Contract"){
       
       this.flatironOwners = this.Property.filter(a => {
         return a.Market === "Colorado";
@@ -250,11 +268,21 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
     });
   }
   onChange(value: any) {
-
+    
   }
-
   resetStates(servicecontract: NgForm) {
     if (servicecontract != undefined) {
+      // Consulting Services
+      this.selectedStreetAddress = "";
+      this.selectedEmergencyCompensation = "";
+      this.selectedContractAmount = "";
+      this.selectedMonthlyCompensation = "";
+      this.selectedYearlyCompensation = "";
+      this.selectedReimbursableExpenses = "";
+      this.selectedPayment = "";
+      this.selectedCovid = "";
+      this.selectedPollutionLiability = null;
+      // xxxx----xxx
       this.selectedPropertyAddress = "";
       this.selectedPropertyManager = "BioMed Realty LLC"
       this.selectedContractor = "";
@@ -270,9 +298,6 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
       this.selectedCommencementDate = "";
       this.selectedIncludeTM = null;
       this.addressRepeating = [];
-      // Object.keys(servicecontract.controls).forEach(key =>{
-      //    servicecontract.controls[key].setErrors(null);
-      // });
 
       if (this.selectedForm.Title == "Change Order Form") {
         this.selectedCOnum = "";
@@ -294,6 +319,9 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
         this.selectedSubComp = null;
         this.selectedSubstantialCompletionDate = "";
       }
+       if (this.selectedForm.Title != 'Consulting Services'){
+         this.ConsultingServiceTemp = "";
+       }
     }
   }
   resetCOgmp() {
@@ -378,18 +406,122 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
   clearPM() {
     this.selectedPropertyManager = null;
   }
+  ConsultinServiceTem:any[]=[
+    { ID: 1, Title: "General Contract" },
+    { ID: 2, Title: "Flatiron Service Contract" },
+  ]
 
+  ConsultingTem(value:any){
+    console.log(value);
+  }
   onSave() {
     //SERVICE CONTRACT
     if (this.selectedForm.Title == "Service Contract") {
-      var docx = new DocxReader();
       var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/ServiceContractTemplate.docx"; //prod
       //var steUrl = "/sites/fredd/SourceCode/assets/template/ServiceContractTemplate.docx"; //Staging
-      //var steUrl = "/assets/template/ServiceContractTemplate.docx" //local
-      docx.Load(steUrl, () => {
+      // var steUrl = "/assets/template/ServiceContractTemplate.docx" //local
+    }else     if (this.selectedForm.Title == "TRS Service Contract") {
+       var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/TRSContractTemplate.docx"; //prod
+      //var steUrl = "/sites/fredd/SourceCode/assets/template/TRSContractTemplate.docx"; //staging
+      // var steUrl = "/assets/template/TRSContractTemplate.docx" //local
+    }else if (this.selectedForm.Title == "Change Order Form") {
+      var steUrl = "/sites/fredd/SourceCode1/ChangeOrder/assets/template/ChangeOrderTemplate.docx"; //prod
+      //var steUrl = "/sites/fredd/SourceCode/assets/template/TRSContractTemplate.docx"; //staging
+      //var steUrl = "/assets/template/ChangeOrderTemplate.docx" //local
+    }else if (this.selectedForm.Title == "Flatiron Service Contract") {
+      var steUrl = "/sites/fredd/SourceCode1/ChangeOrder/assets/template/FlatironServiceContractTemplate.docx"; //prod
+      //var steUrl = "/sites/fredd/SourceCode/assets/template/FlatironServiceContractTemplate.docx"; //Staging
+      //var steUrl = "/assets/template/FlatironServiceContractTemplate.docx" //local
+    }else   if (this.selectedForm.Title == "Service Contract BMR LP (Draft)") {
+      //  var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/ServiceTemplateBMR LPclean.docx"; //prod
+      //var steUrl = "/sites/fredd/SourceCode/assets/template/ServiceContractTemplate.docx"; //Staging
+        var steUrl = "/assets/template/ServiceTemplateBMR LPclean.docx" //local
+    }else if(this.ConsultingServiceTemp == 'General Contract') {   
+    var steUrl = "/assets/template/ConsultingServicesAgreement.docx" //local
+    }
+    var docx = new DocxReader();
+    docx.Load(steUrl, () => {
+      var docxvar = {};
+      if (docx.Search("City") == true) {
+        docxvar['City'] = this.selectedContractorCity;
+      }
+      if (docx.Search("State") == true) {
+        docxvar['State'] = this.selectedContractorState.Title;
+      }
+      if (docx.Search("ZipCode") == true) {
+        docxvar['ZipCode'] = this.selectedContractorZip;
+      }
+      if (docx.Search("ContractorName") == true) {
+        docxvar['ContractorName'] = this.selectedContractor;
+      }
+      if (docx.Search("ContractorStreetAddress") == true) {
+        docxvar['ContractorStreetAddress'] = this.selectedContractorAddress;
+      }
+      if (docx.Search("ContractorAttn") == true) {
+        if (this.selectedContractorAttn == "" || this.selectedContractorAttn == undefined) {
+          docxvar['ContractorAttn'] = "\n";
+        }
+        else {
+          docxvar['ContractorAttn'] = "Attn: " + this.selectedContractorAttn;
+        }
+      }
+      if (docx.Search("ContractorEmail") == true) {
+        if (this.selectedContractorEmail == "" || this.selectedContractorEmail == undefined) {
+          docxvar['ContractorEmail'] = "\n";
+        }
+        else {
+          docxvar['ContractorEmail'] = "Email: " + this.selectedContractorEmail;
+        }
+      }
+      if (docx.Search("ExecutionDate") == true) {
+        docxvar['ExecutionDate'] = moment(this.selectedExecutionDate).format("MM/DD/YY");
+      }
+      if (docx.Search("CommencementDate") == true) {
+        docxvar['CommencementDate'] = moment(this.selectedCommencementDate).format("MM/DD/YY");
+      }
+      if (docx.Search("ExpirationDate") == true) {
+        docxvar['ExpirationDate'] = moment(this.selectedExpirationDate).format("MM/DD/YY");
+      }
+      if (docx.Search("PropertyManager") == true) {
+        if (this.selectedPropertyManager == "" || this.selectedPropertyManager == undefined) {
+          docxvar['PropertyManager'] = "BioMed Realty LLC"
+        }
+        else {
+          docxvar['PropertyManager'] = this.selectedPropertyManager;
+        }
+      }
+      if (docx.Search("ContractorStateOfFormation") == true) {
+        docxvar['ContractorStateOfFormation'] = this.selectedContractorStateOfFormation;
+      }
+      if (this.selectedIncludeTM == true) {
+        if (docx.Search("TM_Y") == true) {
+          docxvar['TM_Y'] = "☑";
+        }
+        if (docx.Search("TM_N") == true) {
+          docxvar['TM_N'] = "☐";
+        }
+      }
+      if (this.selectedIncludeTM == false) {
+        if (docx.Search("TM_Y") == true) {
+          docxvar['TM_Y'] = "☐";
+        }
+        if (docx.Search("TM_N") == true) {
+          docxvar['TM_N'] = "☑";
+        }
+      }
+      if (this.selectedIncludeTM == undefined) {
+        if (docx.Search("TM_Y") == true) {
+          docxvar['TM_Y'] = "☐";
+        }
+        if (docx.Search("TM_N") == true) {
+          docxvar['TM_N'] = "☑";
+        }
+      }
+      if (docx.Search("PropertyAddress") == true) {
+        docxvar['PropertyAddress'] = this.selectedPropertyAddress;
+      }
 
-        var docxvar = {};
-
+    if (this.selectedForm.Title == "Service Contract") {
         if (docx.Search("Owner") == true) {
           docxvar['Owner'] = this.selectedOwner.Owner;
         }
@@ -404,88 +536,8 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
             docxvar['OwnerStateOfFormation'] = this.selectedOwner.StateOfFormation;
           }
         }
-        if (docx.Search("PropertyManager") == true) {
-          if (this.selectedPropertyManager == "" || this.selectedPropertyManager == undefined) {
-            docxvar['PropertyManager'] = "BioMed Realty LLC"
-          }
-          else {
-            docxvar['PropertyManager'] = this.selectedPropertyManager;
-          }
-        }
         if (docx.Search("Contractor") == true) {
           docxvar['Contractor'] = this.selectedContractor;
-        }
-
-        if (docx.Search("ContractorName") == true) {
-          docxvar['ContractorName'] = this.selectedContractor;
-        }
-
-        if (docx.Search("ContractorStreetAddress") == true) {
-          docxvar['ContractorStreetAddress'] = this.selectedContractorAddress;
-        }
-        if (docx.Search("City") == true) {
-          docxvar['City'] = this.selectedContractorCity;
-        }
-        if (docx.Search("State") == true) {
-          docxvar['State'] = this.selectedContractorState.Title;
-        }
-        if (docx.Search("ZipCode") == true) {
-          docxvar['ZipCode'] = this.selectedContractorZip;
-        }
-        if (docx.Search("ContractorAttn") == true) {
-          if (this.selectedContractorAttn == "" || this.selectedContractorAttn == undefined) {
-            docxvar['ContractorAttn'] = "\n";
-          }
-          else {
-            docxvar['ContractorAttn'] = "Attn: " + this.selectedContractorAttn;
-          }
-        }
-        if (docx.Search("ContractorEmail") == true) {
-          if (this.selectedContractorEmail == "" || this.selectedContractorEmail == undefined) {
-            docxvar['ContractorEmail'] = "\n";
-          }
-          else {
-            docxvar['ContractorEmail'] = "Email: " + this.selectedContractorEmail;
-          }
-        }
-        if (docx.Search("ContractorStateOfFormation") == true) {
-          docxvar['ContractorStateOfFormation'] = this.selectedContractorStateOfFormation;
-        }
-        if (docx.Search("ExecutionDate") == true) {
-          docxvar['ExecutionDate'] = moment(this.selectedExecutionDate).format("MM/DD/YY");
-        }
-        if (docx.Search("CommencementDate") == true) {
-          docxvar['CommencementDate'] = moment(this.selectedCommencementDate).format("MM/DD/YY");
-        }
-        if (docx.Search("ExpirationDate") == true) {
-          docxvar['ExpirationDate'] = moment(this.selectedExpirationDate).format("MM/DD/YY");
-        }
-        if (docx.Search("PropertyAddress") == true) {
-          docxvar['PropertyAddress'] = this.selectedPropertyAddress;
-        }
-        if (this.selectedIncludeTM == true) {
-          if (docx.Search("TM_Y") == true) {
-            docxvar['TM_Y'] = "☑";
-          }
-          if (docx.Search("TM_N") == true) {
-            docxvar['TM_N'] = "☐";
-          }
-        }
-        if (this.selectedIncludeTM == false) {
-          if (docx.Search("TM_Y") == true) {
-            docxvar['TM_Y'] = "☐";
-          }
-          if (docx.Search("TM_N") == true) {
-            docxvar['TM_N'] = "☑";
-          }
-        }
-        if (this.selectedIncludeTM == undefined) {
-          if (docx.Search("TM_Y") == true) {
-            docxvar['TM_Y'] = "☐";
-          }
-          if (docx.Search("TM_N") == true) {
-            docxvar['TM_N'] = "☑";
-          }
         }
         if (docx.Search("Section8_2") == true) {
           if (this.selectedOwner.Owner == "BRE-BMR Congress LLC") {
@@ -526,133 +578,12 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
             docxvar['AdditionalInsureds'] = "";
           }
         }
-        docx.docxtemplater.setData(docxvar);
-
-        try {
-          docx.docxtemplater.render();
-        }
-        catch (error) {
-          var e = {
-            message: error.message,
-            name: error.name,
-            stack: error.stack,
-            properties: error.properties,
-          }
-          console.log(JSON.stringify({ error: e }));
-          throw error;
-        }
-
-        docx.SetName("SC" + " - " + this.selectedContractor);
-
-        docx.Download();
-      });
     }
     //TRS SERVICE CONTRACT
     if (this.selectedForm.Title == "TRS Service Contract") {
-      var docx = new DocxReader();
-      var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/TRSContractTemplate.docx"; //prod
-      //var steUrl = "/sites/fredd/SourceCode/assets/template/TRSContractTemplate.docx"; //staging
-      //var steUrl = "/assets/template/TRSContractTemplate.docx" //local
-      docx.Load(steUrl, () => {
-
-        var docxvar = {};
 
         if (docx.Search("Owner") == true) {
           docxvar['Owner'] = this.selectedOwner.Owner;
-        }
-        // if (docx.Search("Owner") == true) {
-        //   docxvar['CopyTo'] = this.selectedOwner.Owner;
-        // }
-        // if (docx.Search("OwnerStateOfFormation") == true) {
-        //   if (this.selectedOwner.StateOfFormation == undefined) {
-        //     docxvar['OwnerStateOfFormation'] = "";
-        //   }
-        //   else {
-        //     docxvar['OwnerStateOfFormation'] = this.selectedOwner.StateOfFormation;
-        //   }
-        // }
-        if (docx.Search("PropertyManager") == true) {
-          if (this.selectedPropertyManager == "" || this.selectedPropertyManager == undefined) {
-            docxvar['PropertyManager'] = "BioMed Realty LLC"
-          }
-          else {
-            docxvar['PropertyManager'] = this.selectedPropertyManager;
-          }
-        }
-        if (docx.Search("Contractor") == true) {
-          docxvar['Contractor'] = this.selectedContractor;
-        }
-
-        if (docx.Search("ContractorName") == true) {
-          docxvar['ContractorName'] = this.selectedContractor;
-        }
-
-        if (docx.Search("ContractorStreetAddress") == true) {
-          docxvar['ContractorStreetAddress'] = this.selectedContractorAddress;
-        }
-        if (docx.Search("City") == true) {
-          docxvar['City'] = this.selectedContractorCity;
-        }
-        if (docx.Search("State") == true) {
-          docxvar['State'] = this.selectedContractorState.Title;
-        }
-        if (docx.Search("ZipCode") == true) {
-          docxvar['ZipCode'] = this.selectedContractorZip;
-        }
-        if (docx.Search("ContractorAttn") == true) {
-          if (this.selectedContractorAttn == "" || this.selectedContractorAttn == undefined) {
-            docxvar['ContractorAttn'] = "\n";
-          }
-          else {
-            docxvar['ContractorAttn'] = "Attn: " + this.selectedContractorAttn;
-          }
-        }
-        if (docx.Search("ContractorEmail") == true) {
-          if (this.selectedContractorEmail == "" || this.selectedContractorEmail == undefined) {
-            docxvar['ContractorEmail'] = "\n";
-          }
-          else {
-            docxvar['ContractorEmail'] = "Email: " + this.selectedContractorEmail;
-          }
-        }
-        if (docx.Search("ContractorStateOfFormation") == true) {
-          docxvar['ContractorStateOfFormation'] = this.selectedContractorStateOfFormation;
-        }
-        if (docx.Search("ExecutionDate") == true) {
-          docxvar['ExecutionDate'] = moment(this.selectedExecutionDate).format("MM/DD/YY");
-        }
-        if (docx.Search("CommencementDate") == true) {
-          docxvar['CommencementDate'] = moment(this.selectedCommencementDate).format("MM/DD/YY");
-        }
-        if (docx.Search("ExpirationDate") == true) {
-          docxvar['ExpirationDate'] = moment(this.selectedExpirationDate).format("MM/DD/YY");
-        }
-        if (docx.Search("PropertyAddress") == true) {
-          docxvar['PropertyAddress'] = this.selectedPropertyAddress;
-        }
-        if (this.selectedIncludeTM == true) {
-          if (docx.Search("TM_Y") == true) {
-            docxvar['TM_Y'] = "☑";
-          }
-          if (docx.Search("TM_N") == true) {
-            docxvar['TM_N'] = "☐";
-          }
-        }
-        if (this.selectedIncludeTM == false) {
-          if (docx.Search("TM_Y") == true) {
-            docxvar['TM_Y'] = "☐";
-          }
-          if (docx.Search("TM_N") == true) {
-            docxvar['TM_N'] = "☑";
-          }
-        }
-        if (this.selectedIncludeTM == undefined) {
-          if (docx.Search("TM_Y") == true) {
-            docxvar['TM_Y'] = "☐";
-          }
-          if (docx.Search("TM_N") == true) {
-            docxvar['TM_N'] = "☑";
-          }
         }
         if (docx.Search("Section8_2") == true) {
           if (this.selectedOwner.Owner == "BRE-BMR Congress LLC") {
@@ -692,64 +623,20 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
           else {
             docxvar['AdditionalInsureds'] = "";
           }
-        }
-        docx.docxtemplater.setData(docxvar);
-
-        try {
-          docx.docxtemplater.render();
-        }
-        catch (error) {
-          var e = {
-            message: error.message,
-            name: error.name,
-            stack: error.stack,
-            properties: error.properties,
-          }
-          console.log(JSON.stringify({ error: e }));
-          throw error;
-        }
-
-        docx.SetName("SC" + " - " + this.selectedContractor);
-
-        docx.Download();
-      });
+     } 
     }
     //CHANGE ORDER FORM
-    if (this.selectedForm.Title == "Change Order Form") {
-      var docx = new DocxReader();
-      var steUrl = "/sites/fredd/SourceCode1/ChangeOrder/assets/template/ChangeOrderTemplate.docx"; //prod
-      //var steUrl = "/sites/fredd/SourceCode/assets/template/TRSContractTemplate.docx"; //staging
-      //var steUrl = "/assets/template/ChangeOrderTemplate.docx" //local
-      docx.Load(steUrl, () => {
-
+    if (this.selectedForm.Title == "Change Order Form") {//CO
         var docxvar = {};
 
         if (docx.Search("Owner") == true) {
           docxvar['Owner'] = this.selectedOwner.Owner;
-        }
-        if (docx.Search("PropertyAddress") == true) {
-          docxvar['PropertyAddress'] = this.selectedPropertyAddress;
         }
         if (docx.Search("CO_Num") == true) {
           docxvar['CO_Num'] = this.selectedCOnum;
         }
         if (docx.Search("Date") == true) {
           docxvar['Date'] = moment(this.selectedDate).format("MM/DD/YY");
-        }
-        if (docx.Search("ContractorName") == true) {
-          docxvar['ContractorName'] = this.selectedContractor;
-        }
-        if (docx.Search("ContractorStreetAddress") == true) {
-          docxvar['ContractorStreetAddress'] = this.selectedContractorAddress;
-        }
-        if (docx.Search("City") == true) {
-          docxvar['City'] = this.selectedContractorCity;
-        }
-        if (docx.Search("State") == true) {
-          docxvar['State'] = this.selectedContractorState.Title;
-        }
-        if (docx.Search("Zipcode") == true) {
-          docxvar['Zipcode'] = this.selectedContractorZip;
         }
         if (docx.Search("ContractDate") == true) {
           docxvar['ContractDate'] = moment(this.selectedContractDate).format("MM/DD/YY");
@@ -868,80 +755,17 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
             }
           }
         }
-        docx.docxtemplater.setData(docxvar);
-        try {
-          docx.docxtemplater.render();
-        }
-        catch (error) {
-          var e = {
-            message: error.message,
-            name: error.name,
-            stack: error.stack,
-            properties: error.properties,
-          }
-          console.log(JSON.stringify({ error: e }));
-          throw error;
-        }
-
-        docx.SetName("CO" + " - " + this.selectedContractor);
-
-        docx.Download();
-      });
     }
     //FLATIRON SERVICE CONTRACT
-    if (this.selectedForm.Title == "Flatiron Service Contract (Draft)") {
-      var docx = new DocxReader();
-      var steUrl = "/sites/fredd/SourceCode1/ChangeOrder/assets/template/FlatironServiceContractTemplate.docx"; //prod
-      //var steUrl = "/sites/fredd/SourceCode/assets/template/FlatironServiceContractTemplate.docx"; //Staging
-      //var steUrl = "/assets/template/FlatironServiceContractTemplate.docx" //local
-      docx.Load(steUrl, () => {
-
-        var docxvar = {};
-
-        // if (docx.Search("Owner") == true) {
-        //   docxvar['Owner'] = this.addressRepeating[0].Name;
-        // }
-          //let signatureSection = "";
+    if (this.selectedForm.Title == "Flatiron Service Contract") {
           for(var j=0; j < 8; j++){
-            // docxvar['Witness' + j] = "\tREMAINDER OF PAGE INTENTIONALLY LEFT BLANK ";
-            // docxvar['OwnerSection' + j] = "";
             docxvar['OwnersSelected' + j] = "";
             docxvar['OwnersSelected' + this.addressRepeating.length] = "";
             docxvar['OwnersSelected8'] = ""; //for state of formation when all owners selected
-            // docxvar['By' + j] = "";
-            // docxvar['Crescent' + j] = "";
-            // docxvar['OwnerStateOfFormation' + j] = "";
-            // docxvar['Agent' + j] = "";
-            // docxvar['Agent' + j] = "";
-            // docxvar['ByLine' + j] = "";
-            // docxvar['NameLine' + j] = "";
-            // docxvar['Title' + j] = "";
-            // docxvar['ContractorSection' + j] = "";
-            // docxvar['Contractor' + j] = "";
-            // docxvar['ContractorStateOfFormation' + j] = "";
-            // docxvar['ContractorBy' + j] = "";
-            // docxvar['ContractorNameLine' + j] = "";
-            // docxvar['ContractorTitle' + j] = "";
             docxvar['OwnersSelectedT' + j] = "";
             docxvar['PropertyAddress' + j] = "";
           }
           for(var i=0; i < this.addressRepeating.length; i++){
-            // if (docx.Search("Witness" + i)==true){
-            //   if (this.addressRepeating[i].Name == undefined){
-            //     docxvar['Witness' + i] = "\tREMAINDER OF PAGE INTENTIONALLY LEFT BLANK";
-            //   }
-            //   else{
-            //     docxvar['Witness' + i] = "IN WITNESS WHEREOF, the parties hereto have executed this Contract as of the date and year first above written.";
-            //   }
-            // }
-            // if (docx.Search("OwnerSection" + i)==true){
-            //   if (this.addressRepeating[i].Name == undefined){
-            //     docxvar['OwnerSection' + i] = "";
-            //   }
-            //   else{
-            //     docxvar['OwnerSection' + i] = "OWNER";
-            //   }
-            // }
             if (docx.Search("OwnersSelected" + i)==true){
               if (this.addressRepeating[i].Name == undefined){
                 docxvar['OwnersSelected' + i] = "";
@@ -969,110 +793,6 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
                 docxvar['OwnersSelectedT' + i] = this.addressRepeating[i].Name;
               } 
             }
-            // if (docx.Search("By" + i)==true){
-            //   if (this.addressRepeating[i].Name == undefined){
-            //     docxvar['By' + i] = "";
-            //   }
-            //   else{
-            //     docxvar['By' + i] = "By:";
-            //   }
-            // }
-            // if (docx.Search("Crescent" + i)==true){
-            //   if (this.addressRepeating[i].Name == undefined){
-            //     docxvar['Crescent' + i] = "";
-            //   }
-            //   else{
-            //     docxvar['Crescent' + i] = "CRESCENT PROPERTY SERVICES LLC,";
-            //   }
-            // }
-            // if (docx.Search("OwnerStateOfFormation" + i)==true){
-            //   if (this.addressRepeating[i].Name == undefined){
-            //     docxvar['OwnerStateOfFormation' + i] = "";
-            //   }
-            //   else{
-            //     docxvar['OwnerStateOfFormation' + i] = "a Delaware limited liability company,";
-            //   }
-            // }
-            // if (docx.Search("Agent" + i)==true){
-            //   if (this.addressRepeating[i].Name == undefined){
-            //     docxvar['Agent' + i] = "";
-            //   }
-            //   else{
-            //     docxvar['Agent' + i] = "its managing agent";
-            //   } 
-            // }
-            // if (docx.Search("ByLine" + i)==true){
-            //   if (this.addressRepeating[i].Name == undefined){
-            //     docxvar['ByLine' + i] = "";
-            //   }
-            //   else{
-            //     docxvar['ByLine' + i] = "By:	__________________________________________";
-            //   }
-            // }
-            // if (docx.Search("NameLine" + i)==true){
-            //   if (this.addressRepeating[i].Name == undefined){
-            //     docxvar['NameLine' + i] = "";
-            //   }
-            //   else{
-            //     docxvar['NameLine' + i] = "Name:	Brandi Herdzina";
-            //   }
-            // }
-            // if (docx.Search("Title" + i)==true){
-            //   if (this.addressRepeating[i].Name == undefined){
-            //     docxvar['Title' + i] = "";
-            //   }
-            //   else{
-            //     docxvar['Title' + i] = "Title:	Authorized Signatory";
-            //   }
-            // }
-            // if (docx.Search("ContractorSection" + i)==true){
-            //   if (this.addressRepeating[i].Name == undefined){
-            //     docxvar['ContractorSection' + i] = "";
-            //   }
-            //   else{
-            //     docxvar['ContractorSection' + i] = "CONTRACTOR";
-            //   }
-            // }
-            // if (docx.Search("Contractor" + i)==true){
-            //   if (this.addressRepeating[i].Name == undefined){
-            //     docxvar['Contractor' + i] = "";
-            //   }
-            //   else{
-            //     docxvar['Contractor' + i] = this.selectedContractor;
-            //   }
-            // }
-            // if (docx.Search("ContractorStateOfFormation" + i)==true){
-            //   if (this.addressRepeating[i].Name == undefined){
-            //     docxvar['ContractorStateOfFormation' + i] = "";
-            //   }
-            //   else{
-            //     docxvar['ContractorStateOfFormation' + i] = "a " + this.selectedContractorStateOfFormation;
-            //   }
-            // }
-            // if (docx.Search("ContractorBy" + i)==true){
-            //   if (this.addressRepeating[i].Name == undefined){
-            //     docxvar['ContractorBy' + i] = "";
-            //   }
-            //   else{
-            //     docxvar['ContractorBy' + i] = "By:	______________________________________________";
-            //   }
-            // }
-            // if (docx.Search("ContractorNameLine" + i)==true){
-            //   if (this.addressRepeating[i].Name == undefined){
-            //     docxvar['ContractorNameLine' + i] = "";
-            //   }
-            //   else{
-            //     docxvar['ContractorNameLine' + i] = "Name:	______________________________________________";
-            //   }
-            // }
-            // if (docx.Search("ContractorTitle" + i)==true){
-            //   if (this.addressRepeating[i].Name == undefined){
-            //     docxvar['ContractorTitle' + i] = "";
-            //   }
-            //   else{
-            //     docxvar['ContractorTitle' + i] = "Title:	______________________________________________";
-            //   }
-            // }
             if (docx.Search("PropertyAddress" + i)==true){
               if (this.addressRepeating[i].Name == undefined){
                 docxvar['PropertyAddress' + i] = "";
@@ -1081,117 +801,42 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
                 docxvar['PropertyAddress' + i] = this.addressRepeating[i].Address;
               }
             }
-            // signatureSection = signatureSection + 
-            // "\tIN WITNESS WHEREOF, the parties hereto have executed this Contract as of the date and year first above written." + 
-            // "\r\nOWNER" +
-            // "\r\n" + this.addressRepeating[i].Name +
-            // "\r\n\nBy:\tCRESCENT PROPERTY SERVICES LLC,\n\ta Delaware limited liability company,\n\tits managing agent" + 
-            // "\r\n\tBy:\t__________________________________________\nName:\tBrandi Herdzina\nTitle:\tAuthorized Signatory" +
-            // "\r\nCONTRACTOR" +
-            // "\r\n" + this.selectedContractor +
-            // "\r\na " + this.selectedContractorStateOfFormation +
-            // "\r\n\nBy:\t__________________________________________\nName:\t__________________________________________\nTitle:\t__________________________________________" +
-            // "\r\n\n\n\n\n\n\n\n\n\n\n";
           }
-          
-        if (docx.Search("Contractor") == true) {
-          docxvar['Contractor'] = this.selectedContractor;
-        }
-        if (docx.Search("ContractorStateOfFormation") == true) {
-          docxvar['ContractorStateOfFormation'] = this.selectedContractorStateOfFormation;
-        }
-        if (docx.Search("ContractorName") == true) {
-          docxvar['ContractorName'] = this.selectedContractor;
-        }
-
-        if (docx.Search("ContractorStreetAddress") == true) {
-          docxvar['ContractorStreetAddress'] = this.selectedContractorAddress;
-        }
-        if (docx.Search("City") == true) {
-          docxvar['City'] = this.selectedContractorCity;
-        }
-        if (docx.Search("State") == true) {
-          docxvar['State'] = this.selectedContractorState.Title;
-        }
-        if (docx.Search("ZipCode") == true) {
-          docxvar['ZipCode'] = this.selectedContractorZip;
-        }
-        if (docx.Search("ContractorAttn") == true) {
-          if (this.selectedContractorAttn == "" || this.selectedContractorAttn == undefined) {
-            docxvar['ContractorAttn'] = "\n";
-          }
-          else {
-            docxvar['ContractorAttn'] = "Attn: " + this.selectedContractorAttn;
-          }
-        }
-        if (docx.Search("ContractorEmail") == true) {
-          if (this.selectedContractorEmail == "" || this.selectedContractorEmail == undefined) {
-            docxvar['ContractorEmail'] = "\n";
-          }
-          else {
-            docxvar['ContractorEmail'] = "Email: " + this.selectedContractorEmail;
-          }
-        }
-        // if (docx.Search("ContractorStateOfFormation") == true) {
-        //   docxvar['ContractorStateOfFormation'] = this.selectedContractorStateOfFormation;
-        // }
-        if (docx.Search("ExecutionDate") == true) {
-          docxvar['ExecutionDate'] = moment(this.selectedExecutionDate).format("MM/DD/YY");
-        }
-        if (docx.Search("CommencementDate") == true) {
-          docxvar['CommencementDate'] = moment(this.selectedCommencementDate).format("MM/DD/YY");
-        }
-        if (docx.Search("ExpirationDate") == true) {
-          docxvar['ExpirationDate'] = moment(this.selectedExpirationDate).format("MM/DD/YY");
-        }
-        // if (docx.Search("PropertyAddress") == true) {
-        //   docxvar['PropertyAddress'] = this.selectedPropertyAddress;
-        // }
-        if (this.selectedIncludeTM == true) {
-          if (docx.Search("TM_Y") == true) {
-            docxvar['TM_Y'] = "☑";
-          }
-          if (docx.Search("TM_N") == true) {
-            docxvar['TM_N'] = "☐";
-          }
-        }
-        if (this.selectedIncludeTM == false) {
-          if (docx.Search("TM_Y") == true) {
-            docxvar['TM_Y'] = "☐";
-          }
-          if (docx.Search("TM_N") == true) {
-            docxvar['TM_N'] = "☑";
-          }
-        }
-        if (this.selectedIncludeTM == undefined) {
-          if (docx.Search("TM_Y") == true) {
-            docxvar['TM_Y'] = "☐";
-          }
-          if (docx.Search("TM_N") == true) {
-            docxvar['TM_N'] = "☑";
-          }
-        }
-        docx.docxtemplater.setData(docxvar);
-
-        try {
-          docx.docxtemplater.render();
-        }
-        catch (error) {
-          var e = {
-            message: error.message,
-            name: error.name,
-            stack: error.stack,
-            properties: error.properties,
-          }
-          console.log(JSON.stringify({ error: e }));
-          throw error;
-        }
-
-        docx.SetName("SC" + " - " + this.selectedContractor);
-
-        docx.Download();
-      });
     } 
+    // Consuting Service
+    if (this.ConsultingServiceTemp == 'General Contract') {
+      if (docx.Search("ContractAmount") == true) {
+        docxvar['ContractAmount'] = this.selectedContractAmount;
+      }
+      if (docx.Search("MonthlyCompensation") == true) {
+        docxvar['MonthlyCompensation'] = this.selectedMonthlyCompensation;
+      }
+      if (docx.Search("YearlyCompensation") == true) {
+        docxvar['YearlyCompensation'] = this.selectedYearlyCompensation;
+      }
+      if (docx.Search("EmergencyCompensation") == true) {
+        docxvar['EmergencyCompensation'] = this.selectedEmergencyCompensation;
+      }
+      if (docx.Search("ReimbursableExpenses") == true) {
+        docxvar['ReimbursableExpenses'] = this.selectedReimbursableExpenses;
+      }
   }
-
+    docx.docxtemplater.setData(docxvar);
+    try {
+      docx.docxtemplater.render();
+    }
+    catch (error) {
+      var e = {
+        message: error.message,
+        name: error.name,
+        stack: error.stack,
+        properties: error.properties,
+      }
+      console.log(JSON.stringify({ error: e }));
+      throw error;
+    }
+    docx.SetName("SC" + " - " + this.selectedContractor);
+    docx.Download();
+  });
+  }
 }
