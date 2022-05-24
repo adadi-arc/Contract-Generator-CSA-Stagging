@@ -95,8 +95,8 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
     { ID: 2, Title: "TRS Service Contract" },
     { ID: 3, Title: "Change Order Form" },
     { ID: 4, Title: "Flatiron Service Contract"},
-    { ID: 5, Title: "Service Contract BMR LP (Draft)"},
-    { ID: 6, Title: "Consulting Services"}    
+    { ID: 5, Title: "Service Contract BMR LP"},
+    { ID: 6, Title: "Consulting Services (Draft)"}    
   ];
   selectedForm: any = null;
   // Consulting Service
@@ -112,6 +112,23 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
   selectedCovid: any = null;
   selectedPollutionLiability: any = null;
   // X----
+  // Hide Show Variables General Template
+  scopeService:string="In addition, the Services shall include any additional services to be performed by Consultant on a time and materials basis (“T&M Services”) upon written request by Owner (for which purpose an email from an authorized employee or agent of Owner shall be deemed sufficient).";
+  compensationTM: string = ", which limits shall not be increased except by an agreement in writing signed by Owner and Consultant, for T&M Services performed in accordance with the terms of this Agreement."
+  applicationPayment: string ="  NOTE:  SPECIFIC LIEN WAIVER SUBSECTIONS SHOULD ONLY BE INCLUDED IF THE SERVICES ARE OF A TYPE FOR WHICH CONSULTANT HAS A RIGHT TO LIEN THE PROPERTY IN THE STATE.  IF NOT, STATE “[INTENTIONALLY OMITTED]” IN PLACE OF THE LIEN WAIVER LANGUAGE.][CALIFORNIA:  [Consultant shall deliver to Owner a written invoice (the “Application for Payment”) on or before the fifth (5th) day of each month during the Term describing in reasonable detail all Services performed by Consultant during the previous month.  Provided the Application for Payment is timely delivered to Owner, Owner shall make payment to Consultant not later than the final day of the month.  With each Application for Payment Consultant shall submit (a) such evidence as may be customary, and such evidence as may be reasonably required by Owner, to demonstrate costs incurred or estimated to be incurred on account of the Services and the Contract Amount during such month and the percentage of completion of each category of Services reasonably estimated to the end of the month of the submission of such Application for Payment, (b) certification by Consultant that the Services for which payment is being sought has been completed in accordance with this Agreement and all applicable permits, (c) [a conditional waiver and release of lien upon progress or final payment (as applicable) from Consultant and each subcontractor complying with the requirements of California Civil Code Section 8132 or 8136 (as applicable) or any successor statute and in the applicable form attached as Exhibit C hereto with respect to the Services to which the Application for Payment applies][OR][Intentionally omitted], (d) [an unconditional waiver and release of lien upon progress payment from Consultant and each subcontractor complying with the requirements of California Civil Code Section 8134 or any successor statute and in the applicable form attached as Exhibit C hereto with respect to all Services previously paid through the date of the immediately preceding Application for Payment][OR][Intentionally omitted], (e) a detailed written description and copies of all change orders and other modifications to the Services or this Agreement issued through the date of the Application for Payment and (f) such other information or documentation as may be reasonably requested by Owner or Owner’s lenders.[  Within ten (10) days after Consultant’s receipt of the final payment under this Agreement, Consultant shall deliver to Owner an unconditional waiver and release of lien upon payment from Consultant and each subcontractor complying with the requirements of California Civil Code Section 8138 and in the applicable form attached as Exhibit C hereto with respect to all Services.]]][COLORADO & ILLINOIS:  [ Consultant shall deliver to Owner a written invoice (the “Application for Payment”) on or before the fifth (5th) day of each month during the Term describing in reasonable detail all Services performed by Consultant during the previous month.  Provided the Application for Payment is timely delivered to Owner, Owner shall make payment to Consultant not later than the final day of the month.  With each Application for Payment Consultant shall submit (a) such evidence as may be customary, and such evidence as may be reasonably required by Owner, to demonstrate costs incurred or estimated to be incurred on account of the Services and the Contract Amount during such month and the percentage of completion of each category of Services reasonably estimated to the end of the month of the submission of such Application for Payment, (b) certification by Consultant that the Services for which payment is being sought has been completed in accordance with this Agreement and all applicable permits, (c) [a conditional waiver and release of lien upon progress payment from Consultant and each subcontractor complying with the requirements of applicable laws and in the applicable form attached as Exhibit C hereto with respect to the Services to which the Application for Payment applies][OR][Intentionally omitted], (d) [an unconditional waiver and release of lien upon payment from Consultant and each subcontractor complying with the requirements of applicable laws and in the applicable form attached as Exhibit C hereto with respect to all Services previously paid through the date of the immediately preceding Application for Payment][OR][Intentionally omitted], (e) a detailed written description and copies of all change orders and other modifications to the Services or this Agreement issued through the date of the Application for Payment and (f) such other information or documentation as may be reasonably requested by Owner or Owner’s lenders.[  Within ten (10) days after Consultant’s receipt of the final payment under this Agreement, Consultant shall deliver to Owner an unconditional waiver and release of lien upon payment from Consultant and each subcontractor complying with the requirements of applicable laws and in the applicable form attached as Exhibit C hereto with respect to all Services.]][NOTE:  FOR ILLINOIS ONLY:  [  All lien waivers provided to Owner under this Agreement shall be notarized by the appropriate party.]]][DELAWARE, NEW JERSEY, NEW YORK & PENNSYLVANIA:  [  Consultant shall deliver to Owner a written invoice (the “Application for Payment”) on or before the fifth (5th) day of each month during the Term describing in reasonable detail all Services performed by Consultant during the previous month.  Provided the Application for Payment is timely delivered to Owner, Owner shall make payment to Consultant not later than the final day of the month.  With each Application for Payment Consultant shall submit (a) such evidence as may be customary, and such evidence as may be reasonably required by Owner, to demonstrate costs incurred or estimated to be incurred on account of the Services and the Contract Amount during such month and the percentage of completion of each category of Services reasonably estimated to the end of the month of the submission of such Application for Payment, (b) certification by Consultant that the Services for which payment is being sought has been completed in accordance with this Agreement and all applicable permits, (c) [an unconditional waiver and release of lien upon payment from Consultant and each subcontractor complying with the requirements of applicable laws and in the applicable form attached as Exhibit C hereto with respect to all Services previously paid through the date of the immediately preceding Application for Payment][OR][Intentionally omitted], (d) [a detailed written description and copies of all change orders and other modifications to the Services or this Agreement issued through the date of the Application for Payment][OR][Intentionally omitted] and (e) such other information or documentation as may be reasonably requested by Owner or Owner’s lenders.[  Within ten (10) days after Consultant’s receipt of the final payment under this Agreement, Consultant shall deliver to Owner an unconditional waiver and release of lien upon payment from Consultant and each subcontractor complying with the requirements of applicable laws and in the applicable form attached as Exhibit C hereto with respect to all Services.]]][FLORIDA, MISSOURI, NORTH CAROLINA, VIRGINIA & WASHINGTON:  [  Consultant shall deliver to Owner a written invoice (the “Application for Payment”) on or before the fifth (5th) day of each month during the Term describing in reasonable detail all Services performed by Consultant during the previous month.  Provided the Application for Payment is timely delivered to Owner, Owner shall make payment to Consultant not later than the final day of the month.  With each Application for Payment Consultant shall submit (a) such evidence as may be customary, and such evidence as may be reasonably required by Owner, to demonstrate costs incurred or estimated to be incurred on account of the Services and the Contract Amount during such month and the percentage of completion of each category of Services reasonably estimated to the end of the month of the submission of such Application for Payment, (b) certification by Consultant that the Services for which payment is being sought has been completed in accordance with this Agreement and all applicable permits, (c) [a conditional waiver and release of lien upon progress or final payment (as applicable) from Consultant and each subcontractor complying with the requirements of applicable laws and in the applicable form attached as Exhibit C hereto with respect to the Services to which the Application for Payment applies][OR][Intentionally omitted], (d) [an unconditional waiver and release of lien upon payment from Consultant and each subcontractor complying with the requirements of applicable laws and in the applicable form attached as Exhibit C hereto with respect to all Services previously paid through the date of the immediately preceding Application for Payment][OR][Intentionally omitted], (e) a detailed written description and copies of all change orders and other modifications to the Services or this Agreement issued through the date of the Application for Payment and (f) such other information or documentation as may be reasonably requested by Owner or Owner’s lenders.  [Within ten (10) days after Consultant’s receipt of the final payment under this Agreement, Consultant shall deliver to Owner an unconditional waiver and release of lien upon payment from Consultant and each subcontractor complying with the requirements of applicable laws and in the applicable form attached as Exhibit C hereto with respect to all Services.]]][MASSACHUSETTS:  [  Consultant shall deliver to Owner a written invoice (the “Application for Payment”) on or before the fifth (5th) day of each month during the Term describing in reasonable detail all Services performed by Consultant during the previous month.  Provided the Application for Payment is timely delivered to Owner, Owner shall make payment to Consultant not later than the final day of the month.  With each Application for Payment Consultant shall submit (a) such evidence as may be customary, and such evidence as may be reasonably required by Owner, to demonstrate costs incurred or estimated to be incurred on account of the Services and the Contract Amount during such month and the percentage of completion of each category of Services reasonably estimated to the end of the month of the submission of such Application for Payment, (b) certification by Consultant that the Services for which payment is being sought has been completed in accordance with this Agreement and all applicable permits, (c) [a conditional waiver and release of lien upon progress payment from Consultant and each subcontractor complying with the requirements of applicable laws and in the applicable form attached as Exhibit C hereto with respect to the Services to which the Application for Payment applies][OR][Intentionally omitted], (d) a detailed written description and copies of all change orders and other modifications to the Services or this Agreement issued through the date of the Application for Payment and (e) such other information or documentation as may be reasonably requested by Owner or Owner’s lenders.[  Within ten (10) days after Consultant’s receipt of the final payment under this Agreement, Consultant shall deliver to Owner an unconditional waiver and release of lien upon payment from Consultant and each subcontractor complying with the requirements of applicable laws and in the applicable form attached as Exhibit C hereto with respect to all Services. "
+  applicationPaymentHeading:string = "Applications for Payment. "
+  applicationPaymentbullet: string = "3.2.      "
+  payment: string = ", subject to satisfactory receipt of the documentation set forth in Section 3.2, Owner shall pay to Consultant an amount equal to the value, based on the Contract Amount, of all Services performed pursuant to this Agreement during the preceding calendar month as reasonably determined by Owner[ and supported by the documentation provided pursuant to Section 3.2"
+  covid19: string = "COVID-19.  Consultant acknowledges and agrees that COVID-19 may be present in or around the Property and individuals working at or near the Property.  Consultant, on behalf of itself, its affiliates and its subcontractors, and their respective parents, shareholders, partners, directors, officers, employees, material suppliers and other vendors, and each of their respective successors and assigns (collectively with Consultant, the “Consultant Parties”) hereby waives any recourse against, releases Owner and all other Indemnitees from, and expressly assumes the risk of any and all injury, sickness, loss or damage, including death, arising from the presence of COVID-19 in or around the Property or individuals working at or near the Property.  Consultant shall indemnify, reimburse, save, defend (at Owner’s option and with counsel reasonably acceptable to Owner) and hold harmless the Indemnitees for, from and against any and all Claims of any kind or nature arising from Consultant Parties’ contact with COVID-19 at or near the Property or in relation to the Services.  The foregoing obligations of Consultant are in addition to Consultant’s obligations under Article 5.  In addition, Consultant shall (and ensure that all Consultant Parties) adhere to any federal, state and local requirements and recommendations (including from the Centers for Disease Control and Prevention) related to COVID-19." 
+  pollutionLiability: string = "If Consultant’s Services include handling, remediation, treatment, storage or disposal of waste or hazardous materials on or about the project site as determined by Owner, Consultant shall maintain a minimum limit of $2,000,000 per incident with a $2,000,000 policy aggregate.  Such coverage shall include defense costs applicable to claims for bodily injury, property damage or clean-up costs.  Claims-made coverage is permitted, provided the policy retroactive date is continuously maintained prior to the commencement date of this Agreement and coverage is continuously maintained during all periods Consultant performs Services for Owner plus an additional period of three (3) years after termination of this Agreement or the last date Services are performed, whichever is later. "
+  paymentHeading: string = "Payment."
+  paymentBullet: string = "3.3.      "
+  pollutionLiabilityHeading: string = "Pollution Liability:";
+  //  x----
+// Hide show Variable Flatiron
+  applicationPaymentFlatiron: string = "[NOTE:  SPECIFIC LIEN WAIVER SUBSECTIONS SHOULD ONLY BE INCLUDED IF THE SERVICES ARE OF A TYPE FOR WHICH CONSULTANT HAS A RIGHT TO LIEN THE PROPERTY IN THE STATE.  IF NOT, STATE “[INTENTIONALLY OMITTED]” IN PLACE OF THE LIEN WAIVER LANGUAGE.] Consultant shall deliver to Owner a written invoice (the “Application for Payment”) on or before the fifth (5th) day of each month during the Term describing in reasonable detail all Services performed by Consultant during the previous month.  Provided the Application for Payment is timely delivered to Owner, Owner shall make payment to Consultant not later than the final day of the month.  With each Application for Payment Consultant shall submit (a) such evidence as may be customary, and such evidence as may be reasonably required by Owner, to demonstrate costs incurred or estimated to be incurred on account of the Services and the Contract Amount during such month and the percentage of completion of each category of Services reasonably estimated to the end of the month of the submission of such Application for Payment, (b) certification by Consultant that the Services for which payment is being sought has been completed in accordance with this Agreement and all applicable permits, (c) [a conditional waiver and release of lien upon progress payment from Consultant and each subcontractor complying with the requirements of applicable laws and in the applicable form attached as Exhibit C hereto with respect to the Services to which the Application for Payment applies][OR][Intentionally omitted], (d) [an unconditional waiver and release of lien upon payment from Consultant and each subcontractor complying with the requirements of applicable laws and in the applicable form attached as Exhibit C hereto with respect to all Services previously paid through the date of the immediately preceding Application for Payment][OR][Intentionally omitted], (e) a detailed written description and copies of all change orders and other modifications to the Services or this Agreement issued through the date of the Application for Payment and (f) such other information or documentation as may be reasonably requested by Owner or Owner’s lenders.[  Within ten (10) days after Consultant’s receipt of the final payment under this Agreement, Consultant shall deliver to Owner an unconditional waiver and release of lien upon payment from Consultant and each subcontractor complying with the requirements of applicable laws and in the applicable form attached as Exhibit C hereto with respect to all Services."
+  covid:string = "COVID-19.  Consultant acknowledges and agrees that COVID-19 may be present in or around the Property and individuals working at or near the Property.  Consultant, on behalf of itself, its affiliates and its subcontractors, and their respective parents, shareholders, partners, directors, officers, employees, material suppliers and other vendors, and each of their respective successors and assigns (collectively with Consultant, the “Consultant Parties”) hereby waives any recourse against, releases Owner, Property Manager and all other Indemnitees from, and expressly assumes the risk of any and all injury, sickness, loss or damage, including death, arising from the presence of COVID-19 in or around the Property or individuals working at or near the Property.  Consultant shall indemnify, reimburse, save, defend (at Owner’s option and with counsel reasonably acceptable to Owner) and hold harmless Owner, Property Manager and the Indemnitees for, from and against any and all Claims of any kind or nature arising from Consultant Parties’ contact with COVID-19 at or near the Property or in relation to the Services.  The foregoing obligations of Consultant are in addition to Consultant’s obligations under Article 5.  In addition, Consultant shall (and ensure that all Consultant Parties) adhere to any federal, state and local requirements and recommendations (including from the Centers for Disease Control and Prevention) related to COVID-19."
+  
   FormName: any = null;
   flatironOwners: any[] = [];
   selectedOwner: any = null;
@@ -173,6 +190,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
 
   ngAfterViewInit(): void {
     this.getData();
+    this.inWords(1000000)
 
 
   }
@@ -182,7 +200,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
       this.dataProperty = res['d'].results as any[];
       for (var count = 0; count < this.dataProperty.length; count++) {
         var order = this.dataProperty[count];
-        console.log(order);
+        // console.log(order);
         //  var lines = (order.FREDDPropertyName.results[0].Label).split(':'); //{rod/Staging
          var lines = (order.Fredd_x0020_Property_x0020_Name_).split(':'); //Local
         //Prod/Staging
@@ -319,7 +337,7 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
         this.selectedSubComp = null;
         this.selectedSubstantialCompletionDate = "";
       }
-       if (this.selectedForm.Title != 'Consulting Services'){
+       if (this.selectedForm.Title != 'Consulting Services (Draft)'){
          this.ConsultingServiceTemp = "";
        }
     }
@@ -414,6 +432,22 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
   ConsultingTem(value:any){
     console.log(value);
   }
+  a:any[] = ['','One ','Two ','Three ','four ', 'Five ','Six ','Seven ','Eight ','Nine ','Ten ','Eleven ','Twelve ','Thirteen ','Fourteen ','Fifteen ','Sixteen ','Seventeen ','Eighteen ','Nineteen '];
+  b:any[]= ['', '', 'Twenty','Thirty','Forty','Fifty', 'Sixty','Seventy','Eighty','Ninety'];
+
+
+  n: any = null
+inWords(datavalue:any) {
+if ((datavalue = datavalue.toString()).length > 9) return 'overflow';
+ this.n = ('000000000' + datavalue).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
+if (!this.n) return; var str = '';
+str += (this.n[1] != 0) ? (this.a[Number(this.n[1])] || this.b[this.n[1][0]] + ' ' + this.a[this.n[1][1]]) + 'Crore ' : '';
+str += (this.n[2] != 0) ? (this.a[Number(this.n[2])] || this.b[this.n[2][0]] + ' ' + this.a[this.n[2][1]]) + 'Lacs ' : '';
+str += (this.n[3] != 0) ? (this.a[Number(this.n[3])] || this.b[this.n[3][0]] + ' ' + this.a[this.n[3][1]]) + 'Thousand ' : '';
+str += (this.n[4] != 0) ? (this.a[Number(this.n[4])] || this.b[this.n[4][0]] + ' ' + this.a[this.n[4][1]]) + 'Hundred ' : '';
+str += (this.n[5] != 0) ? ((str != '') ? 'and ' : '') + (this.a[Number(this.n[5])] || this.b[this.n[5][0]] + ' ' + this.a[this.n[5][1]]) + 'only ' : '';
+return str;
+}
   onSave() {
     //SERVICE CONTRACT
     if (this.selectedForm.Title == "Service Contract") {
@@ -432,13 +466,16 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
       var steUrl = "/sites/fredd/SourceCode1/ChangeOrder/assets/template/FlatironServiceContractTemplate.docx"; //prod
       //var steUrl = "/sites/fredd/SourceCode/assets/template/FlatironServiceContractTemplate.docx"; //Staging
       //var steUrl = "/assets/template/FlatironServiceContractTemplate.docx" //local
-    }else   if (this.selectedForm.Title == "Service Contract BMR LP (Draft)") {
+    }else   if (this.selectedForm.Title == "Service Contract BMR LP") {
       //  var steUrl = "/sites/fredd/SourceCode1/ServiceContract/assets/template/ServiceTemplateBMR LPclean.docx"; //prod
       //var steUrl = "/sites/fredd/SourceCode/assets/template/ServiceContractTemplate.docx"; //Staging
         var steUrl = "/assets/template/ServiceTemplateBMR LPclean.docx" //local
     }else if(this.ConsultingServiceTemp == 'General Contract') {   
     var steUrl = "/assets/template/ConsultingServicesAgreement.docx" //local
+    }else if (this.ConsultingServiceTemp == 'Flatiron Service Contract'){
+      var steUrl = "/assets/template/ConsultingServicesFlatironTem.docx" //local
     }
+
     var docx = new DocxReader();
     docx.Load(steUrl, () => {
       var docxvar = {};
@@ -519,6 +556,52 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
       }
       if (docx.Search("PropertyAddress") == true) {
         docxvar['PropertyAddress'] = this.selectedPropertyAddress;
+      }
+      if (docx.Search("ContractAmount") == true) {
+        docxvar['ContractAmount'] = this.selectedContractAmount;
+      } 
+      if (docx.Search("ContractAmountSpell") == true) {
+        docxvar['ContractAmountSpell'] = this.inWords(this.selectedContractAmount);
+      }
+      if (docx.Search("MonthlyCompensation") == true) {
+        docxvar['MonthlyCompensation'] = this.selectedMonthlyCompensation;
+      }
+      if (docx.Search("MonthlyCompensationSpell") == true) {
+        docxvar['MonthlyCompensationSpell'] = this.inWords(this.selectedMonthlyCompensation);
+      }
+      if (docx.Search("YearlyCompensation") == true) {
+        docxvar['YearlyCompensation'] = this.selectedYearlyCompensation;
+      }
+      if (docx.Search("YearlyCompensationSpell") == true) {
+        docxvar['YearlyCompensationSpell'] = this.inWords(this.selectedYearlyCompensation);
+      }
+      if (docx.Search("EmergencyCompensation") == true) {
+        docxvar['EmergencyCompensation'] = this.selectedEmergencyCompensation;
+      }
+      if (docx.Search("EmergencyCompensationSpell") == true) {
+        docxvar['EmergencyCompensationSpell'] = this.inWords(this.selectedEmergencyCompensation);
+      }
+      if (docx.Search("ReimbursableExpenses") == true) {
+        docxvar['ReimbursableExpenses'] = this.selectedReimbursableExpenses;
+      }
+      if (docx.Search("ReimbursableExpensesSpell") == true) {
+        docxvar['ReimbursableExpensesSpell'] = this.inWords(this.selectedReimbursableExpenses);
+      }
+
+      if (this.selectedIncludeTM == true) {
+        if (docx.Search("scopeService") == true) {
+          docxvar['scopeService'] = this.scopeService;
+        }
+        if (docx.Search("compensationTM") == true) {
+          docxvar['compensationTM'] = this.compensationTM;
+        }
+      }else{
+        if (docx.Search("scopeService") == true) {
+          docxvar['scopeService'] = "";
+        }
+        if (docx.Search("compensationTM") == true) {
+          docxvar['compensationTM'] = ".";
+        }
       }
 
     if (this.selectedForm.Title == "Service Contract") {
@@ -805,22 +888,130 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
     } 
     // Consuting Service
     if (this.ConsultingServiceTemp == 'General Contract') {
-      if (docx.Search("ContractAmount") == true) {
-        docxvar['ContractAmount'] = this.selectedContractAmount;
+      // if (this.selectedIncludeTM == true) {
+      //   if (docx.Search("scopeService") == true) {
+      //     docxvar['scopeService'] = this.scopeService;
+      //   }
+      //   if (docx.Search("compensationTM") == true) {
+      //     docxvar['compensationTM'] = this.compensationTM;
+      //   }
+      // }else{
+      //   if (docx.Search("scopeService") == true) {
+      //     docxvar['scopeService'] = "";
+      //   }
+      //   if (docx.Search("compensationTM") == true) {
+      //     docxvar['compensationTM'] = "";
+      //   }
+      // }
+      if (this.selectedPayment == true) {
+
+        if (docx.Search("selectedPayment") == true) {
+          docxvar['selectedPayment'] = this.applicationPayment;
+        }
+        if (docx.Search("applicationPaymentHeading") == true) {
+          docxvar['applicationPaymentHeading'] = this.applicationPaymentHeading;
+        }
+        if (docx.Search("applicationPaymentBullet") == true) {
+          docxvar['applicationPaymentBullet'] = this.applicationPaymentbullet;
+        }
+        if (docx.Search("Payment") == true) {
+          docxvar['Payment'] = this.payment;
+        }
+        if (docx.Search("PaymentHeading") == true) {
+          docxvar['PaymentHeading'] = this.paymentHeading;
+        }
+        if (docx.Search("PaymentBullet") == true) {
+          docxvar['PaymentBullet'] = this.paymentBullet;
+        }
+        } else{
+        if (docx.Search("selectedPayment") == true) {
+          docxvar['selectedPayment'] = "";
+        }
+        if (docx.Search("applicationPaymentHeading") == true) {
+          docxvar['applicationPaymentHeading'] = "";
+        }
+        if (docx.Search("applicationPaymentBullet") == true) {
+          docxvar['applicationPaymentBullet'] = "";
+        }
+        if (docx.Search("Payment") == true) {
+          docxvar['Payment'] = "";
+        }
+        if (docx.Search("PaymentHeading") == true) {
+          docxvar['PaymentHeading'] = "Payment";
+        }
+        if (docx.Search("PaymentBullet") == true) {
+          docxvar['PaymentBullet'] = "3.2.      ";
+        }
+      
       }
-      if (docx.Search("MonthlyCompensation") == true) {
-        docxvar['MonthlyCompensation'] = this.selectedMonthlyCompensation;
+
+      if(this.selectedCovid == true){
+        if (docx.Search("Covid") == true) {
+          docxvar['Covid'] = this.covid19;
+        }
+      }else{
+        if (docx.Search("Covid") == true) {
+          docxvar['Covid'] = "";
+        }
       }
-      if (docx.Search("YearlyCompensation") == true) {
-        docxvar['YearlyCompensation'] = this.selectedYearlyCompensation;
+      if(this.selectedPollutionLiability == true){
+        if (docx.Search("Pollution") == true) {
+          docxvar['Pollution'] = this.pollutionLiability;
+        }
+        if (docx.Search("PollutionHeading") == true) {
+          docxvar['PollutionHeading'] = this.pollutionLiabilityHeading;
+        }
+      }else{
+        if (docx.Search("Pollution") == true) {
+          docxvar['Pollution'] = "";
+        }
+        if (docx.Search("PollutionHeading") == true) {
+          docxvar['PollutionHeading'] = "";
+        }
       }
-      if (docx.Search("EmergencyCompensation") == true) {
-        docxvar['EmergencyCompensation'] = this.selectedEmergencyCompensation;
+
+    }
+    //Faltiron 
+    if (this.ConsultingServiceTemp == 'Flatiron Service Contract'){
+      if(this.selectedPayment == true){
+        if (docx.Search("Payment") == true) {
+          docxvar['Payment'] = this.applicationPaymentFlatiron;
+        }
+        if (docx.Search("applicationPaymentHeading") == true) {
+          docxvar['applicationPaymentHeading'] = this.applicationPaymentHeading;
+        }
+        if (docx.Search("applicationPaymentBullet") == true) {
+          docxvar['applicationPaymentBullet'] = this.applicationPaymentbullet;
+        }
+        if (docx.Search("PaymentBullet") == true) {
+          docxvar['PaymentBullet'] = this.paymentBullet;
+        }
+      
+      }else{
+        if (docx.Search("Payment") == true) {
+          docxvar['Payment'] = "";
+        }
+        if (docx.Search("applicationPaymentHeading") == true) {
+          docxvar['applicationPaymentHeading'] = "";
+        }
+        if (docx.Search("applicationPaymentBullet") == true) {
+          docxvar['applicationPaymentBullet'] = "";
+        }
+        if (docx.Search("PaymentBullet") == true) {
+          docxvar['PaymentBullet'] = "3.2.      ";
+        }
       }
-      if (docx.Search("ReimbursableExpenses") == true) {
-        docxvar['ReimbursableExpenses'] = this.selectedReimbursableExpenses;
+      if(this.selectedCovid == true){
+        if (docx.Search("Covid") == true) {
+          docxvar['Covid'] = this.covid;
+        }
+      }else{
+        if (docx.Search("Covid") == true) {
+          docxvar['Covid'] = "";
+        }
       }
-  }
+
+    }
     docx.docxtemplater.setData(docxvar);
     try {
       docx.docxtemplater.render();
@@ -839,4 +1030,5 @@ export class ServicecontractformComponent extends BaseComponent implements OnIni
     docx.Download();
   });
   }
+  
 }
