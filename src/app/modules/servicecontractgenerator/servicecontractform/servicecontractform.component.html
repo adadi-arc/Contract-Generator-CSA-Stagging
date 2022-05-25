@@ -324,19 +324,18 @@
             >
               <mat-label>Select Flatiron Owner(s)</mat-label>
               <mat-select
-
-                  class="MatInputBoxShadow"
-                  [(ngModel)]="fiOwners"
-                  (selectionChange)="flatironOwnerSelection($event)"
-                  multiple
-                >
-                <mat-option
-                  *ngFor="let option of flatironOwners"
-                  [value]="option"
-                >
-                  {{ option.Property }}
-                </mat-option>
-              </mat-select>
+              class="MatInputBoxShadow"
+              type="text"
+              name="fiOwnerSelect"
+              [(ngModel)]="fiOwners"
+              (selectionChange)="flatironOwnerSelection($event)"
+              [formControl]="selected"
+              multiple
+            >
+              <mat-option *ngFor="let item of flatironOwners" [value]="item">
+                {{ item.Property }}
+              </mat-option>
+            </mat-select>
             </mat-form-field>
            
             <mat-form-field
