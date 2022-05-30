@@ -1,8 +1,8 @@
 
 {
-    "api": "http://localhost:53244/",
-    "spSite": "/sites/DMSDemo2/contract-generator",
+    "api": "/sites/fredd",
+    "spSite": "/sites/fredd",
     "tokenID": "arctoken",
-    "baseUrl": "http://localhost:8100",
+    "baseUrl": "http://fredd/",
     "extBaseUrl": "http://fredd.biomedrealty.com:8090/"
 }
