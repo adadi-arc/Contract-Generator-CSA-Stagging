@@ -265,7 +265,7 @@
                   name="fiOwnerSelect"
                   [(ngModel)]="fiOwners"
                   (selectionChange)="flatironOwnerSelection($event)"
-                  [formControl]="selected"
+                  
                   multiple
                 >
                   <mat-option
@@ -323,19 +323,27 @@
               id="fiSelect"
             >
               <mat-label>Select Flatiron Owner(s)</mat-label>
-              <mat-select
-              class="MatInputBoxShadow"
-              type="text"
-              name="fiOwnerSelect"
-              [(ngModel)]="fiOwners"
-              (selectionChange)="flatironOwnerSelection($event)"
-              [formControl]="selected"
-              multiple
-            >
+              <!-- <mat-select [multiple]="true" required id="fiOwnerSelect"
+              class="MatInputBoxShadow"  type="text" name="fiOwnerSelect"
+              #fiOwnerSelect ="ngModel" [(ngModel)]="fiOwners"
+              (ngModelChange)="flatironOwnerSelection($event)">
               <mat-option *ngFor="let item of flatironOwners" [value]="item">
                 {{ item.Property }}
               </mat-option>
-            </mat-select>
+            </mat-select> -->
+            <mat-select
+                  class="MatInputBoxShadow"
+                  type="text"
+                  name="fiOwnerConsultingSelect"
+                  [(ngModel)]="fiOwnersConsulting"
+                  (selectionChange)="flatironOwnerSelection($event)"
+                  
+                  multiple
+                >
+                <mat-option *ngFor="let item of flatironOwners" [value]="item">
+                  {{ item.Property }}
+                </mat-option>
+              </mat-select>
             </mat-form-field>
            
             <mat-form-field
@@ -468,7 +476,7 @@
      </mat-accordion>
      <mat-accordion class="example-headers-align"
    *ngIf="ConsultingServiceTemp == 'Flatiron Service Contract'">
-     <mat-expansion-panel [expanded]="step === 0" style="margin-top: 70px;" hideToggle>
+     <mat-expansion-panel [expanded]="step === 0" style="margin-top: 15px;" hideToggle>
        <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
          <mat-panel-title style="color: white;">
            Other Provide Details
@@ -530,13 +538,14 @@
            </div>
          </div>
          <div class="row mt-2">
-           <div class="col-md-3">
-             <mat-checkbox class="example-margin"  name="Payment" [(ngModel)]="selectedPayment">Application For Payment
+           <div class="col-md-12">
+             <mat-checkbox class="example-margin"  name="Payment" [(ngModel)]="selectedPayment">Include Section 3.2 "Applications For Payment"?
              </mat-checkbox>
+             <mat-checkbox style="margin-left: 20px;" class="example-margin" name="Covid" [(ngModel)]="selectedCovid">Will consultants be on-site (COVID restrictions apply)?
+            </mat-checkbox>
            </div>
            <div class="col-md-2">
-             <mat-checkbox class="example-margin" name="Covid" [(ngModel)]="selectedCovid">Will consultants be on-site (COVID restrictions apply)?
-             </mat-checkbox>
+
            </div>
           
           
@@ -547,7 +556,7 @@
      </mat-accordion>
      <mat-accordion class="example-headers-align"
    *ngIf="ConsultingServiceTemp == 'Flatiron Service Contract'">
-     <mat-expansion-panel [expanded]="step === 0" style="margin-top: 70px;" hideToggle>
+     <mat-expansion-panel [expanded]="step === 0" style="margin-top: 15px;" hideToggle>
        <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
          <mat-panel-title style="color: white;">
            Other Details
@@ -1968,7 +1977,7 @@
         </mat-accordion>
         <mat-accordion class="example-headers-align"
         *ngIf="ConsultingServiceTemp == 'General Contract' &&   this.FormName == 'Consulting Services (Draft)'">
-        <mat-expansion-panel [expanded]="step === 0" style="margin-top: 70px;" hideToggle>
+        <mat-expansion-panel [expanded]="step === 0" style="margin-top: 15px;" hideToggle>
           <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
             <mat-panel-title style="color: white;">
              Contract Details
@@ -2029,19 +2038,24 @@
               </div>
             </div>
             <div class="row mt-2">
-              <div class="col-md-2">
-                <mat-checkbox class="example-margin"  name="Payment" [(ngModel)]="selectedPayment">Application For Payment
+              <div class="col-md-12">
+                <mat-checkbox class="example-margin"  name="Payment" [(ngModel)]="selectedPayment">Include Section 3.2 "Applications For Payment"?
                 </mat-checkbox>
-              </div>
-              <div class="col-md-3">
-                <mat-checkbox class="example-margin" name="Covid" [(ngModel)]="selectedCovid">Will consultants be on-site (COVID restrictions apply)?
+                <mat-checkbox style="margin-left: 20px;" class="example-margin" name="Covid" [(ngModel)]="selectedCovid">Will consultants be on-site (COVID restrictions apply)?
                 </mat-checkbox>
-              </div>
-              <div class="col-md-4" style="margin-left: 20px;">
-                <mat-checkbox class="example-margin" name="PollutionLiability" [(ngModel)]="selectedPollutionLiability"> Pollution Liability
+                <mat-checkbox style="margin-left: 20px;" class="example-margin" name="PollutionLiability" [(ngModel)]="selectedPollutionLiability"> Include Pollution Liability?
                 </mat-checkbox>
+
               </div>
-             
+              <div class="col-md-12">
+                <mat-radio-group
+                  [(ngModel)]="selectedCompanyChoice"
+                  [ngModelOptions]="{ standalone: true }">
+                <mat-radio-button value="partnership">Partnership</mat-radio-button>
+                <mat-radio-button style="margin-left:10px" value="liability">Liability</mat-radio-button>
+              </mat-radio-group>
+              </div>
+
             </div>
           
           </div>
@@ -2049,7 +2063,7 @@
         </mat-accordion>
         <mat-accordion class="example-headers-align"
       *ngIf="ConsultingServiceTemp == 'General Contract' &&   this.FormName == 'Consulting Services (Draft)'">
-        <mat-expansion-panel [expanded]="step === 0" style="margin-top: 70px;" hideToggle>
+        <mat-expansion-panel [expanded]="step === 0" style="margin-top: 10px;" hideToggle>
           <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
             <mat-panel-title style="color: white;">
               Other Details
