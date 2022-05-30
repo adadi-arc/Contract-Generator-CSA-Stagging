@@ -212,30 +212,30 @@ export class ServicecontractformComponent
       for (var count = 0; count < this.dataProperty.length; count++) {
         var order = this.dataProperty[count];
         // console.log(order);
-        var lines = (order.FREDDPropertyName.results[0].Label).split(':'); //{rod/Staging
-        // var lines = order.Fredd_x0020_Property_x0020_Name_.split(':'); //Local
+        // var lines = (order.FREDDPropertyName.results[0].Label).split(':'); //{rod/Staging
+        var lines = order.Fredd_x0020_Property_x0020_Name_.split(':'); //Local
         //Prod/Staging
-          this.menuData.push({
-             "Property": lines[3],
-             "ID": order.ID,
-             "Region": lines[1],
-             "Market": lines[2],
-             "Owner": order.EntityName,
-             "StateOfFormation": order.StateofFormation,
-            "AdditionalInsureds": order.AdditionalInsureds,
-             "EntityID": order.EntityID
-            });
+          // this.menuData.push({
+          //    "Property": lines[3],
+          //    "ID": order.ID,
+          //    "Region": lines[1],
+          //    "Market": lines[2],
+          //    "Owner": order.EntityName,
+          //    "StateOfFormation": order.StateofFormation,
+          //   "AdditionalInsureds": order.AdditionalInsureds,
+          //    "EntityID": order.EntityID
+          //   });
         //Local
-        // this.menuData.push({
-        //   Property: lines[3],
-        //   ID: order.ID,
-        //   Region: lines[1],
-        //   Market: lines[2],
-        //   Owner: order.EntityName,
-        //   StateOfFormation: order.StateofFormation,
-        //   AdditionalInsureds: order.AdditionalInsureds,
-        //   EntityID: order.EntityID,
-        // });
+         this.menuData.push({
+           Property: lines[3],
+           ID: order.ID,
+           Region: lines[1],
+           Market: lines[2],
+           Owner: order.EntityName,
+           StateOfFormation: order.StateofFormation,
+           AdditionalInsureds: order.AdditionalInsureds,
+           EntityID: order.EntityID,
+         });
       }
       this.Region = [
         ...new Map(
@@ -558,11 +558,11 @@ return this.numberToEnglish(v)+" ";
       //var steUrl = "/sites/fredd/SourceCode/assets/template/ServiceContractTemplate.docx"; //Staging
       //var steUrl = '/assets/template/ServiceTemplateBMR LPclean.docx'; //local
     } else if (this.ConsultingServiceTemp == 'General Contract') {
-       var steUrl = "/sites/fredd/SourceCode1/ChangeOrder/assets/template/ConsultingServicesAgreement.docx"; //prod
-      // var steUrl = '/assets/template/ConsultingServicesAgreement.docx'; //local
+      //  var steUrl = "/sites/fredd/SourceCode1/ChangeOrder/assets/template/ConsultingServicesAgreement.docx"; //prod
+      var steUrl = '/assets/template/ConsultingServicesAgreement.docx'; //local
     } else if (this.ConsultingServiceTemp == 'Flatiron Service Contract') {
-       var steUrl = "/sites/fredd/SourceCode1/ChangeOrder/assets/template/ConsultingServicesFlatironTem.docx"; //prod
-      // var steUrl = '/assets/template/ConsultingServicesFlatironTem.docx'; //local
+      //  var steUrl = "/sites/fredd/SourceCode1/ChangeOrder/assets/template/ConsultingServicesFlatironTem.docx"; //prod
+      var steUrl = '/assets/template/ConsultingServicesFlatironTem.docx'; //local
     }
 
     var docx = new DocxReader();

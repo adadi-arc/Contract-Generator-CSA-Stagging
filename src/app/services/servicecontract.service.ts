@@ -24,9 +24,9 @@ export class ServicecontractService {
 
   async getAllProperty(){
     var queryProperty = {
-      select: "ID, Title, EntityID, FREDDPropertyName, EntityName, AdditionalInsureds,StateofFormation, Fredd_x0020_Property_x0020_Name_, TaxCatchAll/Term,TaxCatchAll/IdForTerm,TaxCatchAll/Title,TaxCatchAll/IdForTermStore,TaxCatchAll/IdForTermSet", //prod
-      // select: "ID, Title, EntityID, FREDDPropertyName, EntityName, AdditionalInsureds, StateofFormation, Fredd_x0020_Property_x0020_Name_", //local/staging
-      expand: "TaxCatchAll", //prod
+      // select: "ID, Title, EntityID, FREDDPropertyName, EntityName, AdditionalInsureds,StateofFormation, Fredd_x0020_Property_x0020_Name_, TaxCatchAll/Term,TaxCatchAll/IdForTerm,TaxCatchAll/Title,TaxCatchAll/IdForTermStore,TaxCatchAll/IdForTermSet", //prod
+      select: "ID, Title, EntityID, FREDDPropertyName, EntityName, AdditionalInsureds, StateofFormation, Fredd_x0020_Property_x0020_Name_", //local/staging
+      // expand: "TaxCatchAll", //prod
       orderby: "EntityID asc",
       top: "5000"
     }
@@ -34,9 +34,9 @@ export class ServicecontractService {
   }
   async getAllMaster(){
     var queryMaster = {
-      select: "ID, Title, Building_x0020_ID, Building_x0020_Property_x0020_Ma/Title, Building_x0020_Property_x0020_Ma/ID", //prod
-      // select: "ID, Title, Building_x0020_ID", //local
-      expand: "Building_x0020_Property_x0020_Ma", //prod
+      // select: "ID, Title, Building_x0020_ID, Building_x0020_Property_x0020_Ma/Title, Building_x0020_Property_x0020_Ma/ID", //prod
+      select: "ID, Title, Building_x0020_ID", //local
+      // expand: "Building_x0020_Property_x0020_Ma", //prod
       orderby: "Building_x0020_ID asc",
       top: "5000"
     }
