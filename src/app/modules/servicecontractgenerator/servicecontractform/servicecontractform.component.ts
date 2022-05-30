@@ -213,29 +213,29 @@ export class ServicecontractformComponent
         var order = this.dataProperty[count];
         // console.log(order);
         var lines = (order.FREDDPropertyName.results[0].Label).split(':'); //{rod/Staging
-        //var lines = order.Fredd_x0020_Property_x0020_Name_.split(':'); //Local
+        // var lines = order.Fredd_x0020_Property_x0020_Name_.split(':'); //Local
         //Prod/Staging
-         this.menuData.push({
-            "Property": lines[3],
-            "ID": order.ID,
-            "Region": lines[1],
-            "Market": lines[2],
-            "Owner": order.EntityName,
-            "StateOfFormation": order.StateofFormation,
-           "AdditionalInsureds": order.AdditionalInsureds,
-            "EntityID": order.EntityID
-           });
+          this.menuData.push({
+             "Property": lines[3],
+             "ID": order.ID,
+             "Region": lines[1],
+             "Market": lines[2],
+             "Owner": order.EntityName,
+             "StateOfFormation": order.StateofFormation,
+            "AdditionalInsureds": order.AdditionalInsureds,
+             "EntityID": order.EntityID
+            });
         //Local
-        //this.menuData.push({
-        //  Property: lines[3],
-        //  ID: order.ID,
-        //  Region: lines[1],
-        //  Market: lines[2],
-        //  Owner: order.EntityName,
-        //  StateOfFormation: order.StateofFormation,
-        //  AdditionalInsureds: order.AdditionalInsureds,
-        //  EntityID: order.EntityID,
-        //});
+        // this.menuData.push({
+        //   Property: lines[3],
+        //   ID: order.ID,
+        //   Region: lines[1],
+        //   Market: lines[2],
+        //   Owner: order.EntityName,
+        //   StateOfFormation: order.StateofFormation,
+        //   AdditionalInsureds: order.AdditionalInsureds,
+        //   EntityID: order.EntityID,
+        // });
       }
       this.Region = [
         ...new Map(
@@ -540,7 +540,7 @@ return this.numberToEnglish(v)+" ";
     if (this.selectedForm.Title == 'Service Contract') {
       var steUrl ='/sites/fredd/SourceCode1/ChangeOrder/assets/template/ServiceContractTemplate.docx'; //prod
       //var steUrl = "/sites/fredd/SourceCode/assets/template/ServiceContractTemplate.docx"; //Staging
-      //var steUrl = "/assets/template/ServiceContractTemplate.docx" //local
+      var steUrl = "/assets/template/ServiceContractTemplate.docx" //local
     } else if (this.selectedForm.Title == 'TRS Service Contract') {
       var steUrl = '/sites/fredd/SourceCode1/ChangeOrder/assets/template/TRSContractTemplate.docx'; //prod
       //var steUrl = "/sites/fredd/SourceCode/assets/template/TRSContractTemplate.docx"; //staging
@@ -558,11 +558,11 @@ return this.numberToEnglish(v)+" ";
       //var steUrl = "/sites/fredd/SourceCode/assets/template/ServiceContractTemplate.docx"; //Staging
       //var steUrl = '/assets/template/ServiceTemplateBMR LPclean.docx'; //local
     } else if (this.ConsultingServiceTemp == 'General Contract') {
-      var steUrl = "/sites/fredd/SourceCode1/ChangeOrder/assets/template/ConsultingServicesAgreement.docx"; //prod
-      //var steUrl = '/assets/template/ConsultingServicesAgreement.docx'; //local
+       var steUrl = "/sites/fredd/SourceCode1/ChangeOrder/assets/template/ConsultingServicesAgreement.docx"; //prod
+      // var steUrl = '/assets/template/ConsultingServicesAgreement.docx'; //local
     } else if (this.ConsultingServiceTemp == 'Flatiron Service Contract') {
-      var steUrl = "/sites/fredd/SourceCode1/ChangeOrder/assets/template/ConsultingServicesFlatironTem.docx"; //prod
-      //var steUrl = '/assets/template/ConsultingServicesFlatironTem.docx'; //local
+       var steUrl = "/sites/fredd/SourceCode1/ChangeOrder/assets/template/ConsultingServicesFlatironTem.docx"; //prod
+      // var steUrl = '/assets/template/ConsultingServicesFlatironTem.docx'; //local
     }
 
     var docx = new DocxReader();
@@ -715,7 +715,44 @@ return this.numberToEnglish(v)+" ";
           docxvar['compensationTM'] = '.';
         }
       }
-
+      if (docx.Search('Owner') == true) {
+        docxvar['Owner'] = this.selectedOwner.Owner;
+      }
+      if (docx.Search('OwnerStateOfFormation') == true) {
+        if (this.selectedOwner.StateOfFormation == undefined) {
+          docxvar['OwnerStateOfFormation'] = '';
+        } else {
+          docxvar['OwnerStateOfFormation'] =
+            this.selectedOwner.StateOfFormation;
+        }
+      }
+      if (docx.Search('AdditionalInsureds') == true) {
+        if (
+          this.selectedOwner.Owner == 'B9 LS Harrison & Washington LLC' ||
+          this.selectedOwner.Owner == 'BRE-BMR Middlesex LLC' ||
+          this.selectedOwner.Owner == 'BRE-BMR Acquisition Holdings LLC' ||
+          this.selectedOwner.Owner == 'B9 Island Parkway LLC' ||
+          this.selectedOwner.Owner == 'B9 Island Parkway Development LLC'
+        ) {
+          docxvar['AdditionalInsureds'] = ', BRE Edison III LP,';
+        } else if (
+          this.selectedOwner.Owner == 'BRE-BMR Franklin LLC' ||
+          this.selectedOwner.Owner == 'BRE-BMR 20 Sidney LLC'
+        ) {
+          docxvar['AdditionalInsureds'] =
+            ', 20 Sidney Street Condominium Trust';
+        } else {
+          docxvar['AdditionalInsureds'] = '';
+        }
+      }
+      if (docx.Search('AdditionalInsureds') == true) {
+        if (this.selectedOwner.AdditionalInsureds != undefined) {
+          docxvar['AdditionalInsureds'] =
+            ', ' + this.selectedOwner.AdditionalInsureds;
+        } else {
+          docxvar['AdditionalInsureds'] = '';
+        }
+      }
       if (this.selectedForm.Title == 'Service Contract') {
         if (docx.Search('Owner') == true) {
           docxvar['Owner'] = this.selectedOwner.Owner;
@@ -800,9 +837,9 @@ return this.numberToEnglish(v)+" ";
       }
       //TRS SERVICE CONTRACT
       if (this.selectedForm.Title == 'TRS Service Contract') {
-        if (docx.Search('Owner') == true) {
-          docxvar['Owner'] = this.selectedOwner.Owner;
-        }
+        // if (docx.Search('Owner') == true) {
+        //   docxvar['Owner'] = this.selectedOwner.Owner;
+        // }
         if (docx.Search('Section8_2') == true) {
           if (this.selectedOwner.Owner == 'BRE-BMR Congress LLC') {
             docxvar['Section8_2'] =
