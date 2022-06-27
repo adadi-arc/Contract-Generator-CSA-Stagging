@@ -14,8 +14,8 @@ export class SpService {
   headers = { 'Content-Type': this.jsonHeader, Accept: this.jsonHeader };
   apiUrl: string;
   //baseUrl: string = "http://";
-  //baseUrl: string = "http://localhost:8100"; //LOCAL
-  baseUrl: string = (location.href.indexOf('biomedrealty.com:8090') >= 0) ? customConfig.extBaseUrl : customConfig.baseUrl; //PROD
+  baseUrl: string = "http://localhost:8100"; //LOCAL
+  // baseUrl: string = (location.href.indexOf('biomedrealty.com:8090') >= 0) ? customConfig.extBaseUrl : customConfig.baseUrl; //PROD
   context = { FormDigestValue: "", WebFullUrl: "" };
 
   constructor(private http: HttpClient) {

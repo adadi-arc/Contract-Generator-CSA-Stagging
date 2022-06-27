@@ -208,30 +208,30 @@ export class ServicecontractformComponent
       for (var count = 0; count < this.dataProperty.length; count++) {
         var order = this.dataProperty[count];
         // console.log(order);
-        var lines = (order.FREDDPropertyName.results[0].Label).split(':'); //{rod/Staging
-        //var lines = order.Fredd_x0020_Property_x0020_Name_.split(':'); //Local
+        // var lines = (order.FREDDPropertyName.results[0].Label).split(':'); //{rod/Staging
+        var lines = order.Fredd_x0020_Property_x0020_Name_.split(':'); //Local
         //Prod/Staging
-         this.menuData.push({
-            "Property": lines[3],
-            "ID": order.ID,
-            "Region": lines[1],
-            "Market": lines[2],
-            "Owner": order.EntityName,
-            "StateOfFormation": order.StateofFormation,
-           "AdditionalInsureds": order.AdditionalInsureds,
-            "EntityID": order.EntityID
-           });
+        //  this.menuData.push({
+        //     "Property": lines[3],
+        //     "ID": order.ID,
+        //     "Region": lines[1],
+        //     "Market": lines[2],
+        //     "Owner": order.EntityName,
+        //     "StateOfFormation": order.StateofFormation,
+        //    "AdditionalInsureds": order.AdditionalInsureds,
+        //     "EntityID": order.EntityID
+        //    });
         //Local
-        //this.menuData.push({
-        //  Property: lines[3],
-        //  ID: order.ID,
-        //  Region: lines[1],
-        //  Market: lines[2],
-        //  Owner: order.EntityName,
-        //  StateOfFormation: order.StateofFormation,
-        //  AdditionalInsureds: order.AdditionalInsureds,
-        //  EntityID: order.EntityID,
-        //});
+        this.menuData.push({
+          Property: lines[3],
+          ID: order.ID,
+          Region: lines[1],
+          Market: lines[2],
+          Owner: order.EntityName,
+          StateOfFormation: order.StateofFormation,
+          AdditionalInsureds: order.AdditionalInsureds,
+          EntityID: order.EntityID,
+        });
       }
       this.Region = [
         ...new Map(
@@ -542,36 +542,34 @@ export class ServicecontractformComponent
   onSave() {
     //SERVICE CONTRACT
     if (this.selectedForm.Title == 'Service Contract') {
-      var steUrl =
-        '/sites/fredd/SourceCode1/ChangeOrder/assets/template/ServiceContractTemplate.docx'; //prod
+      // var steUrl ='/sites/fredd/SourceCode1/ChangeOrder/assets/template/ServiceContractTemplate.docx'; //prod
       //var steUrl = "/sites/fredd/SourceCode/assets/template/ServiceContractTemplate.docx"; //Staging
-      //var steUrl = '/assets/template/ServiceContractTemplate.docx'; //local
+      var steUrl = '/assets/template/ServiceContractTemplate.docx'; //local
     } else if (this.selectedForm.Title == 'TRS Service Contract') {
-      var steUrl =
-        '/sites/fredd/SourceCode1/ChangeOrder/assets/template/TRSContractTemplate.docx'; //prod
+      // var steUrl ='/sites/fredd/SourceCode1/ChangeOrder/assets/template/TRSContractTemplate.docx'; //prod
       //var steUrl = "/sites/fredd/SourceCode/assets/template/TRSContractTemplate.docx"; //staging
-      //var steUrl = "/assets/template/TRSContractTemplate.docx" //local
+      var steUrl = "/assets/template/TRSContractTemplate.docx" //local
     } else if (this.selectedForm.Title == 'Change Order Form') {
-      var steUrl = '/sites/fredd/SourceCode1/ChangeOrder/assets/template/ChangeOrderTemplate.docx'; //prod
+      // var steUrl = '/sites/fredd/SourceCode1/ChangeOrder/assets/template/ChangeOrderTemplate.docx'; //prod
       //var steUrl = "/sites/fredd/SourceCode/assets/template/TRSContractTemplate.docx"; //staging
-      //var steUrl = "/assets/template/ChangeOrderTemplate.docx" //local
+      var steUrl = "/assets/template/ChangeOrderTemplate.docx" //local
     } else if (this.selectedForm.Title == 'Flatiron Service Contract') {
-      var steUrl =
-        '/sites/fredd/SourceCode1/ChangeOrder/assets/template/FlatironServiceContractTemplate.docx'; //prod
+      // var steUrl =
+      //   '/sites/fredd/SourceCode1/ChangeOrder/assets/template/FlatironServiceContractTemplate.docx'; //prod
       //var steUrl = "/sites/fredd/SourceCode/assets/template/FlatironServiceContractTemplate.docx"; //Staging
-      //var steUrl = '/assets/template/FlatironServiceContractTemplate.docx'; //local
+      var steUrl = '/assets/template/FlatironServiceContractTemplate.docx'; //local
     } else if (this.selectedForm.Title == 'Service Contract BMR LP') {
-      var steUrl =
-        '/sites/fredd/SourceCode1/ChangeOrder/assets/template/ServiceTemplateBMR LPclean.docx'; //prod
+      // var steUrl =
+      //   '/sites/fredd/SourceCode1/ChangeOrder/assets/template/ServiceTemplateBMR LPclean.docx'; //prod
       //var steUrl = "/sites/fredd/SourceCode/assets/template/ServiceContractTemplate.docx"; //Staging
-      //var steUrl = '/assets/template/ServiceTemplateBMR LPclean.docx'; //local
+      var steUrl = '/assets/template/ServiceTemplateBMR LPclean.docx'; //local
     } else if(this.selectedForm.Title == 'Consulting Services Agreement Template') {
       if (this.ConsultingServiceTemp == 'General Contract') {
-        var steUrl = "/sites/fredd/SourceCode1/ChangeOrder/assets/template/ConsultingServicesAgreement.docx"; //prod
-        //var steUrl = '/assets/template/ConsultingServicesAgreement.docx'; //local
+        // var steUrl = "/sites/fredd/SourceCode1/ChangeOrder/assets/template/ConsultingServicesAgreement.docx"; //prod
+        var steUrl = '/assets/template/ConsultingServicesAgreement.docx'; //local
       } else if (this.ConsultingServiceTemp == 'Flatiron Service Contract') {
-        var steUrl = "/sites/fredd/SourceCode1/ChangeOrder/assets/template/ConsultingServicesFlatironTem.docx"; //prod
-        //var steUrl = '/assets/template/ConsultingServicesFlatironTem.docx'; //local
+        // var steUrl = "/sites/fredd/SourceCode1/ChangeOrder/assets/template/ConsultingServicesFlatironTem.docx"; //prod
+        var steUrl = '/assets/template/ConsultingServicesFlatironTem.docx'; //local
       }
     }
    
@@ -1133,28 +1131,30 @@ export class ServicecontractformComponent
         // }
 
 
+        if(this.selectedContractorState.Title == 'CA'){
+      
+           if (docx.Search('selectedPayment') == true) {
+             docxvar['selectedPayment'] = this.applicationPayment;
+           }
+           if (docx.Search('applicationPaymentHeading') == true) {
+             docxvar['applicationPaymentHeading'] =
+               this.applicationPaymentHeading;
+           }
+           if (docx.Search('applicationPaymentBullet') == true) {
+             docxvar['applicationPaymentBullet'] = this.applicationPaymentbullet;
+           }
+           if (docx.Search('Payment') == true) {
+             docxvar['Payment'] = this.payment;
+           }
+           if (docx.Search('PaymentHeading') == true) {
+             docxvar['PaymentHeading'] = this.paymentHeading;
+           }
+           if (docx.Search('PaymentBullet') == true) {
+             docxvar['PaymentBullet'] = this.paymentBullet;
+           }
+       
 
-        if (this.selectedPayment == true) {
-          if (docx.Search('selectedPayment') == true) {
-            docxvar['selectedPayment'] = this.applicationPayment;
-          }
-          if (docx.Search('applicationPaymentHeading') == true) {
-            docxvar['applicationPaymentHeading'] =
-              this.applicationPaymentHeading;
-          }
-          if (docx.Search('applicationPaymentBullet') == true) {
-            docxvar['applicationPaymentBullet'] = this.applicationPaymentbullet;
-          }
-          if (docx.Search('Payment') == true) {
-            docxvar['Payment'] = this.payment;
-          }
-          if (docx.Search('PaymentHeading') == true) {
-            docxvar['PaymentHeading'] = this.paymentHeading;
-          }
-          if (docx.Search('PaymentBullet') == true) {
-            docxvar['PaymentBullet'] = this.paymentBullet;
-          }
-        } else {
+        }   else {
           if (docx.Search('selectedPayment') == true) {
             docxvar['selectedPayment'] = '';
           }
@@ -1174,6 +1174,7 @@ export class ServicecontractformComponent
             docxvar['PaymentBullet'] = '3.2.      ';
           }
         }
+
 
         if (this.selectedCovid == true) {
           if (docx.Search('Covid') == true) {
@@ -1246,7 +1247,8 @@ export class ServicecontractformComponent
             }
           }
         }
-        if (this.selectedPayment == true) {
+        if(this.selectedContractorState.Title == 'CA'){
+     
           if (docx.Search('Payment') == true) {
             docxvar['Payment'] = this.applicationPaymentFlatiron;
           }
