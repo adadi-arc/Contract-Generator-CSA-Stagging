@@ -46,7 +46,7 @@
         class="example-full-width"
         style="width: 40%; margin-top: 15px; margin-left: 40px;"
         id="formselect"
-        *ngIf=" this.FormName == 'Consulting Services (Draft)'"
+        *ngIf=" this.FormName == 'Consulting Services Agreement Template'"
       >
         <mat-label>Select Contract Template:</mat-label>
         <mat-select
@@ -80,7 +80,7 @@
       "
       style="margin-top: 15px"
     >
-      <mat-accordion class="example-headers-align" *ngIf="this.FormName != 'Consulting Services (Draft)'">
+      <mat-accordion class="example-headers-align" *ngIf="this.FormName != 'Consulting Services Agreement Template'">
         <mat-expansion-panel [expanded]="step === 0" hideToggle>
           <mat-expansion-panel-header
             style="background-color: #4c7ab5; height: 43px"
@@ -296,7 +296,7 @@
     </div>
      <!-- Non-Flatiron Owner For Consulting  -->
     <div class="row" 
-    *ngIf="ConsultingServiceTemp == 'Flatiron Service Contract' &&   this.FormName == 'Consulting Services (Draft)'"
+    *ngIf="ConsultingServiceTemp == 'Flatiron Service Contract' &&   this.FormName == 'Consulting Services Agreement Template'"
     >
     <div
     class="col-md-5"
@@ -754,7 +754,7 @@
       >
         <mat-expansion-panel
           [expanded]="step === 0"
-          style="margin-top: 90px"
+          style="margin-top: 15px"
           hideToggle
         >
           <mat-expansion-panel-header
@@ -1576,7 +1576,7 @@
       >
         <mat-expansion-panel
           [expanded]="step === 0"
-          style="margin-top: 90px"
+          style="margin-top: 15px"
           hideToggle
         >
           <mat-expansion-panel-header
@@ -1794,7 +1794,7 @@
       >
         <mat-expansion-panel
           [expanded]="step === 0"
-          style="margin-top: 90px"
+          style="margin-top: 15px"
           hideToggle
         >
           <mat-expansion-panel-header
@@ -1866,7 +1866,7 @@
     <!-- General Template -->
        <div
        class="col-md-5"
-       *ngIf="ConsultingServiceTemp == 'General Contract' &&   this.FormName == 'Consulting Services (Draft)'"
+       *ngIf="ConsultingServiceTemp == 'General Contract' &&   this.FormName == 'Consulting Services Agreement Template'"
        style="margin-top: 15px"
      >
        <mat-accordion class="example-headers-align">
@@ -1957,7 +1957,7 @@
               
                <mat-form-field
                  *ngIf="
-                   (this.FormName == 'Consulting Services (Draft)' || ConsultingServiceTemp == 'General Template' ) &&
+                   (this.FormName == 'Consulting Services Agreement Template' || ConsultingServiceTemp == 'General Template' ) &&
                    selectedOwner != undefined
                  "
                  style="width: 100%"
@@ -1976,7 +1976,7 @@
                  mat-raised-button
                  (click)="clearPM()"
                  *ngIf="
-                 (this.FormName == 'Consulting Services (Draft)' || ConsultingServiceTemp == 'General Template' ) &&
+                 (this.FormName == 'Consulting Services Agreement Template' || ConsultingServiceTemp == 'General Template' ) &&
                  selectedOwner != undefined
                  "
                  color="primary"
@@ -1992,7 +1992,7 @@
     >
        <!-- Consulting Service -->
      <mat-accordion class="example-headers-align"
-     *ngIf=" (ConsultingServiceTemp == 'General Contract' &&  this.FormName == 'Consulting Services (Draft)') && selectedOwner != undefined">
+     *ngIf=" (ConsultingServiceTemp == 'General Contract' &&  this.FormName == 'Consulting Services Agreement Template') && selectedOwner != undefined">
      <mat-expansion-panel [expanded]="step === 0" hideToggle>
        <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
          <mat-panel-title style="color: white;">
@@ -2099,7 +2099,7 @@
      </mat-expansion-panel>
      </mat-accordion>
      <mat-accordion class="example-headers-align"
-     *ngIf=" ConsultingServiceTemp == 'General Contract' &&   this.FormName == 'Consulting Services (Draft)' && selectedOwner != undefined">
+     *ngIf=" ConsultingServiceTemp == 'General Contract' &&   this.FormName == 'Consulting Services Agreement Template' && selectedOwner != undefined">
      <mat-expansion-panel [expanded]="step === 0" style="margin-top: 15px;" hideToggle>
        <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
          <mat-panel-title style="color: white;">
@@ -2168,24 +2168,14 @@
              </mat-checkbox>
              <mat-checkbox  class="example-margin" name="PollutionLiability" [(ngModel)]="selectedPollutionLiability"> Include Pollution Liability?
              </mat-checkbox>
-
            </div>
-           <div class="col-md-12 mt-2">
-             <mat-radio-group
-               [(ngModel)]="selectedCompanyChoice"
-               [ngModelOptions]="{ standalone: true }">
-             <mat-radio-button value="partnership">Partnership</mat-radio-button>
-             <mat-radio-button style="margin-left:10px" value="liability">Liability</mat-radio-button>
-           </mat-radio-group>
-           </div>
-
          </div>
        
        </div>
      </mat-expansion-panel>
      </mat-accordion>
      <mat-accordion class="example-headers-align"
-   *ngIf=" ( ConsultingServiceTemp == 'General Contract' &&   this.FormName == 'Consulting Services (Draft)') && selectedOwner != undefined">
+   *ngIf=" ( ConsultingServiceTemp == 'General Contract' &&   this.FormName == 'Consulting Services Agreement Template') && selectedOwner != undefined">
      <mat-expansion-panel [expanded]="step === 0" style="margin-top: 10px;" hideToggle>
        <mat-expansion-panel-header style="background-color: #4c7ab5; height: 43px;">
          <mat-panel-title style="color: white;">

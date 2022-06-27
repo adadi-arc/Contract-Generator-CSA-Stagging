@@ -3,13 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ServiceContract } from 'src/app/models/servicecontract.model';
 import { ServicecontractService } from 'src/app/services/servicecontract.service';
 import { BaseComponent } from '../../base/base.component';
-import { Document, Packer, Paragraph, TextRun } from 'docx';
-// import * as fs from "file-saver";
-import { saveAs } from 'file-saver';
-import { DocumentCreator } from './servicecontracttemplate';
 import moment, { invalid } from 'moment';
 import { NgForm } from '@angular/forms';
-import { ValueConverter } from '@angular/compiler/src/render3/view/template';
+import 'moment-timezone';
+
 
 declare let DocxReader: any;
 
@@ -97,7 +94,7 @@ export class ServicecontractformComponent
     { ID: 3, Title: 'Change Order Form' },
     { ID: 4, Title: 'Flatiron Service Contract' },
     { ID: 5, Title: 'Service Contract BMR LP' },
-    { ID: 6, Title: 'Consulting Services (Draft)' },
+    { ID: 6, Title: 'Consulting Services Agreement Template' },
   ];
   selectedForm: any = null;
   // Consulting Service
@@ -123,7 +120,7 @@ export class ServicecontractformComponent
   applicationPaymentHeading: string = 'Applications for Payment. ';
   applicationPaymentbullet: string = '3.2.      ';
   payment: string =
-    ', subject to satisfactory receipt of the documentation set forth in Section 3.2, Owner shall pay to Consultant an amount equal to the value, based on the Contract Amount, of all Services performed pursuant to this Agreement during the preceding calendar month as reasonably determined by Owner[ and supported by the documentation provided pursuant to Section 3.2';
+    ', subject to satisfactory receipt of the documentation set forth in Section 3.2, Owner shall pay to Consultant an amount equal to the value, based on the Contract Amount, of all Services performed pursuant to this Agreement during the preceding calendar month as reasonably determined by Owner[ and supported by the documentation provided pursuant to Section 3.2]';
   covid19: string =
     'COVID-19.  Consultant acknowledges and agrees that COVID-19 may be present in or around the Property and individuals working at or near the Property.  Consultant, on behalf of itself, its affiliates and its subcontractors, and their respective parents, shareholders, partners, directors, officers, employees, material suppliers and other vendors, and each of their respective successors and assigns (collectively with Consultant, the “Consultant Parties”) hereby waives any recourse against, releases Owner and all other Indemnitees from, and expressly assumes the risk of any and all injury, sickness, loss or damage, including death, arising from the presence of COVID-19 in or around the Property or individuals working at or near the Property.  Consultant shall indemnify, reimburse, save, defend (at Owner’s option and with counsel reasonably acceptable to Owner) and hold harmless the Indemnitees for, from and against any and all Claims of any kind or nature arising from Consultant Parties’ contact with COVID-19 at or near the Property or in relation to the Services.  The foregoing obligations of Consultant are in addition to Consultant’s obligations under Article 5.  In addition, Consultant shall (and ensure that all Consultant Parties) adhere to any federal, state and local requirements and recommendations (including from the Centers for Disease Control and Prevention) related to COVID-19.';
   pollutionLiability: string =
@@ -162,7 +159,6 @@ export class ServicecontractformComponent
   selectedNetChange: any = null;
   selectedPreviousGMP: any = null;
   selectedCOincdec: any = null;
-  selectedCompanyChoice: any = null;
   selectedCOamount: any = null;
   selecctedCOdate: any = null;
   selectedNewGMP: any = null;
@@ -212,30 +208,30 @@ export class ServicecontractformComponent
       for (var count = 0; count < this.dataProperty.length; count++) {
         var order = this.dataProperty[count];
         // console.log(order);
-        // var lines = (order.FREDDPropertyName.results[0].Label).split(':'); //{rod/Staging
-        var lines = order.Fredd_x0020_Property_x0020_Name_.split(':'); //Local
+        var lines = (order.FREDDPropertyName.results[0].Label).split(':'); //{rod/Staging
+        //var lines = order.Fredd_x0020_Property_x0020_Name_.split(':'); //Local
         //Prod/Staging
-          // this.menuData.push({
-          //    "Property": lines[3],
-          //    "ID": order.ID,
-          //    "Region": lines[1],
-          //    "Market": lines[2],
-          //    "Owner": order.EntityName,
-          //    "StateOfFormation": order.StateofFormation,
-          //   "AdditionalInsureds": order.AdditionalInsureds,
-          //    "EntityID": order.EntityID
-          //   });
-        //Local
          this.menuData.push({
-           Property: lines[3],
-           ID: order.ID,
-           Region: lines[1],
-           Market: lines[2],
-           Owner: order.EntityName,
-           StateOfFormation: order.StateofFormation,
-           AdditionalInsureds: order.AdditionalInsureds,
-           EntityID: order.EntityID,
-         });
+            "Property": lines[3],
+            "ID": order.ID,
+            "Region": lines[1],
+            "Market": lines[2],
+            "Owner": order.EntityName,
+            "StateOfFormation": order.StateofFormation,
+           "AdditionalInsureds": order.AdditionalInsureds,
+            "EntityID": order.EntityID
+           });
+        //Local
+        //this.menuData.push({
+        //  Property: lines[3],
+        //  ID: order.ID,
+        //  Region: lines[1],
+        //  Market: lines[2],
+        //  Owner: order.EntityName,
+        //  StateOfFormation: order.StateofFormation,
+        //  AdditionalInsureds: order.AdditionalInsureds,
+        //  EntityID: order.EntityID,
+        //});
       }
       this.Region = [
         ...new Map(
@@ -355,7 +351,7 @@ export class ServicecontractformComponent
         this.selectedSubComp = null;
         this.selectedSubstantialCompletionDate = '';
       }
-      if (this.selectedForm.Title != 'Consulting Services (Draft)') {
+      if (this.selectedForm.Title != 'Consulting Services Agreement Template') {
         this.ConsultingServiceTemp = '';
       }
     }
@@ -450,124 +446,140 @@ export class ServicecontractformComponent
     }
   }
 
-numberToEnglish( n ) {
+    numberToEnglish( n ) {
         
-  var string = n.toString(), units, tens, scales, start, end, chunks, chunksLen, chunk, ints, i, word, words, and = 'and';
+    var string = n.toString(), units, tens, scales, start, end, chunks, chunksLen, chunk, ints, i, word, words, and = 'and';
 
-  string = string.replace(/[, ]/g,"");
+    /* Remove spaces and commas */
+    string = string.replace(/[, ]/g,"");
 
-  if( parseInt( string ) === 0 ) {
-      return 'zero';
-  }
-  units = [ '','One ','Two ','Three ','Four ','Five ','Six ','Seven ','Eight ','Nine ','Ten ','Eleven ','Twelve ','Thirteen ','Fourteen ','Fifteen ','Sixteen ','Seventeen ','Eighteen ','Nineteen ', ];
-  
-  tens = ['','Twenty','Thirty','Forty','Fifty','Sixty','Seventy','Eighty','Ninety', ];
-  
-  scales = [ '', 'Thousand', 'Million', 'Billion', 'Trillion', 'Quadrillion','Quintillion', 'Sextillion', 'Septillion', 'Octillion', 'Nonillion' ];
-  
-  start = string.length;
-  chunks = [];
-  while( start > 0 ) {
-      end = start;
-      chunks.push( string.slice( ( start = Math.max( 0, start - 3 ) ), end ) );
-  }
-  chunksLen = chunks.length;
-  if( chunksLen > scales.length ) {
-      return '';
-  }
-  
-  /* Stringify each integer in each chunk */
-  words = [];
-  for( i = 0; i < chunksLen; i++ ) {
-      
-      chunk = parseInt( chunks[i] );
-      
-      if( chunk ) {
-          
-          /* Split chunk into array of individual integers */
-          ints = chunks[i].split( '' ).reverse().map( parseFloat );
-      
-          /* If tens integer is 1, i.e. 10, then add 10 to units integer */
-          if( ints[1] === 1 ) {
-              ints[0] += 10;
-          }
-          
-          /* Add scale word if chunk is not zero and array item exists */
-          if( ( word = scales[i] ) ) {
-              words.push( word );
-          }
-          
-          /* Add unit word if array item exists */
-          if( ( word = units[ ints[0] ] ) ) {
-              words.push( word );
-          }
-          
-          /* Add tens word if array item exists */
-          if( ( word = tens[ ints[1] ] ) ) {
-              words.push( word );
-          }
-          
-          /* Add 'and' string after units or tens integer if: */
-          if( ints[0] || ints[1] ) {
-              
-              /* Chunk has a hundreds integer or chunk is the first of multiple chunks */
-              if( ints[2] || ! i && chunksLen ) {
-                  words.push( and );
-              }
-          
-          }
-          
-          /* Add hundreds word if array item exists */
-          if( ( word = units[ ints[2] ] ) ) {
-              words.push( word + ' Hundred' );
-          }
-          
-      }
-      
-  }
-  
-  return words.reverse().join( ' ' );
-  
+    /* Is number zero? */
+    if( parseInt( string ) === 0 ) {
+        return 'zero';
+    }
+    
+    /* Array of units as words */
+    units = [ '', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen' ];
+    
+    /* Array of tens as words */
+    tens = [ '', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety' ];
+    
+    /* Array of scales as words */
+    scales = [ '', 'Thousand', 'Million', 'Billion', 'Trillion', 'Quadrillion', 'Quintillion', 'Sextillion', 'Septillion', 'Octillion', 'Nonillion', 'Decillion', 'Undecillion', 'Duodecillion', 'Tredecillion', 'Quatttuor-decillion', 'quindecillion', 'sexdecillion', 'septen-decillion', 'octodecillion', 'novemdecillion', 'vigintillion', 'centillion' ];
+    
+    /* Split user argument into 3 digit chunks from right to left */
+    start = string.length;
+    chunks = [];
+    while( start > 0 ) {
+        end = start;
+        chunks.push( string.slice( ( start = Math.max( 0, start - 3 ) ), end ) );
+    }
+    
+    /* Check if function has enough scale words to be able to stringify the user argument */
+    chunksLen = chunks.length;
+    if( chunksLen > scales.length ) {
+        return '';
+    }
+    
+    /* Stringify each integer in each chunk */
+    words = [];
+    for( i = 0; i < chunksLen; i++ ) {
+        
+        chunk = parseInt( chunks[i] );
+        
+        if( chunk ) {
+            
+            /* Split chunk into array of individual integers */
+            ints = chunks[i].split( '' ).reverse().map( parseFloat );
+        
+            /* If tens integer is 1, i.e. 10, then add 10 to units integer */
+            if( ints[1] === 1 ) {
+                ints[0] += 10;
+            }
+            
+            /* Add scale word if chunk is not zero and array item exists */
+            if( ( word = scales[i] ) ) {
+                words.push( word );
+            }
+            
+            /* Add unit word if array item exists */
+            if( ( word = units[ ints[0] ] ) ) {
+                words.push( word );
+            }
+            
+            /* Add tens word if array item exists */
+            if( ( word = tens[ ints[1] ] ) ) {
+                words.push( word );
+            }
+            
+            /* Add 'and' string after units or tens integer if: */
+            if( ints[0] || ints[1] ) {
+                
+                /* Chunk has a hundreds integer or chunk is the first of multiple chunks */
+                if( ints[2] || ! i && chunksLen ) {
+                    words.push( and );
+                }
+            
+            }
+            
+            /* Add hundreds word if array item exists */
+            if( ( word = units[ ints[2] ] ) ) {
+                words.push( word + ' Hundred' );
+            }
+            
+        }
+        
+    }
+    
+    return words.reverse().join( ' ' );
+    
 }
 
-
-// - - - - - Tests - - - - - -
-inWords(v) {
-return this.numberToEnglish(v)+" ";
-}
+  // - - - - - Tests - - - - - -
+  inWords(v) {
+    return this.numberToEnglish(v) + ' ';
+  }
   onSave() {
     //SERVICE CONTRACT
     if (this.selectedForm.Title == 'Service Contract') {
-      var steUrl ='/sites/fredd/SourceCode1/ChangeOrder/assets/template/ServiceContractTemplate.docx'; //prod
+      var steUrl =
+        '/sites/fredd/SourceCode1/ChangeOrder/assets/template/ServiceContractTemplate.docx'; //prod
       //var steUrl = "/sites/fredd/SourceCode/assets/template/ServiceContractTemplate.docx"; //Staging
-      var steUrl = "/assets/template/ServiceContractTemplate.docx" //local
+      //var steUrl = '/assets/template/ServiceContractTemplate.docx'; //local
     } else if (this.selectedForm.Title == 'TRS Service Contract') {
-      var steUrl = '/sites/fredd/SourceCode1/ChangeOrder/assets/template/TRSContractTemplate.docx'; //prod
+      var steUrl =
+        '/sites/fredd/SourceCode1/ChangeOrder/assets/template/TRSContractTemplate.docx'; //prod
       //var steUrl = "/sites/fredd/SourceCode/assets/template/TRSContractTemplate.docx"; //staging
-       //var steUrl = "/assets/template/TRSContractTemplate.docx" //local
+      //var steUrl = "/assets/template/TRSContractTemplate.docx" //local
     } else if (this.selectedForm.Title == 'Change Order Form') {
       var steUrl = '/sites/fredd/SourceCode1/ChangeOrder/assets/template/ChangeOrderTemplate.docx'; //prod
       //var steUrl = "/sites/fredd/SourceCode/assets/template/TRSContractTemplate.docx"; //staging
       //var steUrl = "/assets/template/ChangeOrderTemplate.docx" //local
     } else if (this.selectedForm.Title == 'Flatiron Service Contract') {
-      var steUrl = "/sites/fredd/SourceCode1/ChangeOrder/assets/template/FlatironServiceContractTemplate.docx"; //prod
+      var steUrl =
+        '/sites/fredd/SourceCode1/ChangeOrder/assets/template/FlatironServiceContractTemplate.docx'; //prod
       //var steUrl = "/sites/fredd/SourceCode/assets/template/FlatironServiceContractTemplate.docx"; //Staging
       //var steUrl = '/assets/template/FlatironServiceContractTemplate.docx'; //local
     } else if (this.selectedForm.Title == 'Service Contract BMR LP') {
-      var steUrl = "/sites/fredd/SourceCode1/ChangeOrder/assets/template/ServiceTemplateBMR LPclean.docx"; //prod
+      var steUrl =
+        '/sites/fredd/SourceCode1/ChangeOrder/assets/template/ServiceTemplateBMR LPclean.docx'; //prod
       //var steUrl = "/sites/fredd/SourceCode/assets/template/ServiceContractTemplate.docx"; //Staging
       //var steUrl = '/assets/template/ServiceTemplateBMR LPclean.docx'; //local
-    } else if (this.ConsultingServiceTemp == 'General Contract') {
-      //  var steUrl = "/sites/fredd/SourceCode1/ChangeOrder/assets/template/ConsultingServicesAgreement.docx"; //prod
-      var steUrl = '/assets/template/ConsultingServicesAgreement.docx'; //local
-    } else if (this.ConsultingServiceTemp == 'Flatiron Service Contract') {
-      //  var steUrl = "/sites/fredd/SourceCode1/ChangeOrder/assets/template/ConsultingServicesFlatironTem.docx"; //prod
-      var steUrl = '/assets/template/ConsultingServicesFlatironTem.docx'; //local
+    } else if(this.selectedForm.Title == 'Consulting Services Agreement Template') {
+      if (this.ConsultingServiceTemp == 'General Contract') {
+        var steUrl = "/sites/fredd/SourceCode1/ChangeOrder/assets/template/ConsultingServicesAgreement.docx"; //prod
+        //var steUrl = '/assets/template/ConsultingServicesAgreement.docx'; //local
+      } else if (this.ConsultingServiceTemp == 'Flatiron Service Contract') {
+        var steUrl = "/sites/fredd/SourceCode1/ChangeOrder/assets/template/ConsultingServicesFlatironTem.docx"; //prod
+        //var steUrl = '/assets/template/ConsultingServicesFlatironTem.docx'; //local
+      }
     }
+   
 
     var docx = new DocxReader();
     docx.Load(steUrl, () => {
       var docxvar = {};
+      var docName = "SC";
       if (docx.Search('City') == true) {
         docxvar['City'] = this.selectedContractorCity;
       }
@@ -604,19 +616,14 @@ return this.numberToEnglish(v)+" ";
         }
       }
       if (docx.Search('ExecutionDate') == true) {
-        docxvar['ExecutionDate'] = moment(this.selectedExecutionDate).format(
-          'MM/DD/YY'
-        );
+        docxvar['ExecutionDate'] = moment(this.selectedExecutionDate).format('MM/DD/YYYY');
       }
       if (docx.Search('CommencementDate') == true) {
-        docxvar['CommencementDate'] = moment(
-          this.selectedCommencementDate
-        ).format('MM/DD/YY');
+        docxvar['CommencementDate'] = moment(this.selectedCommencementDate).format('MM/DD/YYYY');
       }
       if (docx.Search('ExpirationDate') == true) {
-        docxvar['ExpirationDate'] = moment(this.selectedExpirationDate).format(
-          'MM/DD/YY'
-        );
+        var date = new Date(this.selectedCommencementDate);
+        docxvar['ExpirationDate'] = moment(this.selectedExpirationDate).format('MM/DD/YYYY');
       }
       if (docx.Search('PropertyManager') == true) {
         if (
@@ -716,7 +723,7 @@ return this.numberToEnglish(v)+" ";
         }
       }
       if (docx.Search('Owner') == true) {
-        docxvar['Owner'] = this.selectedOwner.Owner;
+        docxvar['Owner'] = (this.selectedOwner != undefined)?this.selectedOwner.Owner:"";
       }
       if (docx.Search('OwnerStateOfFormation') == true) {
         if (this.selectedOwner.StateOfFormation == undefined) {
@@ -907,7 +914,7 @@ return this.numberToEnglish(v)+" ";
       //CHANGE ORDER FORM
       if (this.selectedForm.Title == 'Change Order Form') {
         //CO
-        var docxvar = {};
+        docName = "CO";
 
         if (docx.Search('Owner') == true) {
           docxvar['Owner'] = this.selectedOwner.Owner;
@@ -1108,6 +1115,7 @@ return this.numberToEnglish(v)+" ";
       }
       // Consuting Service
       if (this.ConsultingServiceTemp == 'General Contract') {
+        docName = "CC";
         // if (this.selectedIncludeTM == true) {
         //   if (docx.Search("scopeService") == true) {
         //     docxvar['scopeService'] = this.scopeService;
@@ -1123,6 +1131,9 @@ return this.numberToEnglish(v)+" ";
         //     docxvar['compensationTM'] = "";
         //   }
         // }
+
+
+
         if (this.selectedPayment == true) {
           if (docx.Search('selectedPayment') == true) {
             docxvar['selectedPayment'] = this.applicationPayment;
@@ -1164,10 +1175,6 @@ return this.numberToEnglish(v)+" ";
           }
         }
 
-        if (docx.Search('CompanyChoice') == true) {
-          docxvar['CompanyChoice'] = this.selectedCompanyChoice;
-        }
-
         if (this.selectedCovid == true) {
           if (docx.Search('Covid') == true) {
             docxvar['Covid'] = this.covid19;
@@ -1195,6 +1202,7 @@ return this.numberToEnglish(v)+" ";
       }
       //Faltiron
       if (this.ConsultingServiceTemp == 'Flatiron Service Contract') {
+        docName = "CC";
         for (var j = 0; j < 8; j++) {
           docxvar['OwnersSelected' + j] = '';
           docxvar['OwnersSelected' + this.addressRepeating.length] = '';
@@ -1289,7 +1297,7 @@ return this.numberToEnglish(v)+" ";
         console.log(JSON.stringify({ error: e }));
         throw error;
       }
-      docx.SetName('SC' + ' - ' + this.selectedContractor);
+      docx.SetName(docName+'' + ' - ' + this.selectedContractor);
       docx.Download();
     });
   }
