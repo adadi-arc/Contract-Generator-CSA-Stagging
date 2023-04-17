@@ -1,0 +1,16 @@
+<div class="row">
+    <div class="row" style="display: flex">
+        <div class="col-md-8" *ngIf="formData.selectedOwner != undefined || formData.addressRepeating.length > 0"
+          style="margin-top: 18px; text-align: right"></div>
+        <div class="col-md-4" *ngIf="formData.selectedOwner != undefined || formData.addressRepeating.length > 0"
+          style="margin-top: 18px; text-align: right">
+          <button class="btnEnd" mat-raised-button (click)="resetStates(servicecontract)" type="button" color="white">
+            Reset
+          </button>
+          <button class="btnEnd" mat-raised-button (click)="onSave()"
+            [disabled]="servicecontract.invalid || invalidateFields()" type="button" color="primary">
+            Generate Contract
+          </button>
+        </div>
+      </div>
+</div>

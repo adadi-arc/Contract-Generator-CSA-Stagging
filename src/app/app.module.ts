@@ -15,6 +15,8 @@ import { PageNotFoundComponent } from './modules/main/page-not-found/page-not-fo
 import { BaseComponent } from './modules/base/base.component';
 import { AppInjectorService } from './services/base/app-injector.service';
 import { UserService } from './services/base/user.service';
+import { ApplicationPipesModule } from './services/AppPipesModule';
+import { ShareBtnComponent } from './modules/share/share-btn/share-btn.component';
 // import { ServicecontractformComponent } from './modules/servicecontract/servicecontractform/servicecontractform.component';
 
 
@@ -25,6 +27,7 @@ import { UserService } from './services/base/user.service';
     RoutingComponents,    
     PageNotFoundComponent,
     BaseComponent,
+    ShareBtnComponent,
     // ServicecontractformComponent,    
   ],
   imports: [
@@ -36,7 +39,8 @@ import { UserService } from './services/base/user.service';
     HttpClientModule,
     SharedModule,
     MaterialModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    ApplicationPipesModule
   ],
   providers: [
     BaseService,
